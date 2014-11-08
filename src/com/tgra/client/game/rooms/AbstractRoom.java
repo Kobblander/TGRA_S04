@@ -16,6 +16,6 @@ import java.util.List;
  */
 public abstract class AbstractRoom implements Room {
 
-    protected List<Wall> walls = new ArrayList<Wall>;
+    protected List<Wall> walls = new ArrayList<Wall>();
 
 }

@@ -3,8 +3,8 @@ package com.tgra.client.utility;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g3d.Material;
-import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
+import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable;
 
 /**
@@ -19,7 +19,7 @@ public class Texture {
     // Textures
     public com.badlogic.gdx.graphics.Texture texture;
     private TextureAttribute attribute;
-    private TextureRegion region;
+    public TextureRegion region;
     public TiledDrawable tiledDrawable;
     public Material material;
 
@@ -38,11 +38,12 @@ public class Texture {
         material = new Material(attribute);
     }
 
-    public void setUVWrap(ModelInstance modelInstance) {
-        final TextureAttribute textureAttribute = (TextureAttribute) modelInstance.materials.first().get(TextureAttribute.Diffuse);
+    public void setUVRange(MeshPartBuilder partBuilder, float width, float height) {
+        float u = texture.getWidth() / width;
+        float v = texture.getHeight() / height;
 
-        textureAttribute.textureDescription.magFilter = com.badlogic.gdx.graphics.Texture.TextureFilter.Nearest;
-        textureAttribute.textureDescription.minFilter = com.badlogic.gdx.graphics.Texture.TextureFilter.Nearest;
-        modelInstance.materials.first().set(textureAttribute);
+        float max = Math.min(u, v);
+
+        partBuilder.setUVRange(0, 0, max, max);
     }
 }
