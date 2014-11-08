@@ -55,8 +55,7 @@ public class Floor implements Object {
                                                 -1.9f,                                                      // Floor y pos
                                                 (float) floor.getMinY() - (float) floor.getHeight() / 2);       // Floor z pos
 
-        floorInstance.calculateTransforms();
-        
+
         floorTexture.setUVWrap(floorInstance);
 
     }
