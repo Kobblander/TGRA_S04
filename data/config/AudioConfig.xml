@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<audio>
+   <file name="error">
+      <path>error.wav</path>
+   </file>
+   <file name="flashlightOff">
+      <path>flashlight_off.wav</path>
+   </file>
+   <file name="flashlightOn">
+      <path>flashlight_on.wav</path>
+   </file>
+</audio>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<keys>
+   <key name="forward">
+      <value>W</value>
+   </key>
+   <key name="backward">
+      <value>S</value>
+   </key>
+   <key name="right">
+      <value>D</value>
+   </key>
+   <key name="left">
+      <value>A</value>
+   </key>
+    <key name="run">
+      <value>L-Shift</value>
+   </key>
+   <key name="jump">
+      <value>Space</value>
+      <buffered>true</buffered>
+   </key>
+   <key name="flashlight">
+      <value>F</value>
+      <sounds>
+         <sound>flashlightOn</sound>
+         <sound>flashlightOff</sound>
+      </sounds>
+   </key>
+</keys>
