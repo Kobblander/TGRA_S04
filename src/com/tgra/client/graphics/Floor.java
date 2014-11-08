@@ -1,11 +1,14 @@
 package com.tgra.client.graphics;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
+import com.badlogic.gdx.math.Vector3;
 import com.tgra.client.utility.Texture;
 import javafx.geometry.Rectangle2D;
 
@@ -42,23 +45,41 @@ public class Floor implements Object {
     public void build(ModelBuilder builder) {
         long attributes = VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal | VertexAttributes.Usage.TextureCoordinates;
 
-        floorInstance = new ModelInstance(builder.createBox(
-                                                            (float) floor.getWidth(),       // Floor width
-                                                            1f,                             // Floor height
-                                                            (float) floor.getHeight(),      // Floor depth
-                                                            floorTexture.material,          // Floor texture
-                                                            attributes));                   // Floor attr ( See above )
+        builder.begin();
 
-        // Model is translated by its center
+            MeshPartBuilder partBuilder = builder.part("rect", GL20.GL_TRIANGLES, attributes, floorTexture.material);
+            floorTexture.setUVRange(partBuilder, (float) floor.getWidth(), (float) floor.getHeight());
+
+            float x = (float) floor.getMinX(), z = (float) floor.getMaxX();
+            float width = (float) floor.getWidth(), height = (float) floor.getHeight();
+
+            /*partBuilder.rect(
+                    x, -1.9f, z,                            // Corner 00
+                    width, -1.9f, z,                        // Corner 10
+                    width, -1.9f, height,                   // Corner 11
+                    x, -1.9f, height,                       // Corner 01
+                    0, 0, -1                                // Normal Vector
+            ); */
+
+            partBuilder.rect(
+                    -(width * 0.5f), 1f, -(height * 0.5f),
+                    (width * 0.5f), 1f, -(height * 0.5f),
+                    (width * 0.5f), 1f, (height * 0.5f),
+                    -(width * 0.5f), 1f, (height * 0.5f),
+                    0, 0, 1
+            );
+
+        floorInstance = new ModelInstance(builder.end());
+
         floorInstance.transform.setToTranslation(
-                                                (float) floor.getMinX() - (float) floor.getWidth() / 2,         // Floor x pos
-                                                -1.9f,                                                      // Floor y pos
-                                                (float) floor.getMinY() - (float) floor.getHeight() / 2);       // Floor z pos
+                (float) floor.getMinX() - (float) floor.getWidth() / 2,         // Floor x pos
+                0,                                                              // Floor y pos
+                (float) floor.getMinY() - (float) floor.getHeight() / 2);       // Floor z pos
 
         floorInstance.calculateTransforms();
-        
-        floorTexture.setUVWrap(floorInstance);
 
+        // Floor the floor ( lols )
+        floorInstance.transform.rotate(Vector3.X, 180f);
     }
 
     @Override
