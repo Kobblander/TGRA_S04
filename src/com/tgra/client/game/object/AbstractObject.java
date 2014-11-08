@@ -1,7 +1,9 @@
-package com.tgra.client.game;
+package com.tgra.client.game.object;
 
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
+
+import java.lang.*;
 
 /**
  * <h1>AbstractObject</h1>

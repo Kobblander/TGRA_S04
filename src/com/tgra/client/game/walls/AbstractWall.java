@@ -1,6 +1,6 @@
 package com.tgra.client.game.walls;
 
-import com.tgra.client.game.AbstractObject;
+import com.tgra.client.game.object.AbstractObject;
 
 /**
  * <h1>AbstractWallt</h1>

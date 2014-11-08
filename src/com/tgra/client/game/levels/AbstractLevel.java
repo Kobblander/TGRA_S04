@@ -1,6 +1,6 @@
 package com.tgra.client.game.levels;
 
-import com.tgra.client.game.AbstractObject;
+import com.tgra.client.game.object.AbstractObject;
 
 /**
  * <h1>AbstractLevel</h1>
@@ -11,6 +11,6 @@ import com.tgra.client.game.AbstractObject;
  * @author jakob
  * @version 1.1
  */
-public abstract class AbstractLevel extends AbstractObject implements Level{
+public abstract class AbstractLevel extends AbstractObject implements Level {
 
 }

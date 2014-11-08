@@ -1,4 +1,4 @@
-package com.tgra.client.game;
+package com.tgra.client.game.object;
 
 /**
  * <h1>Entity</h1>

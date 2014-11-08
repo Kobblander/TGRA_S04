@@ -1,6 +1,6 @@
 package com.tgra.client.game.floors;
 
-import com.tgra.client.game.AbstractObject;
+import com.tgra.client.game.object.AbstractObject;
 
 /**
  * <h1>AbstractFloor</h1>
@@ -11,6 +11,6 @@ import com.tgra.client.game.AbstractObject;
  * @author jakob
  * @version 1.1
  */
-public abstract class AbstractFloor extends AbstractObject {
+public abstract class AbstractFloor extends AbstractObject implements Floor {
 
 }

@@ -1,5 +1,6 @@
 package com.tgra.client.game;
 
+import com.tgra.client.game.object.Object;
 import com.tgra.client.game.rooms.Room;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class World {
 
     private static List<Room> roomList = new ArrayList<Room>();
 
-    private static List<Object> objectList = new ArrayList<Object>();
+    private static List<com.tgra.client.game.object.Object> objectList = new ArrayList<Object>();
 
     public static List<Room> getRoomList() {
         return roomList;

@@ -9,8 +9,9 @@ package com.tgra.client.game.rooms;
  * @author jakob
  * @version 1.1
  */
-public class BasicRoom {
+public class BasicRoom extends AbstractRoom {
 
-    BasicRoom() {
+
+    public BasicRoom() {
     }
 }

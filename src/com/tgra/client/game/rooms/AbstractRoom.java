@@ -1,5 +1,6 @@
 package com.tgra.client.game.rooms;
 
+import com.tgra.client.game.object.AbstractObject;
 import com.tgra.client.game.walls.Wall;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.List;
  * @author jakob
  * @version 1.1
  */
-public abstract class AbstractRoom implements Room {
+public abstract class AbstractRoom extends AbstractObject implements Room {
 
     protected List<Wall> walls = new ArrayList<Wall>();
 
