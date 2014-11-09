@@ -47,15 +47,6 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
 
     /* protected Roof roof = new Roof(); */
 
-    /**
-     * It is optional to implement the update function.
-     * @param deltaTime Current deltatime.
-     */
-    @Override
-    public void update(float deltaTime) {
-
-    }
-
     protected abstract void initializeRoom();
 
 

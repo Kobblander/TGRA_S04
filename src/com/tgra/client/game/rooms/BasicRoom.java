@@ -30,8 +30,6 @@ public class BasicRoom extends AbstractRoom {
         initializeRoom();
     }
 
-<<<<<<< HEAD
-=======
     @Override
     protected void initializeRoom() {
         this.xUnits = roomSize * unitFactor;
@@ -59,5 +57,4 @@ public class BasicRoom extends AbstractRoom {
         this.floor = floor;
     }
 
->>>>>>> b0db6c9c5293017e4d3be4034f4ccefe85a8152c
 }
