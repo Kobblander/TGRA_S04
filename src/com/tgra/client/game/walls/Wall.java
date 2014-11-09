@@ -10,5 +10,4 @@ package com.tgra.client.game.walls;
  * @version 1.1
  */
 public interface Wall {
-
 }

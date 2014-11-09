@@ -13,4 +13,14 @@ import com.tgra.client.game.object.AbstractObject;
  */
 public abstract class AbstractFloor extends AbstractObject implements Floor {
 
+    protected float xSize;
+    protected float ySize;
+    protected float zSize;
+
+    protected abstract void initializeFloor();
+
+    @Override
+    public void update(float deltaTime) {
+
+    }
 }

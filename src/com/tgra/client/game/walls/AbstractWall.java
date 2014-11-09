@@ -11,10 +11,16 @@ import com.tgra.client.game.object.AbstractObject;
  * @author jakob
  * @version 1.1
  */
-public class AbstractWall extends AbstractObject implements Wall {
+public abstract class AbstractWall extends AbstractObject implements Wall {
+
+    protected float xSize;
+    protected float ySize;
+    protected float zSize;
 
     @Override
     public void update(float deltaTime) {
 
     }
+
+    protected abstract void initializeWall();
 }

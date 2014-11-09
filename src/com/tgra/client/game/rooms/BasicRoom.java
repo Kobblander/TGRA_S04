@@ -1,5 +1,11 @@
 package com.tgra.client.game.rooms;
 
+import com.badlogic.gdx.math.Vector3;
+import com.tgra.client.game.GameFactory;
+import com.tgra.client.game.floors.Floor;
+import com.tgra.client.game.object.*;
+import com.tgra.client.game.walls.Wall;
+
 /**
  * <h1>BasicRoom</h1>
  * <h2>com.tgra.client.game.rooms</h2>
@@ -12,11 +18,56 @@ package com.tgra.client.game.rooms;
 public class BasicRoom extends AbstractRoom {
 
 
-    public BasicRoom() {
+    /**
+     * This constructor makes a perfect square room.
+     * Constructor for a basic room.
+     * @param position THIS PARAMETER WILL BE REFACTORED LATER
+     *                 TO BE THE POSITION WITHIN THE LEVEL
+     *                 Or maybe not... The level will decide the rooms position.
+     */
+    public BasicRoom(Vector3 position, int roomSize) {
+        this.position = position;
+        this.roomXSize = roomSize;
+        this.roomYSize = roomSize;
+        this.roomZSize = roomSize;
+
+        initializeRoom();
     }
 
     @Override
-    public void update(float deltaTime) {
+    protected void initializeRoom() {
+        // A room of size 5 would have 5x5 units
+        // Each unit is of size 200.0f then the actualXSize
+        // would be for example 5*5*200.0f
 
+        // Calculate how many units the room is
+        // unitFactor is how many units the room is given its size
+        this.xUnits = roomXSize * unitFactor;
+        this.yUnits = roomYSize * unitFactor;
+        this.zUnits = roomZSize * unitFactor;
+
+        // Calculate the actual size of the room in float
+        this.actualXSize = this.xUnits * unitSize;
+        this.actualYSize = this.yUnits * unitSize;
+        this.actualZSize = this.zUnits * unitSize;
+
+        // Calculate positions of outerWalls
+        float xPos = this.position.x + this.actualXSize / 2;
+        float yPos = this.position.y + this.actualYSize / 2;
+        float zPos = this.position.z + this.actualZSize / 2;
+
+        // Create all the rooms objects.
+        Wall wall1 = GameFactory.createBasicWall(new Vector3(xPos, yPos, zPos), actualXSize, actualYSize, actualZSize);
+        Wall wall2 = GameFactory.createBasicWall(new Vector3(xPos, yPos, -zPos), actualXSize, actualYSize, actualZSize);
+        Wall wall3 = GameFactory.createBasicWall(new Vector3(-xPos, yPos, zPos), actualXSize, actualYSize, actualZSize);
+        Wall wall4 = GameFactory.createBasicWall(new Vector3(-xPos, yPos, -zPos), actualXSize, actualYSize, actualZSize);
+        this.outerWalls.add(wall1);
+        this.outerWalls.add(wall2);
+        this.outerWalls.add(wall3);
+        this.outerWalls.add(wall4);
+
+        Floor floor = GameFactory.createBasicFloor(position, actualXSize, actualYSize, actualZSize);
+        this.floor = floor;
     }
+
 }

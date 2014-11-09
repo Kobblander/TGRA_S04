@@ -21,12 +21,12 @@ public class World {
 
     public static World getInstance() { return instance; }
 
-    private World() {
-    }
-
     private static List<Room> roomList = new ArrayList<Room>();
 
-    private static List<com.tgra.client.game.object.Object> objectList = new ArrayList<Object>();
+    private static List<Object> objectList = new ArrayList<Object>();
+
+    private World() {
+    }
 
     public static List<Room> getRoomList() {
         return roomList;
@@ -34,6 +34,10 @@ public class World {
 
     public static List<Object> getObjectList() {
         return objectList;
+    }
+
+    public static void addObject(Object object) {
+        objectList.add(object);
     }
 
 }
