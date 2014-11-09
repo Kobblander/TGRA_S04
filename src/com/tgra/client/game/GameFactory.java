@@ -1,9 +1,13 @@
 package com.tgra.client.game;
 
+import com.badlogic.gdx.math.Vector3;
+import com.tgra.client.game.floors.BasicFloor;
+import com.tgra.client.game.object.Object;
 import com.tgra.client.game.rooms.Room;
 import com.tgra.client.game.shapes.Shape;
+import com.tgra.client.game.walls.BasicWall;
 import com.tgra.client.game.walls.Wall;
-import com.tgra.client.graphics.Floor;
+import com.tgra.client.game.floors.Floor;
 
 /**
  * <h1>EntityFactory</h1>
@@ -20,6 +24,8 @@ public class GameFactory {
 
     public static GameFactory getInstance() { return instance; }
 
+    private static World world = World.getInstance();
+
     private GameFactory() {
     }
 
@@ -35,6 +41,17 @@ public class GameFactory {
 
         // Return the wall object
         return null;
+    }
+
+    public static Wall createBasicWall(Vector3 position, float xSize, float ySize, float zSize) {
+        // Get basic wall texture
+
+        // Create the wall
+        Object basicWall = new BasicWall(position, xSize, ySize, zSize);
+        world.addObject(basicWall);
+
+        // Return the wall object
+        return (Wall) basicWall;
     }
 
     public static Floor createDirtFloor() {
@@ -55,4 +72,10 @@ public class GameFactory {
         return null;
     }
 
+    public static Floor createBasicFloor(Vector3 position, float actualXSize, float actualYSize, float actualZSize) {
+
+        Object basicFloor = new BasicFloor(position, actualXSize, actualYSize, actualZSize);
+        world.addObject(basicFloor);
+        return (Floor) basicFloor;
+    }
 }

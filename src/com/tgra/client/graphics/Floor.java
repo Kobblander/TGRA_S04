@@ -53,20 +53,12 @@ public class Floor implements Object {
             float x = (float) floor.getMinX(), z = (float) floor.getMaxX();
             float width = (float) floor.getWidth(), height = (float) floor.getHeight();
 
-            /*partBuilder.rect(
-                    x, -1.9f, z,                            // Corner 00
-                    width, -1.9f, z,                        // Corner 10
-                    width, -1.9f, height,                   // Corner 11
-                    x, -1.9f, height,                       // Corner 01
-                    0, 0, -1                                // Normal Vector
-            ); */
-
             partBuilder.rect(
-                    -(width * 0.5f), 1f, -(height * 0.5f),
-                    (width * 0.5f), 1f, -(height * 0.5f),
-                    (width * 0.5f), 1f, (height * 0.5f),
-                    -(width * 0.5f), 1f, (height * 0.5f),
-                    0, 0, 1
+                    -(width * 0.5f), 1f, -(height * 0.5f),      // Corner 00
+                    (width * 0.5f), 1f, -(height * 0.5f),       // Corner 10
+                    (width * 0.5f), 1f, (height * 0.5f),        // Corner 11
+                    -(width * 0.5f), 1f, (height * 0.5f),       // Corner 01
+                    0, 0, 1                                     // Normal Vector
             );
 
         floorInstance = new ModelInstance(builder.end());

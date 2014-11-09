@@ -7,11 +7,13 @@ import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.tgra.client.*;
-import com.tgra.client.events.*;
-import com.tgra.client.graphics.*;
-import com.tgra.client.utility.*;
+import com.tgra.client.MyGame;
+import com.tgra.client.events.InputManager;
+import com.tgra.client.game.shapes.Sphere;
+import com.tgra.client.graphics.Player;
+import com.tgra.client.utility.Lights;
 
 /**
  * Created with IntelliJ IDEA
@@ -36,7 +38,7 @@ public class GameScreen implements Screen {
     private static Player player;
     private static Lights lights;
 
-    private static Floor floor;
+    private static Sphere sphere;
 
     public GameScreen(MyGame game) {
         this.game = game;
@@ -62,8 +64,8 @@ public class GameScreen implements Screen {
         lights = new Lights(player);
 
         // Setup road
-        floor = new Floor("dirt.png", 2.5f, 2.5f, 5f, 20f);
-        floor.build(modelBuilder);
+        sphere = new Sphere("earth.jpg", new Vector3(0, 0, 0), 1.5f);
+        sphere.build(modelBuilder);
 
         controller = new InputManager(camera, player);
         Gdx.input.setInputProcessor(controller);
@@ -85,7 +87,7 @@ public class GameScreen implements Screen {
         modelBatch.begin(camera);
             lights.render(delta);
 
-            floor.render(modelBatch, environment);
+            sphere.render(modelBatch, environment);
 
             player.draw(modelBatch, environment);
         modelBatch.end();
