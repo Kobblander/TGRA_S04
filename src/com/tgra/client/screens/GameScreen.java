@@ -11,9 +11,17 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.tgra.client.MyGame;
 import com.tgra.client.events.InputManager;
+import com.tgra.client.game.GameFactory;
+import com.tgra.client.game.World;
+import com.tgra.client.game.rooms.Room;
+import com.tgra.client.game.shapes.Box;
+import com.tgra.client.game.shapes.Shape;
 import com.tgra.client.game.shapes.Sphere;
+import com.tgra.client.game.object.Object;
 import com.tgra.client.graphics.Player;
 import com.tgra.client.utility.Lights;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA
@@ -39,6 +47,8 @@ public class GameScreen implements Screen {
     private static Lights lights;
 
     private static Sphere sphere;
+    private static Room room;
+    private static Box box;
 
     public GameScreen(MyGame game) {
         this.game = game;
@@ -64,8 +74,18 @@ public class GameScreen implements Screen {
         lights = new Lights(player);
 
         // Setup road
+        /*
         sphere = new Sphere("earth.jpg", new Vector3(0, 0, 0), 1.5f);
         sphere.build(modelBuilder);
+        */
+
+        /*
+        box = new Box("wood.jpg", new Vector3(0, 0, 0), 5f, 5f, 5f);
+        box.build(modelBuilder);
+        */
+
+        room = GameFactory.createBasicRoom(new Vector3(0, 0, 0), 2);
+
 
         controller = new InputManager(camera, player);
         Gdx.input.setInputProcessor(controller);
@@ -85,11 +105,16 @@ public class GameScreen implements Screen {
 
         // Render graphics instances
         modelBatch.begin(camera);
-            lights.render(delta);
+        lights.render(delta);
 
-            sphere.render(modelBatch, environment);
+        //box.render(modelBatch, environment);
 
-            player.draw(modelBatch, environment);
+
+        player.draw(modelBatch, environment);
+        List<Shape> shapeList = World.getInstance().getShapeList();
+        for (Shape s : shapeList) {
+            s.render(modelBatch, environment);
+        }
         modelBatch.end();
 
 

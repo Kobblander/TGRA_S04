@@ -26,7 +26,7 @@ public class Box implements Shape {
     private static Texture boxTexture;
 
     // Box instance
-    private static ModelInstance boxInstance;
+    private ModelInstance boxInstance;
 
     // Box 3d representation
     private Vector3 center;
@@ -74,6 +74,7 @@ public class Box implements Shape {
 
     public void setRotation(Vector3 axis, float degrees) {
         boxInstance.transform.rotate(axis, degrees);
+
     }
 
     public float getRotation() {

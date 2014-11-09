@@ -3,6 +3,7 @@ package com.tgra.client.game;
 import com.badlogic.gdx.math.Vector3;
 import com.tgra.client.game.floors.BasicFloor;
 import com.tgra.client.game.object.Object;
+import com.tgra.client.game.rooms.BasicRoom;
 import com.tgra.client.game.rooms.Room;
 import com.tgra.client.game.shapes.Box;
 import com.tgra.client.game.shapes.Shape;
@@ -30,10 +31,11 @@ public class GameFactory {
     private GameFactory() {
     }
 
-    public static Shape createWoodenBox(Vector3 position, float xSize, float ySize, float zSize) {
+    public static Box createWoodenBox(Vector3 position, float xSize, float ySize, float zSize) {
         Box box = new Box("wood.jpg", position, xSize, ySize, zSize);
+        world.addShape(box);
 
-        return null;
+        return box;
     }
 
     public static Wall createTiledWall() {
@@ -45,11 +47,11 @@ public class GameFactory {
         return null;
     }
 
-    public static Wall createBasicWall(Vector3 position, float xSize, float ySize, float zSize) {
+    public static Wall createBasicWall(Vector3 position, float rotation, float length, float height, float thickness) {
         // Get basic wall texture
 
         // Create the wall
-        Object basicWall = new BasicWall(position, xSize, ySize, zSize);
+        Object basicWall = new BasicWall(position, rotation, length, height, thickness);
         world.addObject(basicWall);
 
         // Return the wall object
@@ -65,13 +67,10 @@ public class GameFactory {
         return null;
     }
 
-    public static Room createEmptyRoom() {
-        // Generic empty room
-
-        //
-
-        // Return said room
-        return null;
+    public static Room createBasicRoom(Vector3 position, int roomSize) {
+        Room room = new BasicRoom(position, roomSize);
+        world.addObject((Object) room);
+        return room;
     }
 
     public static Floor createBasicFloor(Vector3 position, float actualXSize, float actualYSize, float actualZSize) {

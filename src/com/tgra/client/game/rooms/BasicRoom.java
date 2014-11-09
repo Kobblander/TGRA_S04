@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.tgra.client.game.GameFactory;
 import com.tgra.client.game.floors.Floor;
 import com.tgra.client.game.object.*;
+import com.tgra.client.game.object.Object;
 import com.tgra.client.game.walls.Wall;
 
 /**
@@ -48,7 +49,7 @@ public class BasicRoom extends AbstractRoom {
 
         // Calculate the actual size of the room in float
         this.actualXSize = this.xUnits * unitSize;
-        this.actualYSize = this.yUnits * unitSize;
+        this.actualYSize = (this.yUnits * unitSize) / 2;
         this.actualZSize = this.zUnits * unitSize;
 
         // Calculate positions of outerWalls
@@ -57,17 +58,26 @@ public class BasicRoom extends AbstractRoom {
         float zPos = this.position.z + this.actualZSize / 2;
 
         // Create all the rooms objects.
-        Wall wall1 = GameFactory.createBasicWall(new Vector3(xPos, yPos, zPos), actualXSize, actualYSize, actualZSize);
-        Wall wall2 = GameFactory.createBasicWall(new Vector3(xPos, yPos, -zPos), actualXSize, actualYSize, actualZSize);
-        Wall wall3 = GameFactory.createBasicWall(new Vector3(-xPos, yPos, zPos), actualXSize, actualYSize, actualZSize);
-        Wall wall4 = GameFactory.createBasicWall(new Vector3(-xPos, yPos, -zPos), actualXSize, actualYSize, actualZSize);
-        this.outerWalls.add(wall1);
-        this.outerWalls.add(wall2);
-        this.outerWalls.add(wall3);
-        this.outerWalls.add(wall4);
+        Wall wallTop = GameFactory.createBasicWall(new Vector3(position.x, yPos, zPos), 0.0f, actualZSize, actualYSize, 1.0f);
+        Wall wallLeft = GameFactory.createBasicWall(new Vector3(xPos, yPos, position.z), 90.0f, actualXSize, actualYSize, 1.0f);
+        Wall wallBottom = GameFactory.createBasicWall(new Vector3(position.x, yPos, -zPos), 0.0f, actualZSize, actualYSize, 1.0f);
+        Wall wallRight = GameFactory.createBasicWall(new Vector3(-xPos, yPos, position.z), 90.0f, actualXSize, actualYSize, 1.0f);
+        this.outerWalls.add(wallTop);
+        this.outerWalls.add(wallLeft);
+        this.outerWalls.add(wallBottom);
+        this.outerWalls.add(wallRight);
 
         Floor floor = GameFactory.createBasicFloor(position, actualXSize, actualYSize, actualZSize);
         this.floor = floor;
     }
 
+    @Override
+    public void render() {
+        for (Wall w : outerWalls) {
+            Object wo = (Object) w;
+            wo.render();
+        }
+        Object fo = (Object) floor;
+        fo.render();
+    }
 }

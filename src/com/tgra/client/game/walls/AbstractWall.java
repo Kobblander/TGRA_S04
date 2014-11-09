@@ -21,7 +21,11 @@ public abstract class AbstractWall extends AbstractObject implements Wall {
     protected float zSize;
 
     // Default thickness of all walls.
-    protected float thickness = 20.0f;
+    protected float thickness = 5.0f;
+
+    // Length, height and rotation of the wall.
+    protected float height;
+    protected float length;
     protected float rotation;
 
     @Override

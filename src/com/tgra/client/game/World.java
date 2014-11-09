@@ -2,6 +2,7 @@ package com.tgra.client.game;
 
 import com.tgra.client.game.object.Object;
 import com.tgra.client.game.rooms.Room;
+import com.tgra.client.game.shapes.Shape;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,8 @@ public class World {
 
     private static List<Object> objectList = new ArrayList<Object>();
 
+    private static List<Shape> shapeList = new ArrayList<Shape>();
+
     private World() {
     }
 
@@ -38,6 +41,14 @@ public class World {
 
     public static void addObject(Object object) {
         objectList.add(object);
+    }
+
+    public static void addShape(Shape shape) {
+        shapeList.add(shape);
+    }
+
+    public static List<Shape> getShapeList() {
+        return shapeList;
     }
 
 }
