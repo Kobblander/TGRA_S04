@@ -19,4 +19,13 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
 
     protected List<Wall> walls = new ArrayList<Wall>();
 
+    /**
+     * It is optional to implement this update function.
+     * Only do so if it is needed to update the rooms variables.
+     * @param deltaTime Current deltaTime.
+     */
+    @Override
+    public void update(float deltaTime) {
+
+    }
 }
