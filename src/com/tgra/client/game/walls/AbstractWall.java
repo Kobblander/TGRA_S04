@@ -1,6 +1,7 @@
 package com.tgra.client.game.walls;
 
 import com.tgra.client.game.object.AbstractObject;
+import com.tgra.client.game.shapes.Box;
 
 /**
  * <h1>AbstractWallt</h1>
@@ -13,9 +14,15 @@ import com.tgra.client.game.object.AbstractObject;
  */
 public abstract class AbstractWall extends AbstractObject implements Wall {
 
+    protected Box box;
+
     protected float xSize;
     protected float ySize;
     protected float zSize;
+
+    // Default thickness of all walls.
+    protected float thickness = 20.0f;
+    protected float rotation;
 
     @Override
     public void update(float deltaTime) {

@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.tgra.client.game.floors.BasicFloor;
 import com.tgra.client.game.object.Object;
 import com.tgra.client.game.rooms.Room;
+import com.tgra.client.game.shapes.Box;
 import com.tgra.client.game.shapes.Shape;
 import com.tgra.client.game.walls.BasicWall;
 import com.tgra.client.game.walls.Wall;
@@ -29,7 +30,8 @@ public class GameFactory {
     private GameFactory() {
     }
 
-    public static Shape createBox(/* Texture */) {
+    public static Shape createWoodenBox(Vector3 position, float xSize, float ySize, float zSize) {
+        Box box = new Box("wood.jpg", position, xSize, ySize, zSize);
 
         return null;
     }
