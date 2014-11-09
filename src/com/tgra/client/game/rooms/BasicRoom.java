@@ -19,31 +19,44 @@ public class BasicRoom extends AbstractRoom {
 
 
     /**
+     * This constructor makes a perfect square room.
      * Constructor for a basic room.
      * @param position THIS PARAMETER WILL BE REFACTORED LATER
      *                 TO BE THE POSITION WITHIN THE LEVEL
+     *                 Or maybe not... The level will decide the rooms position.
      */
     public BasicRoom(Vector3 position, int roomSize) {
         this.position = position;
-        this.roomSize = roomSize;
+        this.roomXSize = roomSize;
+        this.roomYSize = roomSize;
+        this.roomZSize = roomSize;
 
         initializeRoom();
     }
 
     @Override
     protected void initializeRoom() {
-        this.xUnits = roomSize * unitFactor;
-        this.yUnits = roomSize * unitFactor;
-        this.zUnits = roomSize * unitFactor;
+        // A room of size 5 would have 5x5 units
+        // Each unit is of size 200.0f then the actualXSize
+        // would be for example 5*5*200.0f
 
+        // Calculate how many units the room is
+        // unitFactor is how many units the room is given its size
+        this.xUnits = roomXSize * unitFactor;
+        this.yUnits = roomYSize * unitFactor;
+        this.zUnits = roomZSize * unitFactor;
+
+        // Calculate the actual size of the room in float
         this.actualXSize = this.xUnits * unitSize;
         this.actualYSize = this.yUnits * unitSize;
         this.actualZSize = this.zUnits * unitSize;
 
+        // Calculate positions of outerWalls
         float xPos = this.position.x + this.actualXSize / 2;
         float yPos = this.position.y + this.actualYSize / 2;
         float zPos = this.position.z + this.actualZSize / 2;
 
+        // Create all the rooms objects.
         Wall wall1 = GameFactory.createBasicWall(new Vector3(xPos, yPos, zPos), actualXSize, actualYSize, actualZSize);
         Wall wall2 = GameFactory.createBasicWall(new Vector3(xPos, yPos, -zPos), actualXSize, actualYSize, actualZSize);
         Wall wall3 = GameFactory.createBasicWall(new Vector3(-xPos, yPos, zPos), actualXSize, actualYSize, actualZSize);

@@ -21,7 +21,9 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
 
     // Currently rooms are symmetric
     // A room of size 1 fits one cell in a level.
-    protected int roomSize = 1;
+    protected int roomXSize = 1;
+    protected int roomYSize = 1;
+    protected int roomZSize = 1;
 
     // Unit size of a room.
     // A doorway would take up a single unit.
@@ -29,7 +31,10 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
 
     // Number of units per roomSize
     // This needs to be an odd number.
-    protected int unitFactor = 5;
+    // A room of size 5 would have 5x5 units
+    // Each unit is of size 200.0f then the actualXSize
+    // would be for example 5*5*200.0f
+    protected int unitFactor = 3;
 
     // This is will be multiplied by the unitSize, default 1.
     protected int xUnits = 1;
