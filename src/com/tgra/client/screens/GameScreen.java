@@ -17,7 +17,6 @@ import com.tgra.client.game.rooms.Room;
 import com.tgra.client.game.shapes.Box;
 import com.tgra.client.game.shapes.Shape;
 import com.tgra.client.game.shapes.Sphere;
-import com.tgra.client.game.object.Object;
 import com.tgra.client.graphics.Player;
 import com.tgra.client.utility.Lights;
 
@@ -105,16 +104,16 @@ public class GameScreen implements Screen {
 
         // Render graphics instances
         modelBatch.begin(camera);
-        lights.render(delta);
+            lights.render(delta);
 
-        //box.render(modelBatch, environment);
+            //box.render(modelBatch, environment);
 
 
-        player.draw(modelBatch, environment);
-        List<Shape> shapeList = World.getInstance().getShapeList();
-        for (Shape s : shapeList) {
-            s.render(modelBatch, environment);
-        }
+            player.draw(modelBatch, environment);
+            List<Shape> shapeList = World.getInstance().getShapeList();
+            for (Shape s : shapeList) {
+                s.render(modelBatch, environment);
+            }
         modelBatch.end();
 
 

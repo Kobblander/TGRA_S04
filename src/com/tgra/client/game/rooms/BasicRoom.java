@@ -3,7 +3,6 @@ package com.tgra.client.game.rooms;
 import com.badlogic.gdx.math.Vector3;
 import com.tgra.client.game.GameFactory;
 import com.tgra.client.game.floors.Floor;
-import com.tgra.client.game.object.*;
 import com.tgra.client.game.object.Object;
 import com.tgra.client.game.walls.Wall;
 
@@ -58,10 +57,11 @@ public class BasicRoom extends AbstractRoom {
         float zPos = this.position.z + this.actualZSize / 2;
 
         // Create all the rooms objects.
-        Wall wallTop = GameFactory.createBasicWall(new Vector3(position.x, yPos, zPos), 0.0f, actualZSize, actualYSize, 1.0f);
+        Wall wallTop = GameFactory.createBasicWall(new Vector3(xPos, yPos,  position.z), 0.0f, actualZSize, actualYSize, 1.0f);
         Wall wallLeft = GameFactory.createBasicWall(new Vector3(xPos, yPos, position.z), 90.0f, actualXSize, actualYSize, 1.0f);
-        Wall wallBottom = GameFactory.createBasicWall(new Vector3(position.x, yPos, -zPos), 0.0f, actualZSize, actualYSize, 1.0f);
+        Wall wallBottom = GameFactory.createBasicWall(new Vector3(-xPos, yPos,  position.z), 0.0f, actualZSize, actualYSize, 1.0f);
         Wall wallRight = GameFactory.createBasicWall(new Vector3(-xPos, yPos, position.z), 90.0f, actualXSize, actualYSize, 1.0f);
+
         this.outerWalls.add(wallTop);
         this.outerWalls.add(wallLeft);
         this.outerWalls.add(wallBottom);

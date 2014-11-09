@@ -4,8 +4,6 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.tgra.client.game.GameFactory;
 import com.tgra.client.game.object.AbstractObject;
-import com.tgra.client.game.shapes.Box;
-import com.tgra.client.game.shapes.Shape;
 import com.tgra.client.utility.Lights;
 
 /**
@@ -28,7 +26,7 @@ public class BasicWall extends AbstractWall {
     protected void initializeWall() {
         box = GameFactory.createWoodenBox(position, thickness, height, length);
         box.build(AbstractObject.builder);
-        box.setRotation(new Vector3(0, 1, 0), rotation);
+        box.setRotation(Vector3.Y, rotation);
     }
 
     @Override
