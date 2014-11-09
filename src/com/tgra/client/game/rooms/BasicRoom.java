@@ -14,4 +14,9 @@ public class BasicRoom extends AbstractRoom {
 
     public BasicRoom() {
     }
+
+    @Override
+    public void update(float deltaTime) {
+
+    }
 }

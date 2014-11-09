@@ -5,7 +5,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g3d.Material;
 import com.badlogic.gdx.graphics.g3d.attributes.TextureAttribute;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.utils.TiledDrawable;
+import com.tgra.client.screens.GameScreen;
 
 /**
  * Created with IntelliJ IDEA
@@ -39,11 +41,12 @@ public class Texture {
     }
 
     public void setUVRange(MeshPartBuilder partBuilder, float width, float height) {
-        float u = texture.getWidth() / width;
-        float v = texture.getHeight() / height;
+        Vector3 size = new Vector3(1, 1, 1);
+        GameScreen.camera.unproject(size);
 
-        float max = Math.min(u, v);
+        float u = texture.getWidth() / (Math.abs(width * size.x));
+        float v = texture.getHeight() / (Math.abs( height * size.y));
 
-        partBuilder.setUVRange(0, 0, max, max);
+        partBuilder.setUVRange(0, 0, u, v);
     }
 }
