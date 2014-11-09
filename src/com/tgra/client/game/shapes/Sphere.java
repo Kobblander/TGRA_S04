@@ -60,5 +60,6 @@ public class Sphere implements Shape {
         sphereInstance = new ModelInstance(builder.end());
 
         sphereInstance.transform.setTranslation(center);
+        sphereInstance.calculateTransforms();
     }
 }

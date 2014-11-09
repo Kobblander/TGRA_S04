@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
+import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.tgra.client.utility.Texture;
 
@@ -69,5 +70,17 @@ public class Box implements Shape {
     @Override
     public void render(ModelBatch modelBatch, Environment environment) {
         modelBatch.render(boxInstance, environment);
+    }
+
+    public void setRotation(Vector3 axis, float degrees) {
+        boxInstance.transform.rotate(axis, degrees);
+    }
+
+    public float getRotation() {
+        Quaternion q = new Quaternion();
+
+        boxInstance.transform.getRotation(q);
+
+        return q.getAngle();
     }
 }
