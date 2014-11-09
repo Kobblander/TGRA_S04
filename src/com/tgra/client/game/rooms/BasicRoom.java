@@ -54,6 +54,7 @@ public class BasicRoom extends AbstractRoom {
         this.outerWalls.add(wall4);
 
         Floor floor = GameFactory.createBasicFloor(position, actualXSize, actualYSize, actualZSize);
+        this.floor = floor;
     }
 
 }
