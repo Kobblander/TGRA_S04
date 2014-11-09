@@ -36,4 +36,9 @@ public class BasicRoom extends AbstractRoom {
         this.actualYSize = this.yUnits * unitSize;
         this.actualZSize = this.zUnits * unitSize;
     }
+
+    @Override
+    public void update(float deltaTime) {
+
+    }
 }
