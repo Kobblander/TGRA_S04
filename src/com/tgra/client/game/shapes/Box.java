@@ -22,7 +22,7 @@ import com.tgra.client.utility.Texture;
  * @version 1.1
  */
 public class Box implements Shape {
-    // Side textures
+    // Box texture
     private Texture boxTexture;
 
     // Box instance
@@ -73,8 +73,8 @@ public class Box implements Shape {
         modelBatch.render(boxInstance, environment);
     }
 
-    public void setRotation(Vector3 axis, float degrees) {
-        boxInstance.transform.rotate(axis, degrees);
+    public void setRotation(float degrees) {
+        boxInstance.transform.rotate(Vector3.Y, degrees);
         boxInstance.calculateTransforms();
     }
 

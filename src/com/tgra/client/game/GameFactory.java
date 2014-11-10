@@ -2,14 +2,14 @@ package com.tgra.client.game;
 
 import com.badlogic.gdx.math.Vector3;
 import com.tgra.client.game.floors.BasicFloor;
+import com.tgra.client.game.floors.Floor;
 import com.tgra.client.game.object.Object;
+import com.tgra.client.game.roofs.BasicRoof;
+import com.tgra.client.game.roofs.Roof;
 import com.tgra.client.game.rooms.BasicRoom;
 import com.tgra.client.game.rooms.Room;
-import com.tgra.client.game.shapes.Box;
-import com.tgra.client.game.shapes.Shape;
 import com.tgra.client.game.walls.BasicWall;
 import com.tgra.client.game.walls.Wall;
-import com.tgra.client.game.floors.Floor;
 
 /**
  * <h1>EntityFactory</h1>
@@ -28,15 +28,7 @@ public class GameFactory {
 
     private static World world = World.getInstance();
 
-    private GameFactory() {
-    }
-
-    public static Box createWoodenBox(Vector3 position, float xSize, float ySize, float zSize) {
-        Box box = new Box("wood.jpg", position, xSize, ySize, zSize);
-        world.addShape(box);
-
-        return box;
-    }
+    private GameFactory() {}
 
     public static Wall createTiledWall() {
         // Get tile texture
@@ -74,9 +66,16 @@ public class GameFactory {
     }
 
     public static Floor createBasicFloor(Vector3 position, float actualXSize, float actualYSize, float actualZSize) {
-
         Object basicFloor = new BasicFloor(position, actualXSize, actualYSize, actualZSize);
         world.addObject(basicFloor);
+
         return (Floor) basicFloor;
+    }
+
+    public static Roof createBasicRoof(Vector3 position, float actualXSize, float actualYSize, float actualZSize) {
+        Object basicRoof = new BasicRoof(position, actualXSize, actualYSize, actualZSize);
+        world.addObject(basicRoof);
+
+        return (Roof) basicRoof;
     }
 }

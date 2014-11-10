@@ -12,15 +12,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.tgra.client.MyGame;
 import com.tgra.client.events.InputManager;
 import com.tgra.client.game.GameFactory;
-import com.tgra.client.game.World;
 import com.tgra.client.game.rooms.Room;
-import com.tgra.client.game.shapes.Box;
-import com.tgra.client.game.shapes.Shape;
-import com.tgra.client.game.shapes.Sphere;
+import com.tgra.client.game.shapes.Cylinder;
 import com.tgra.client.graphics.Player;
 import com.tgra.client.utility.Lights;
-
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA
@@ -45,9 +40,9 @@ public class GameScreen implements Screen {
     private static Player player;
     private static Lights lights;
 
-    private static Sphere sphere;
     private static Room room;
-    private static Box box;
+    private static Cylinder column;
+
 
     public GameScreen(MyGame game) {
         this.game = game;
@@ -83,8 +78,10 @@ public class GameScreen implements Screen {
         box.build(modelBuilder);
         */
 
-        room = GameFactory.createBasicRoom(new Vector3(0, 0, 0), 2);
+        room = GameFactory.createBasicRoom(new Vector3(2, -1.9f, 2), 2);
 
+        column = new Cylinder("glyphs.jpg", new Vector3(8f, 0f, 8f), 1f, 8f, 1f);
+        column.build(modelBuilder);
 
         controller = new InputManager(camera, player);
         Gdx.input.setInputProcessor(controller);
@@ -110,10 +107,11 @@ public class GameScreen implements Screen {
 
 
             player.draw(modelBatch, environment);
-            List<Shape> shapeList = World.getInstance().getShapeList();
-            for (Shape s : shapeList) {
-                s.render(modelBatch, environment);
-            }
+
+            room.render(modelBatch, environment);
+
+            column.render(modelBatch, environment);
+
         modelBatch.end();
 
 

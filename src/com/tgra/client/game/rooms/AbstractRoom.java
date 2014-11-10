@@ -2,6 +2,7 @@ package com.tgra.client.game.rooms;
 
 import com.tgra.client.game.floors.Floor;
 import com.tgra.client.game.object.AbstractObject;
+import com.tgra.client.game.roofs.Roof;
 import com.tgra.client.game.walls.Wall;
 
 import java.util.ArrayList;
@@ -24,6 +25,13 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
     protected int roomXSize = 1;
     protected int roomYSize = 1;
     protected int roomZSize = 1;
+
+    // Wall thickness
+    protected float thickness = 1;
+
+    // Roof / Floor thickness
+    protected float floorThickness = 0.5f;
+    protected float roofThickness = 0.5f;
 
     // Unit size of a room.
     // A doorway would take up a single unit.
@@ -48,9 +56,9 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
 
     protected List<Wall> outerWalls = new ArrayList<Wall>();
 
-    protected Floor floor; /*= new Floor();*/
+    protected Floor floor;
 
-    /* protected Roof roof = new Roof(); */
+    protected Roof roof;
 
     protected abstract void initializeRoom();
 

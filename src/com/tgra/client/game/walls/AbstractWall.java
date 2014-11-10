@@ -33,5 +33,5 @@ public abstract class AbstractWall extends AbstractObject implements Wall {
 
     }
 
-    protected abstract void initializeWall();
+    protected abstract void build();
 }

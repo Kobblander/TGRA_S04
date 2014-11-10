@@ -1,10 +1,10 @@
 package com.tgra.client.game.walls;
 
+import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.math.Vector3;
-import com.tgra.client.game.GameFactory;
 import com.tgra.client.game.object.AbstractObject;
-import com.tgra.client.utility.Lights;
+import com.tgra.client.game.shapes.Box;
 
 /**
  * Created by jakob on 9.11.2014.
@@ -18,19 +18,20 @@ public class BasicWall extends AbstractWall {
         this.height = height;
         this.length = length;
         this.rotation = rotation;
-        initializeWall();
+
+        build();
     }
 
 
     @Override
-    protected void initializeWall() {
-        box = GameFactory.createWoodenBox(position, thickness, height, length);
+    protected void build() {
+        box = new Box("wall.jpg", position, thickness, height, length);
         box.build(AbstractObject.builder);
-        box.setRotation(Vector3.Y, rotation);
+        box.setRotation(rotation);
     }
 
     @Override
-    public void render() {
-        box.render(new ModelBatch(), Lights.getEnvironment());
+    public void render(ModelBatch modelBatch, Environment environment) {
+        box.render(modelBatch, environment);
     }
 }

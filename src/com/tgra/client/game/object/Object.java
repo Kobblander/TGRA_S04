@@ -1,5 +1,8 @@
 package com.tgra.client.game.object;
 
+import com.badlogic.gdx.graphics.g3d.Environment;
+import com.badlogic.gdx.graphics.g3d.ModelBatch;
+
 /**
  * <h1>Entity</h1>
  * <h2>com.tgra.client.game</h2>
@@ -13,6 +16,6 @@ public interface Object {
 
     public void update(float deltaTime);
 
-    public void render();
+    public void render(ModelBatch modelBatch, Environment environment);
 
 }

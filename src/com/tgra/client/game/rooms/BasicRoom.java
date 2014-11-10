@@ -1,8 +1,9 @@
 package com.tgra.client.game.rooms;
 
+import com.badlogic.gdx.graphics.g3d.Environment;
+import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.tgra.client.game.GameFactory;
-import com.tgra.client.game.floors.Floor;
 import com.tgra.client.game.object.Object;
 import com.tgra.client.game.walls.Wall;
 
@@ -52,32 +53,66 @@ public class BasicRoom extends AbstractRoom {
         this.actualZSize = this.zUnits * unitSize;
 
         // Calculate positions of outerWalls
-        float xPos = this.position.x + this.actualXSize / 2;
+        float xPos = this.position.x + this.actualXSize / 2 + thickness / 2;
         float yPos = this.position.y + this.actualYSize / 2;
-        float zPos = this.position.z + this.actualZSize / 2;
+        float zPos = this.position.z + this.actualZSize / 2 + thickness / 2;
 
         // Create all the rooms objects.
-        Wall wallTop = GameFactory.createBasicWall(new Vector3(xPos, yPos,  position.z), 0.0f, actualZSize, actualYSize, 1.0f);
-        Wall wallLeft = GameFactory.createBasicWall(new Vector3(xPos, yPos, position.z), 90.0f, actualXSize, actualYSize, 1.0f);
-        Wall wallBottom = GameFactory.createBasicWall(new Vector3(-xPos, yPos,  position.z), 0.0f, actualZSize, actualYSize, 1.0f);
-        Wall wallRight = GameFactory.createBasicWall(new Vector3(-xPos, yPos, position.z), 90.0f, actualXSize, actualYSize, 1.0f);
+        Wall wallRight = GameFactory.createBasicWall(
+                new Vector3(xPos, yPos,  position.z),
+                0.0f,
+                actualZSize,
+                actualYSize,
+                thickness
+        );
 
-        this.outerWalls.add(wallTop);
-        this.outerWalls.add(wallLeft);
-        this.outerWalls.add(wallBottom);
+        Wall wallFront = GameFactory.createBasicWall(
+                new Vector3(zPos - this.actualZSize - thickness, yPos, -position.x),
+                -90.0f,
+                actualXSize,
+                actualYSize,
+                thickness
+        );
+
+        Wall wallLeft = GameFactory.createBasicWall(
+                new Vector3(xPos  - this.actualXSize - thickness, yPos,  position.z),
+                0.0f,
+                actualZSize,
+                actualYSize,
+                thickness
+        );
+
+        Wall wallBottom = GameFactory.createBasicWall(
+                new Vector3(zPos, yPos, -position.x),
+                -90.0f,
+                actualXSize,
+                actualYSize,
+                thickness
+        );
+
         this.outerWalls.add(wallRight);
+        this.outerWalls.add(wallLeft);
+        this.outerWalls.add(wallFront);
+        this.outerWalls.add(wallBottom);
 
-        Floor floor = GameFactory.createBasicFloor(position, actualXSize, actualYSize, actualZSize);
-        this.floor = floor;
+        this.floor = GameFactory.createBasicFloor(position, actualXSize, floorThickness, actualZSize);
+
+        Vector3 roofPos = new Vector3(position.x, actualYSize - 1.75f, position.z);
+
+        this.roof = GameFactory.createBasicRoof(roofPos, actualXSize, roofThickness, actualZSize);
     }
 
     @Override
-    public void render() {
+    public void render(ModelBatch modelBatch, Environment environment) {
         for (Wall w : outerWalls) {
             Object wo = (Object) w;
-            wo.render();
+            wo.render(modelBatch, environment);
         }
-        Object fo = (Object) floor;
-        fo.render();
+
+        Object f = (Object) floor;
+        f.render(modelBatch, environment);
+
+        Object r = (Object) roof;
+        r.render(modelBatch, environment);
     }
 }

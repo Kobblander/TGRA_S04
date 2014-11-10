@@ -17,7 +17,7 @@ public abstract class AbstractFloor extends AbstractObject implements Floor {
     protected float ySize;
     protected float zSize;
 
-    protected abstract void initializeFloor();
+    protected abstract void build();
 
     @Override
     public void update(float deltaTime) {

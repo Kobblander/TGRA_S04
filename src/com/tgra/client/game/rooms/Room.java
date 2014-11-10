@@ -9,6 +9,6 @@ package com.tgra.client.game.rooms;
  * @author jakob
  * @version 1.1
  */
-public interface Room {
+public interface Room extends com.tgra.client.game.object.Object {
 
 }
