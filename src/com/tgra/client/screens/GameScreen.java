@@ -41,6 +41,7 @@ public class GameScreen implements Screen {
     private static Lights lights;
 
     private static Room room;
+    private static Room room2, room3, room4;
     private static Cylinder column;
 
 
@@ -79,6 +80,9 @@ public class GameScreen implements Screen {
         */
 
         room = GameFactory.createBasicRoom(new Vector3(2, -1.9f, 2), 2);
+        room2 = GameFactory.createBasicRoom(new Vector3(2, -1.9f, 16), 2);
+        room3 = GameFactory.createBasicRoom(new Vector3(16, -1.9f, 2), 2);
+        room4 = GameFactory.createBasicRoom(new Vector3(-16, -1.9f, 2), 2);
 
         column = new Cylinder("glyphs.jpg", new Vector3(8f, 0f, 8f), 1f, 8f, 1f);
         column.build(modelBuilder);
@@ -109,6 +113,9 @@ public class GameScreen implements Screen {
             player.draw(modelBatch, environment);
 
             room.render(modelBatch, environment);
+            room2.render(modelBatch, environment);
+            room3.render(modelBatch, environment);
+            room4.render(modelBatch, environment);
 
             column.render(modelBatch, environment);
 
