@@ -47,6 +47,7 @@ public class GameScreen implements Screen {
 
     private static Sphere sphere;
     private static Room room;
+    private static Room room2;
     private static Box box;
 
     public GameScreen(MyGame game) {
@@ -83,7 +84,8 @@ public class GameScreen implements Screen {
         box.build(modelBuilder);
         */
 
-        room = GameFactory.createBasicRoom(new Vector3(0, 0, 0), 2);
+        //room = GameFactory.createBasicRoom(new Vector3(0, 0, 0), 2);
+        room2 = GameFactory.createBasicRoom(new Vector3(0, 0, 12), 2);
 
 
         controller = new InputManager(camera, player);
