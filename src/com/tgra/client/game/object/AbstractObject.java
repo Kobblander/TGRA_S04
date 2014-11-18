@@ -21,4 +21,9 @@ public abstract class AbstractObject implements Object {
 
     @Override
     public abstract void update(float deltaTime);
+
+    @Override
+    public Vector3 getPosition() {
+        return this.position;
+    }
 }

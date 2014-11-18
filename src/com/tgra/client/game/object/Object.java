@@ -2,6 +2,7 @@ package com.tgra.client.game.object;
 
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
+import com.badlogic.gdx.math.Vector3;
 
 /**
  * <h1>Entity</h1>
@@ -17,5 +18,7 @@ public interface Object {
     public void update(float deltaTime);
 
     public void render(ModelBatch modelBatch, Environment environment);
+
+    public Vector3 getPosition();
 
 }

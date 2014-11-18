@@ -6,11 +6,17 @@ import com.tgra.client.game.floors.Floor;
 import com.tgra.client.game.levels.BasicLevel;
 import com.tgra.client.game.levels.Level;
 import com.tgra.client.game.levels.LevelPos;
+import com.tgra.client.game.maze.Coord;
+import com.tgra.client.game.maze.Maze;
+import com.tgra.client.game.maze.MazeType;
+import com.tgra.client.game.rooms.MazeRoom;
+import com.tgra.client.game.walls.MazeWall;
 import com.tgra.client.game.object.Object;
 import com.tgra.client.game.roofs.BasicRoof;
 import com.tgra.client.game.roofs.Roof;
 import com.tgra.client.game.rooms.BasicRoom;
 import com.tgra.client.game.rooms.Room;
+import com.tgra.client.game.shapes.Box;
 import com.tgra.client.game.shapes.Cylinder;
 import com.tgra.client.game.shapes.Shape;
 import com.tgra.client.game.walls.BasicWall;
@@ -83,7 +89,8 @@ public class GameFactory {
         level.addRoomToLevel(createBasicRoom(1, 1, 1), new LevelPos(-1, 0, 4));
         level.addRoomToLevel(createBasicRoom(1, 1, 1), new LevelPos(-3, 0, 3));
 
-        level.addRoomToLevel(createBasicRoom(5, 3, 5), new LevelPos(1, 0, 1));
+        level.addRoomToLevel(createMazeRoom(), new LevelPos(1, 0, 1));
+
 
 
         //level.addDoorway(new LevelPos(0, 0, 0), new LevelPos(0, 0, 1));
@@ -101,13 +108,10 @@ public class GameFactory {
         return level;
     }
 
-    public Floor createDirtFloor() {
-        // Get the dirt floor texture
-
-        // Create the floor with said texture
-
-        //
-        return null;
+    public Maze createMaze(int size, float cellsize, MazeType mazeType, Vector3 position) {
+        Maze maze = new Maze(size, cellsize, mazeType, position);
+        world.addObject(maze);
+        return maze;
     }
 
     public Cylinder createColumn(Vector3 position, float width, float height, float depth) {
@@ -117,6 +121,12 @@ public class GameFactory {
 
     public Room createBasicRoom(int roomXSize, int roomYSize, int roomZSize) {
         Room room = new BasicRoom(roomXSize, roomYSize, roomZSize);
+        world.addObject(room);
+        return room;
+    }
+
+    public Room createMazeRoom() {
+        Room room = new MazeRoom();
         world.addObject(room);
         return room;
     }
@@ -133,5 +143,16 @@ public class GameFactory {
         world.addObject(basicRoof);
 
         return (Roof) basicRoof;
+    }
+
+    public MazeWall createWall(Coord coord, Coord coord1, Maze maze) {
+        MazeWall mazeWall = new MazeWall(coord, coord1, maze);
+        world.addObject(mazeWall);
+
+        return mazeWall;
+    }
+
+    public Box createWallBox(Vector3 newPos, float v, float tallness, float thickness) {
+        return null;
     }
 }

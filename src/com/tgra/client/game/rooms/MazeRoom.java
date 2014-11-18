@@ -3,34 +3,33 @@ package com.tgra.client.game.rooms;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.math.Vector3;
-import com.tgra.client.game.object.Object;
+import com.tgra.client.game.maze.Maze;
+import com.tgra.client.game.maze.MazeType;
 import com.tgra.client.game.shapes.Cylinder;
+import com.tgra.client.game.object.Object;
 
 /**
- * <h1>BasicRoom</h1>
+ * <h1>MazeRoom</h1>
  * <h2>com.tgra.client.game.rooms</h2>
  * <p></p>
- * Created on 8.11.2014.
+ * Created on 18.11.2014.
  *
  * @author jakob
  * @version 1.1
  */
-public class BasicRoom extends AbstractRoom {
+public class MazeRoom extends AbstractRoom {
 
-    public BasicRoom(int roomXSize, int roomYSize, int roomZSize) {
-        if (roomXSize % 2 == 0) {
-            System.out.println("Room sizes must be odd numbers.");
-            roomXSize++;
-        } else if (roomYSize % 2 == 0) {
-            System.out.println("Room sizes must be odd numbers.");
-            roomYSize++;
-        }
-        initializeRoom(roomXSize, roomYSize, roomZSize);
+    private Maze maze;
+    private int roomSize = 5;
+
+    public MazeRoom() {
+        initializeRoom(roomSize, 2, roomSize);
     }
-
 
     @Override
     protected void initDoodads() {
+
+        maze = gameFactory.createMaze(15, unitSize + 0.3f, MazeType.PRIM, this.position);
 
         // Create all the rooms objects.
         Cylinder c1 = gameFactory.createColumn(TL, 1f, actualYSize, 1f);
@@ -50,16 +49,13 @@ public class BasicRoom extends AbstractRoom {
 
         Vector3 roofPos = new Vector3(position.x, actualYSize - 1.75f, position.z);
         roof = gameFactory.createBasicRoof(roofPos, actualXSize, roofThickness, actualZSize);
+
     }
 
     @Override
     public void render(ModelBatch modelBatch, Environment environment) {
-        /*
-        for (Wall w : outerWalls) {
-            Object wo = (Object) w;
-            wo.render(modelBatch, environment);
-        }
-        */
+
+        maze.render(modelBatch, environment);
 
         if (topWall != null) {
             ((Object) topWall).render(modelBatch, environment);
@@ -85,6 +81,4 @@ public class BasicRoom extends AbstractRoom {
         r.render(modelBatch, environment);
 
     }
-
-
 }
