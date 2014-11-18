@@ -56,12 +56,10 @@ public class DoorWall extends AbstractWall {
         doorwayBox.build(World.getInstance().getModelBuilder());
         doorwayBox.setRotation(rotation);
 
-        /*
         Vector3 columnPos = new Vector3(this.position);
         //columnPos.z -= roomData.getUnitSize()/2;
-        columnA = gameFactory.createColumn(position, thickness, roomData.get, thickness);
+        columnA = gameFactory.createColumn(position, thickness, roomData.getUnitSize(), thickness);
         columnA.build(World.getInstance().getModelBuilder());
-        */
 
     }
 

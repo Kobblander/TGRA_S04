@@ -41,10 +41,10 @@ public class BasicRoom extends AbstractRoom {
         c3.build(modelBuilder);
         Cylinder c4 = gameFactory.createColumn(BR, 1f, actualYSize, 1f);
         c4.build(modelBuilder);
-        columns.add(c1);
-        columns.add(c2);
-        columns.add(c3);
-        columns.add(c4);
+        doodads.add(c1);
+        doodads.add(c2);
+        doodads.add(c3);
+        doodads.add(c4);
 
         floor = gameFactory.createBasicFloor(position, actualXSize + thickness + 0.1f, floorThickness, actualZSize + thickness + 0.1f);
 
@@ -54,29 +54,15 @@ public class BasicRoom extends AbstractRoom {
 
     @Override
     public void render(ModelBatch modelBatch, Environment environment) {
-        /*
-        for (Wall w : outerWalls) {
-            Object wo = (Object) w;
-            wo.render(modelBatch, environment);
-        }
-        */
 
-        if (topWall != null) {
-            ((Object) topWall).render(modelBatch, environment);
-        }
-        if (bottomWall != null) {
-            ((Object) bottomWall).render(modelBatch, environment);
-        }
-        if (rightWall != null) {
-            ((Object) rightWall).render(modelBatch, environment);
-        }
-        if (leftWall != null) {
-            ((Object) leftWall).render(modelBatch, environment);
+        for (Object o : doodads) {
+            o.render(modelBatch, environment);
         }
 
-        for (Cylinder c : columns) {
-            c.render(modelBatch, environment);
-        }
+        topWall.render(modelBatch, environment);
+        bottomWall.render(modelBatch, environment);
+        leftWall.render(modelBatch, environment);
+        rightWall.render(modelBatch, environment);
 
         Object f = (Object) floor;
         f.render(modelBatch, environment);

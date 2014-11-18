@@ -3,6 +3,7 @@ package com.tgra.client.game.shapes;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
+import com.tgra.client.game.object.Object;
 
 /**
  * <h1>Box</h1>
@@ -13,7 +14,7 @@ import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
  * @author jakob
  * @version 1.1
  */
-public interface Shape {
+public interface Shape extends Object{
     /**
      * Render the object in its model batch
      * @param modelBatch batch to render the model in

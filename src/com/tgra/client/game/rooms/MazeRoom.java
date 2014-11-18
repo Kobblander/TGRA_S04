@@ -57,22 +57,14 @@ public class MazeRoom extends AbstractRoom {
 
         maze.render(modelBatch, environment);
 
-        if (topWall != null) {
-            ((Object) topWall).render(modelBatch, environment);
-        }
-        if (bottomWall != null) {
-            ((Object) bottomWall).render(modelBatch, environment);
-        }
-        if (rightWall != null) {
-            ((Object) rightWall).render(modelBatch, environment);
-        }
-        if (leftWall != null) {
-            ((Object) leftWall).render(modelBatch, environment);
+        for (Object o : doodads) {
+            o.render(modelBatch, environment);
         }
 
-        for (Cylinder c : columns) {
-            c.render(modelBatch, environment);
-        }
+        topWall.render(modelBatch, environment);
+        bottomWall.render(modelBatch, environment);
+        leftWall.render(modelBatch, environment);
+        rightWall.render(modelBatch, environment);
 
         Object f = (Object) floor;
         f.render(modelBatch, environment);

@@ -8,8 +8,10 @@ import com.tgra.client.game.GameFactory;
 import com.tgra.client.game.World;
 import com.tgra.client.game.floors.Floor;
 import com.tgra.client.game.object.AbstractObject;
+import com.tgra.client.game.object.Object;
 import com.tgra.client.game.roofs.Roof;
 import com.tgra.client.game.shapes.Cylinder;
+import com.tgra.client.game.walls.DoorWall;
 import com.tgra.client.game.walls.Wall;
 
 import java.util.ArrayList;
@@ -87,6 +89,8 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
     protected float yPos;
     protected float zPos;
 
+    protected ArrayList<Object> doodads = new ArrayList<Object>();
+
     protected abstract void initDoodads();
 
     protected void initializeRoom(int roomXSize, int roomYSize, int roomZSize) {
@@ -143,6 +147,16 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
             this.topWall = null;
             return;
         }
+        if (topWall.getClass() == DoorWall.class) {
+            Vector3 newPosA = new Vector3(this.position.x + unitSize / 2, this.position.y + unitSize / 2, this.position.z - actualZSize / 2);
+            Vector3 newPosB = new Vector3(this.position.x - unitSize / 2, this.position.y + unitSize / 2, this.position.z - actualZSize / 2);
+            Cylinder c1 = gameFactory.createColumn(newPosA, thickness, unitSize, thickness);
+            Cylinder c2 = gameFactory.createColumn(newPosB, thickness, unitSize, thickness);
+            c1.build(World.getInstance().getModelBuilder());
+            c2.build(World.getInstance().getModelBuilder());
+            doodads.add(c1);
+            doodads.add(c2);
+        }
         topWall.initWall(
                 new Vector3(zPos - actualZSize - thickness+0.1f, yPos, -position.x),
                 -90.0f,
@@ -160,6 +174,16 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
             this.bottomWall = null;
             return;
         }
+        if (bottomWall.getClass() == DoorWall.class) {
+            Vector3 newPosA = new Vector3(this.position.x + unitSize / 2, this.position.y + unitSize / 2, this.position.z + actualZSize / 2);
+            Vector3 newPosB = new Vector3(this.position.x - unitSize / 2, this.position.y + unitSize / 2, this.position.z + actualZSize / 2);
+            Cylinder c1 = gameFactory.createColumn(newPosA, thickness, unitSize, thickness);
+            Cylinder c2 = gameFactory.createColumn(newPosB, thickness, unitSize, thickness);
+            c1.build(World.getInstance().getModelBuilder());
+            c2.build(World.getInstance().getModelBuilder());
+            doodads.add(c1);
+            doodads.add(c2);
+        }
         bottomWall.initWall(
                 new Vector3(zPos-0.1f, yPos, -position.x),
                 -90.0f,
@@ -175,6 +199,16 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
         if (leftWall == null) {
             this.leftWall = null;
             return;
+        }
+        if (leftWall.getClass() == DoorWall.class) {
+            Vector3 newPosA = new Vector3(this.position.x - actualXSize / 2, this.position.y + unitSize / 2, this.position.z + unitSize / 2);
+            Vector3 newPosB = new Vector3(this.position.x - actualXSize / 2, this.position.y + unitSize / 2, this.position.z - unitSize / 2);
+            Cylinder c1 = gameFactory.createColumn(newPosA, thickness, unitSize, thickness);
+            Cylinder c2 = gameFactory.createColumn(newPosB, thickness, unitSize, thickness);
+            c1.build(World.getInstance().getModelBuilder());
+            c2.build(World.getInstance().getModelBuilder());
+            doodads.add(c1);
+            doodads.add(c2);
         }
         leftWall.initWall(
                 new Vector3(xPos  - actualXSize - thickness+0.1f, yPos,  position.z),
@@ -192,6 +226,16 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
         if (rightWall == null) {
             this.rightWall = null;
             return;
+        }
+        if (rightWall.getClass() == DoorWall.class) {
+            Vector3 newPosA = new Vector3(this.position.x + actualXSize / 2, this.position.y + unitSize / 2, this.position.z + unitSize / 2);
+            Vector3 newPosB = new Vector3(this.position.x + actualXSize / 2, this.position.y + unitSize / 2, this.position.z - unitSize / 2);
+            Cylinder c1 = gameFactory.createColumn(newPosA, thickness, unitSize, thickness);
+            Cylinder c2 = gameFactory.createColumn(newPosB, thickness, unitSize, thickness);
+            c1.build(World.getInstance().getModelBuilder());
+            c2.build(World.getInstance().getModelBuilder());
+            doodads.add(c1);
+            doodads.add(c2);
         }
         rightWall.initWall(
                 new Vector3(xPos-0.1f, yPos,  position.z),

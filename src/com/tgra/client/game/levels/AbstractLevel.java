@@ -66,16 +66,13 @@ public abstract class AbstractLevel extends AbstractObject implements Level {
         Room roomB = levelGrid.getRoomAtPos(levelPosB);
         RoomData roomDataA = roomA.getRoomData();
         RoomData roomDataB = roomB.getRoomData();
-        boolean isATaller = false;
-        if (roomDataA.getActualYSize() > roomDataB.getActualYSize()) {
-            isATaller = true;
-        }
 
         // LevelPoses must be next to eachother.
         if (levelPosA.y == levelPosB.y) {
             // Check if either left, top, right or bottom of each other
             if (levelPosA.x < levelPosB.x) {
                 // Check which room is taller
+                // TODO: Here I can put columns and doors :)
                 roomA.setRightWall(gameFactory.createDoorWall(roomA));
                 roomB.setLeftWall(gameFactory.createDoorWall(roomB));
             }
