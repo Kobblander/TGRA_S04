@@ -76,7 +76,7 @@ public class MenuScreen implements Screen {
      */
     public void drawMenu(float centerX, float centerY) {
         // Set Assignment title
-        Text title = new Text("Space thingy", centerX - 125, centerY + BUTTON_HEIGHT * 2.5f);
+        Text title = new Text("Cool Running", centerX - 125, centerY + BUTTON_HEIGHT * 2.5f);
         title.setFont("verdana39");
         stage.addActor(title);
 

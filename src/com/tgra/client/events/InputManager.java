@@ -15,9 +15,9 @@ import com.tgra.client.utility.Lights;
  */
 public class InputManager implements InputProcessor {
     static final float MOUSE_SENSITIVITY = 0.25f;
-    static float MOVE_SPEED = 2;
-    static final float NORMAL_SPEED = 2;
-    static final float RUN_SPEED = 4;
+    static float MOVE_SPEED = 10;
+    static final float NORMAL_SPEED = 10;
+    static final float RUN_SPEED = 15;
     static final float NINETY_DEGREE = 89.99f;
     private final Player player;
 
@@ -95,6 +95,7 @@ public class InputManager implements InputProcessor {
         final float cos = MathUtils.cosDeg(angleY);
 
         // Don't fuck with me
+        // I ain't nothin' to fuck with
         if(cos == 0f)
             return true;
 

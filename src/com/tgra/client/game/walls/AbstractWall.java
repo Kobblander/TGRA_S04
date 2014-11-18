@@ -1,6 +1,8 @@
 package com.tgra.client.game.walls;
 
+import com.badlogic.gdx.math.Vector3;
 import com.tgra.client.game.object.AbstractObject;
+import com.tgra.client.game.rooms.RoomData;
 import com.tgra.client.game.shapes.Box;
 
 /**
@@ -14,11 +16,12 @@ import com.tgra.client.game.shapes.Box;
  */
 public abstract class AbstractWall extends AbstractObject implements Wall {
 
-    protected Box box;
 
     protected float xSize;
     protected float ySize;
     protected float zSize;
+
+    protected RoomData roomData;
 
     // Default thickness of all walls.
     protected float thickness = 5.0f;
@@ -33,5 +36,21 @@ public abstract class AbstractWall extends AbstractObject implements Wall {
 
     }
 
-    protected abstract void initializeWall();
+    @Override
+    public void setRoomData(RoomData roomData) {
+        this.roomData = roomData;
+    }
+
+    @Override
+    public void initWall(Vector3 pos, float rotation, float length, float height, float thickness) {
+        this.position = pos;
+        this.thickness = thickness;
+        this.height = height;
+        this.length = length;
+        this.rotation = rotation;
+
+        build();
+    }
+
+    protected abstract void build();
 }

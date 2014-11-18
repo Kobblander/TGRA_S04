@@ -2,14 +2,21 @@ package com.tgra.client.game;
 
 import com.badlogic.gdx.math.Vector3;
 import com.tgra.client.game.floors.BasicFloor;
+import com.tgra.client.game.floors.Floor;
+import com.tgra.client.game.levels.BasicLevel;
+import com.tgra.client.game.levels.Level;
+import com.tgra.client.game.levels.LevelPos;
 import com.tgra.client.game.object.Object;
+import com.tgra.client.game.roofs.BasicRoof;
+import com.tgra.client.game.roofs.Roof;
 import com.tgra.client.game.rooms.BasicRoom;
 import com.tgra.client.game.rooms.Room;
-import com.tgra.client.game.shapes.Box;
+import com.tgra.client.game.shapes.Cylinder;
 import com.tgra.client.game.shapes.Shape;
 import com.tgra.client.game.walls.BasicWall;
+import com.tgra.client.game.walls.DoorWall;
+import com.tgra.client.game.walls.DoorwayData;
 import com.tgra.client.game.walls.Wall;
-import com.tgra.client.game.floors.Floor;
 
 /**
  * <h1>EntityFactory</h1>
@@ -28,15 +35,7 @@ public class GameFactory {
 
     private static World world = World.getInstance();
 
-    private GameFactory() {
-    }
-
-    public static Box createWoodenBox(Vector3 position, float xSize, float ySize, float zSize) {
-        Box box = new Box("wood.jpg", position, xSize, ySize, zSize);
-        world.addShape(box);
-
-        return box;
-    }
+    private GameFactory() {}
 
     public static Wall createTiledWall() {
         // Get tile texture
@@ -47,18 +46,63 @@ public class GameFactory {
         return null;
     }
 
-    public static Wall createBasicWall(Vector3 position, float rotation, float length, float height, float thickness) {
-        // Get basic wall texture
-
+    public Wall createBasicWall() {
         // Create the wall
-        Object basicWall = new BasicWall(position, rotation, length, height, thickness);
+        Object basicWall = new BasicWall();
         world.addObject(basicWall);
 
         // Return the wall object
         return (Wall) basicWall;
     }
 
-    public static Floor createDirtFloor() {
+    public Wall createDoorWall(Room room) {
+        // Create the wall
+        DoorWall doorWall = new DoorWall();
+        doorWall.setRoomData(room.getRoomData());
+        world.addObject(doorWall);
+
+        // Return the wall object
+        return doorWall;
+    }
+
+    public Level createBasicLevel(int levelXSize, int levelYSize) {
+        // Create the basic level
+        Level level = new BasicLevel(new Vector3(0f, -1.9f, 0f), levelXSize, levelYSize);
+        world.addObject(level);
+
+
+        level.addRoomToLevel(createBasicRoom(3, 1, 1), new LevelPos(2, 0, -1));
+
+        level.addRoomToLevel(createBasicRoom(1, 5, 1), new LevelPos(6, 0, 0));
+
+        level.addRoomToLevel(createBasicRoom(1, 2, 1), new LevelPos(0, 0, 0));
+        level.addRoomToLevel(createBasicRoom(5, 1, 1), new LevelPos(1, 0, 0));
+
+
+        level.addRoomToLevel(createBasicRoom(3, 2, 1), new LevelPos(-2, 0, 3));
+        level.addRoomToLevel(createBasicRoom(1, 1, 1), new LevelPos(-1, 0, 2));
+        level.addRoomToLevel(createBasicRoom(1, 1, 1), new LevelPos(-1, 0, 4));
+        level.addRoomToLevel(createBasicRoom(1, 1, 1), new LevelPos(-3, 0, 3));
+
+        level.addRoomToLevel(createBasicRoom(5, 3, 5), new LevelPos(1, 0, 1));
+
+
+        //level.addDoorway(new LevelPos(0, 0, 0), new LevelPos(0, 0, 1));
+        level.addDoorway(new LevelPos(5, 0, 0), new LevelPos(6, 0, 0));
+        level.addDoorway(new LevelPos(3, 0, 0), new LevelPos(3, 0, -1));
+        level.addDoorway(new LevelPos(2, 0, 0), new LevelPos(2, 0, 1));
+        level.addDoorway(new LevelPos(1, 0, 3), new LevelPos(0, 0, 3));
+        level.addDoorway(new LevelPos(0, 0, 0), new LevelPos(1, 0, 0));
+        level.addDoorway(new LevelPos(-1, 0, 3), new LevelPos(-1, 0, 2));
+        level.addDoorway(new LevelPos(-1, 0, 3), new LevelPos(-1, 0, 4));
+        level.addDoorway(new LevelPos(-2, 0, 3), new LevelPos(-3, 0, 3));
+
+
+        // Return the level
+        return level;
+    }
+
+    public Floor createDirtFloor() {
         // Get the dirt floor texture
 
         // Create the floor with said texture
@@ -67,16 +111,28 @@ public class GameFactory {
         return null;
     }
 
-    public static Room createBasicRoom(Vector3 position, int roomSize) {
-        Room room = new BasicRoom(position, roomSize);
-        world.addObject((Object) room);
+    public Cylinder createColumn(Vector3 position, float width, float height, float depth) {
+        Shape cylinder = new Cylinder("glyphs.jpg", position, width, height, depth);
+        return (Cylinder) cylinder;
+    }
+
+    public Room createBasicRoom(int roomXSize, int roomYSize, int roomZSize) {
+        Room room = new BasicRoom(roomXSize, roomYSize, roomZSize);
+        world.addObject(room);
         return room;
     }
 
-    public static Floor createBasicFloor(Vector3 position, float actualXSize, float actualYSize, float actualZSize) {
-
+    public Floor createBasicFloor(Vector3 position, float actualXSize, float actualYSize, float actualZSize) {
         Object basicFloor = new BasicFloor(position, actualXSize, actualYSize, actualZSize);
         world.addObject(basicFloor);
+
         return (Floor) basicFloor;
+    }
+
+    public Roof createBasicRoof(Vector3 position, float actualXSize, float actualYSize, float actualZSize) {
+        Object basicRoof = new BasicRoof(position, actualXSize, actualYSize, actualZSize);
+        world.addObject(basicRoof);
+
+        return (Roof) basicRoof;
     }
 }

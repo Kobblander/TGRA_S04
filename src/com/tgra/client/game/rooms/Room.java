@@ -1,5 +1,8 @@
 package com.tgra.client.game.rooms;
 
+import com.badlogic.gdx.math.Vector3;
+import com.tgra.client.game.walls.Wall;
+
 /**
  * <h1>Room</h1>
  * <h2>com.tgra.client</h2>
@@ -9,6 +12,13 @@ package com.tgra.client.game.rooms;
  * @author jakob
  * @version 1.1
  */
-public interface Room {
+public interface Room extends com.tgra.client.game.object.Object {
 
+    public void setBottomWall(Wall bottomWall);
+    public void setTopWall(Wall bottomWall);
+    public void setRightWall(Wall bottomWall);
+    public void setLeftWall(Wall bottomWall);
+
+    public void setPosition(Vector3 position);
+    public RoomData getRoomData();
 }

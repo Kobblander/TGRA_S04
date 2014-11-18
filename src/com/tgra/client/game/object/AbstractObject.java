@@ -17,17 +17,8 @@ import java.lang.*;
  */
 public abstract class AbstractObject implements Object {
 
-    protected static ModelBuilder builder = new ModelBuilder();
-
-    protected static ModelBatch modelBatch = new ModelBatch();
-
     protected Vector3 position;
 
     @Override
     public abstract void update(float deltaTime);
-
-    @Override
-    public void render() {
-
-    }
 }
