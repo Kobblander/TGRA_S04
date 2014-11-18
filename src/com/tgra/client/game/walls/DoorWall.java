@@ -4,8 +4,8 @@ import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.tgra.client.game.World;
-import com.tgra.client.game.rooms.RoomData;
 import com.tgra.client.game.shapes.Box;
+import com.tgra.client.game.shapes.Cylinder;
 
 /**
  * <h1>DoorWall</h1>
@@ -21,6 +21,8 @@ public class DoorWall extends AbstractWall {
     protected Box boxA;
     protected Box doorwayBox;
     protected Box boxB;
+    protected Cylinder columnA;
+    protected Cylinder columnB;
 
     public DoorWall() {
     }
@@ -54,6 +56,13 @@ public class DoorWall extends AbstractWall {
         doorwayBox.build(World.getInstance().getModelBuilder());
         doorwayBox.setRotation(rotation);
 
+        /*
+        Vector3 columnPos = new Vector3(this.position);
+        //columnPos.z -= roomData.getUnitSize()/2;
+        columnA = gameFactory.createColumn(position, thickness, roomData.get, thickness);
+        columnA.build(World.getInstance().getModelBuilder());
+        */
+
     }
 
     private Vector3 calculateBoxBPos() {
@@ -83,6 +92,7 @@ public class DoorWall extends AbstractWall {
         boxA.render(modelBatch, environment);
         boxB.render(modelBatch, environment);
         doorwayBox.render(modelBatch, environment);
+        //columnA.render(modelBatch, environment);
     }
 
 }

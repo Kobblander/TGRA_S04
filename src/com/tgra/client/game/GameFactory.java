@@ -15,7 +15,6 @@ import com.tgra.client.game.shapes.Cylinder;
 import com.tgra.client.game.shapes.Shape;
 import com.tgra.client.game.walls.BasicWall;
 import com.tgra.client.game.walls.DoorWall;
-import com.tgra.client.game.walls.DoorwayData;
 import com.tgra.client.game.walls.Wall;
 
 /**

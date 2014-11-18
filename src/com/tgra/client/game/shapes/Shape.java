@@ -26,4 +26,6 @@ public interface Shape {
      * @param builder the model builder ( tool )
      */
     public void build(ModelBuilder builder);
+
+    public void setRotation(float degrees);
 }

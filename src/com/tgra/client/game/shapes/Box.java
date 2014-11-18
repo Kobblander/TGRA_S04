@@ -21,12 +21,11 @@ import com.tgra.client.utility.Texture;
  * @author jakob
  * @version 1.1
  */
-public class Box implements Shape {
+public class Box extends AbstractShape {
     // Box texture
     private Texture boxTexture;
 
     // Box instance
-    private ModelInstance boxInstance;
 
     // Box 3d representation
     private Vector3 center;
@@ -64,24 +63,20 @@ public class Box implements Shape {
                 depth
             );
 
-        boxInstance = new ModelInstance(builder.end());
-        boxInstance.calculateTransforms();
+        shapeInstance = new ModelInstance(builder.end());
+        shapeInstance.calculateTransforms();
     }
 
     @Override
     public void render(ModelBatch modelBatch, Environment environment) {
-        modelBatch.render(boxInstance, environment);
+        modelBatch.render(shapeInstance, environment);
     }
 
-    public void setRotation(float degrees) {
-        boxInstance.transform.rotate(Vector3.Y, degrees);
-        boxInstance.calculateTransforms();
-    }
 
     public float getRotation() {
         Quaternion q = new Quaternion();
 
-        boxInstance.transform.getRotation(q);
+        shapeInstance.transform.getRotation(q);
 
         return q.getAngle();
     }

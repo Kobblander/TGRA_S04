@@ -17,12 +17,9 @@ import com.tgra.client.utility.Texture;
  * Date : 11/10/2014
  * Time : 04:36
  */
-public class Cylinder implements Shape {
+public class Cylinder extends AbstractShape {
     // Cylinder texture
     private Texture cylinderTexture;
-
-    // Cylinder instance
-    private ModelInstance cylinderInstance;
 
     // Cylinder 3d representation
     private Vector3 center;
@@ -54,14 +51,14 @@ public class Cylinder implements Shape {
                 10
         );
 
-        cylinderInstance = new ModelInstance(builder.end());
+        shapeInstance = new ModelInstance(builder.end());
 
-        cylinderInstance.transform.setTranslation(center);
-        cylinderInstance.calculateTransforms();
+        shapeInstance.transform.setTranslation(center);
+        shapeInstance.calculateTransforms();
     }
 
     @Override
     public void render(ModelBatch modelBatch, Environment environment) {
-        modelBatch.render(cylinderInstance, environment);
+        modelBatch.render(shapeInstance, environment);
     }
 }

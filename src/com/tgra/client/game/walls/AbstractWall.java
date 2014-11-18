@@ -1,6 +1,7 @@
 package com.tgra.client.game.walls;
 
 import com.badlogic.gdx.math.Vector3;
+import com.tgra.client.game.GameFactory;
 import com.tgra.client.game.object.AbstractObject;
 import com.tgra.client.game.rooms.RoomData;
 import com.tgra.client.game.shapes.Box;
@@ -30,6 +31,8 @@ public abstract class AbstractWall extends AbstractObject implements Wall {
     protected float height;
     protected float length;
     protected float rotation;
+
+    protected GameFactory gameFactory = GameFactory.getInstance();
 
     @Override
     public void update(float deltaTime) {
