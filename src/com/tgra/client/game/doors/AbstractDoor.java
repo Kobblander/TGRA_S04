@@ -22,22 +22,17 @@ import java.util.List;
 public abstract class AbstractDoor extends AbstractObject implements Door {
 
     protected Box box;
-    protected List<Key> keys = new ArrayList<Key>();
     protected Side side;
+    protected boolean isOpen;
 
     @Override
-    public void unlockDoor(Key key) {
-
-    }
-
-    @Override
-    public void openDoor() {
-
+    public void open() {
+        this.isOpen = true;
     }
 
     @Override
     public void update(float deltaTime) {
-
+        // TODO: If open start animation or simply remove box
     }
 
 

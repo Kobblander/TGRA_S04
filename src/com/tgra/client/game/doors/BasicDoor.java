@@ -25,8 +25,5 @@ public class BasicDoor extends AbstractDoor {
     @Override
     public void render(ModelBatch modelBatch, Environment environment) {
         box.render(modelBatch, environment);
-        for (Key k : keys) {
-            k.render(modelBatch, environment);
-        }
     }
 }

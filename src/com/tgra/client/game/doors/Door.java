@@ -13,6 +13,5 @@ import com.tgra.client.game.object.Object;
  * @version 1.1
  */
 public interface Door extends Object {
-    public void openDoor();
-    public void unlockDoor(Key key);
+    public void open();
 }
