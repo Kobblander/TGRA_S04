@@ -26,4 +26,9 @@ public abstract class AbstractObject implements Object {
     public Vector3 getPosition() {
         return this.position;
     }
+
+    @Override
+    public void setPosition(Vector3 position) {
+        this.position = position;
+    }
 }

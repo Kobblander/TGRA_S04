@@ -3,6 +3,7 @@ package com.tgra.client.game.shapes;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
+import com.badlogic.gdx.math.Vector3;
 import com.tgra.client.game.object.Object;
 
 /**
@@ -28,5 +29,5 @@ public interface Shape extends Object{
      */
     public void build(ModelBuilder builder);
 
-    public void setRotation(float degrees);
+    public void setRotation(float degrees, Vector3 axis);
 }

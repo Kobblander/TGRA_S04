@@ -19,6 +19,10 @@ public interface Room extends com.tgra.client.game.object.Object {
     public void setRightWall(Wall bottomWall);
     public void setLeftWall(Wall bottomWall);
 
+    public void setDoorColumns();
+
+    public void setDoor();
+
     public void setPosition(Vector3 position);
     public RoomData getRoomData();
 }

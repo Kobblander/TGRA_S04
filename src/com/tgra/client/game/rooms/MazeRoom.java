@@ -23,7 +23,7 @@ public class MazeRoom extends AbstractRoom {
     private int roomSize = 5;
 
     public MazeRoom() {
-        initializeRoom(roomSize, 2, roomSize);
+        initializeRoom(roomSize, 1, roomSize);
     }
 
     @Override

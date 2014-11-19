@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
+import com.tgra.client.game.World;
 import com.tgra.client.utility.Texture;
 
 /**
@@ -33,6 +34,7 @@ public class Cylinder extends AbstractShape {
         this.depth = depth;
 
         this.cylinderTexture = new Texture(Gdx.files.internal("data/cylinder/" + texture));
+        build(World.getInstance().getModelBuilder());
     }
 
     @Override
@@ -61,4 +63,5 @@ public class Cylinder extends AbstractShape {
     public void render(ModelBatch modelBatch, Environment environment) {
         modelBatch.render(shapeInstance, environment);
     }
+
 }

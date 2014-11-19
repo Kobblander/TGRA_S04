@@ -65,7 +65,7 @@ public class MazeWall extends AbstractWall {
             box = new Box("wall.jpg", newPos, length, 4, 0.5f);
         }
         box.build(World.getInstance().getModelBuilder());
-        box.setRotation(rotation);
+        box.setRotation(rotation, Vector3.Y);
 
     }
 

@@ -11,7 +11,6 @@ import com.tgra.client.game.object.AbstractObject;
 import com.tgra.client.game.object.Object;
 import com.tgra.client.game.roofs.Roof;
 import com.tgra.client.game.shapes.Cylinder;
-import com.tgra.client.game.walls.DoorWall;
 import com.tgra.client.game.walls.Wall;
 
 import java.util.ArrayList;
@@ -91,6 +90,13 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
 
     protected ArrayList<Object> doodads = new ArrayList<Object>();
 
+    protected Vector3 columnAPos = new Vector3();
+    protected Vector3 columnBPos = new Vector3();
+    protected Vector3 columnCPos = new Vector3();
+    protected Cylinder c1;
+    protected Cylinder c2;
+    protected Cylinder c3;
+
     protected abstract void initDoodads();
 
     protected void initializeRoom(int roomXSize, int roomYSize, int roomZSize) {
@@ -147,16 +153,13 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
             this.topWall = null;
             return;
         }
-        if (topWall.getClass() == DoorWall.class) {
-            Vector3 newPosA = new Vector3(this.position.x + unitSize / 2, this.position.y + unitSize / 2, this.position.z - actualZSize / 2);
-            Vector3 newPosB = new Vector3(this.position.x - unitSize / 2, this.position.y + unitSize / 2, this.position.z - actualZSize / 2);
-            Cylinder c1 = gameFactory.createColumn(newPosA, thickness, unitSize, thickness);
-            Cylinder c2 = gameFactory.createColumn(newPosB, thickness, unitSize, thickness);
-            c1.build(World.getInstance().getModelBuilder());
-            c2.build(World.getInstance().getModelBuilder());
-            doodads.add(c1);
-            doodads.add(c2);
-        }
+        columnAPos = new Vector3(this.position.x + unitSize / 2, this.position.y + unitSize / 2, this.position.z - actualZSize / 2 - thickness / 2);
+        columnBPos = new Vector3(this.position.x - unitSize / 2, this.position.y + unitSize / 2, this.position.z - actualZSize / 2 - thickness / 2);
+        columnCPos = new Vector3(this.position.x, this.position.y + unitSize, this.position.z - actualZSize / 2 - thickness / 2);
+        c1 = gameFactory.createColumn(columnAPos, thickness, unitSize, thickness);
+        c2 = gameFactory.createColumn(columnBPos, thickness, unitSize, thickness);
+        c3 = gameFactory.createColumn(columnCPos, thickness, unitSize, thickness);
+        c3.setRotation(-90f, Vector3.Z);
         topWall.initWall(
                 new Vector3(zPos - actualZSize - thickness+0.1f, yPos, -position.x),
                 -90.0f,
@@ -174,16 +177,13 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
             this.bottomWall = null;
             return;
         }
-        if (bottomWall.getClass() == DoorWall.class) {
-            Vector3 newPosA = new Vector3(this.position.x + unitSize / 2, this.position.y + unitSize / 2, this.position.z + actualZSize / 2);
-            Vector3 newPosB = new Vector3(this.position.x - unitSize / 2, this.position.y + unitSize / 2, this.position.z + actualZSize / 2);
-            Cylinder c1 = gameFactory.createColumn(newPosA, thickness, unitSize, thickness);
-            Cylinder c2 = gameFactory.createColumn(newPosB, thickness, unitSize, thickness);
-            c1.build(World.getInstance().getModelBuilder());
-            c2.build(World.getInstance().getModelBuilder());
-            doodads.add(c1);
-            doodads.add(c2);
-        }
+        columnAPos = new Vector3(this.position.x + unitSize / 2, this.position.y + unitSize / 2, this.position.z + actualZSize / 2 + thickness / 2);
+        columnBPos = new Vector3(this.position.x - unitSize / 2, this.position.y + unitSize / 2, this.position.z + actualZSize / 2 + thickness / 2);
+        columnCPos = new Vector3(this.position.x, this.position.y + unitSize, this.position.z + actualZSize / 2 + thickness / 2);
+        c1 = gameFactory.createColumn(columnAPos, thickness, unitSize, thickness);
+        c2 = gameFactory.createColumn(columnBPos, thickness, unitSize, thickness);
+        c3 = gameFactory.createColumn(columnCPos, thickness, unitSize, thickness);
+        c3.setRotation(-90f, Vector3.Z);
         bottomWall.initWall(
                 new Vector3(zPos-0.1f, yPos, -position.x),
                 -90.0f,
@@ -200,16 +200,13 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
             this.leftWall = null;
             return;
         }
-        if (leftWall.getClass() == DoorWall.class) {
-            Vector3 newPosA = new Vector3(this.position.x - actualXSize / 2, this.position.y + unitSize / 2, this.position.z + unitSize / 2);
-            Vector3 newPosB = new Vector3(this.position.x - actualXSize / 2, this.position.y + unitSize / 2, this.position.z - unitSize / 2);
-            Cylinder c1 = gameFactory.createColumn(newPosA, thickness, unitSize, thickness);
-            Cylinder c2 = gameFactory.createColumn(newPosB, thickness, unitSize, thickness);
-            c1.build(World.getInstance().getModelBuilder());
-            c2.build(World.getInstance().getModelBuilder());
-            doodads.add(c1);
-            doodads.add(c2);
-        }
+        columnAPos = new Vector3(this.position.x - actualXSize / 2 - thickness / 2, this.position.y + unitSize / 2, this.position.z + unitSize / 2);
+        columnBPos = new Vector3(this.position.x - actualXSize / 2 - thickness / 2, this.position.y + unitSize / 2, this.position.z - unitSize / 2);
+        columnCPos = new Vector3(this.position.x - actualXSize / 2 - thickness / 2, this.position.y + unitSize, this.position.z);
+        c1 = gameFactory.createColumn(columnAPos, thickness, unitSize, thickness);
+        c2 = gameFactory.createColumn(columnBPos, thickness, unitSize, thickness);
+        c3 = gameFactory.createColumn(columnCPos, thickness, unitSize, thickness);
+        c3.setRotation(-90f, Vector3.X);
         leftWall.initWall(
                 new Vector3(xPos  - actualXSize - thickness+0.1f, yPos,  position.z),
                 0.0f,
@@ -227,16 +224,13 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
             this.rightWall = null;
             return;
         }
-        if (rightWall.getClass() == DoorWall.class) {
-            Vector3 newPosA = new Vector3(this.position.x + actualXSize / 2, this.position.y + unitSize / 2, this.position.z + unitSize / 2);
-            Vector3 newPosB = new Vector3(this.position.x + actualXSize / 2, this.position.y + unitSize / 2, this.position.z - unitSize / 2);
-            Cylinder c1 = gameFactory.createColumn(newPosA, thickness, unitSize, thickness);
-            Cylinder c2 = gameFactory.createColumn(newPosB, thickness, unitSize, thickness);
-            c1.build(World.getInstance().getModelBuilder());
-            c2.build(World.getInstance().getModelBuilder());
-            doodads.add(c1);
-            doodads.add(c2);
-        }
+        columnAPos = new Vector3(this.position.x + actualXSize / 2 + thickness / 2, this.position.y + unitSize / 2, this.position.z + unitSize / 2);
+        columnBPos = new Vector3(this.position.x + actualXSize / 2 + thickness / 2, this.position.y + unitSize / 2, this.position.z - unitSize / 2);
+        columnCPos = new Vector3(this.position.x + actualXSize / 2 + thickness / 2, this.position.y + unitSize, this.position.z);
+        c1 = gameFactory.createColumn(columnAPos, thickness, unitSize, thickness);
+        c2 = gameFactory.createColumn(columnBPos, thickness, unitSize, thickness);
+        c3 = gameFactory.createColumn(columnCPos, thickness, unitSize, thickness);
+        c3.setRotation(-90f, Vector3.X);
         rightWall.initWall(
                 new Vector3(xPos-0.1f, yPos,  position.z),
                 0.0f,
@@ -250,6 +244,23 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
 
     @Override
     public abstract void render(ModelBatch modelBatch, Environment environment);
+
+    @Override
+    public void setDoorColumns() {
+        /*
+        c1.build(World.getInstance().getModelBuilder());
+        c2.build(World.getInstance().getModelBuilder());
+        c3.build(World.getInstance().getModelBuilder());
+        */
+        doodads.add(c1);
+        doodads.add(c2);
+        doodads.add(c3);
+    }
+
+    @Override
+    public void setDoor() {
+
+    }
 
     /**
      * It is optional to implement this update function.
@@ -290,13 +301,6 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
         TL.x = position.x - (actualXSize / 2);
         TL.y = position.y + (actualYSize / 2);
         TL.z = position.z - (actualZSize / 2);
-    }
-
-    protected void defaultWalls() {
-        this.setTopWall(gameFactory.createBasicWall());
-        this.setBottomWall(gameFactory.createBasicWall());
-        this.setRightWall(gameFactory.createBasicWall());
-        this.setLeftWall(gameFactory.createBasicWall());
     }
 
     @Override

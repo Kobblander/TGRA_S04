@@ -17,14 +17,15 @@ public abstract class AbstractShape extends AbstractObject implements Shape {
 
     protected ModelInstance shapeInstance;
 
-    @Override
-    public void setRotation(float degrees) {
-        shapeInstance.transform.rotate(Vector3.Y, degrees);
-        shapeInstance.calculateTransforms();
-    }
 
     @Override
     public void update(float deltaTime) {
 
+    }
+
+    @Override
+    public void setRotation(float degrees, Vector3 axis) {
+        shapeInstance.transform.rotate(axis, degrees);
+        shapeInstance.calculateTransforms();
     }
 }

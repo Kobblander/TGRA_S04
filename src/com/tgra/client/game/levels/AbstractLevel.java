@@ -75,20 +75,24 @@ public abstract class AbstractLevel extends AbstractObject implements Level {
                 // TODO: Here I can put columns and doors :)
                 roomA.setRightWall(gameFactory.createDoorWall(roomA));
                 roomB.setLeftWall(gameFactory.createDoorWall(roomB));
+                roomB.setDoorColumns();
             }
             if (levelPosA.x > levelPosB.x) {
                 roomA.setLeftWall(gameFactory.createDoorWall(roomA));
                 roomB.setRightWall(gameFactory.createDoorWall(roomB));
+                roomB.setDoorColumns();
             }
         }
         if (levelPosA.x == levelPosB.x) {
             if (levelPosA.z < levelPosB.z) {
                 roomA.setBottomWall(gameFactory.createDoorWall(roomA));
                 roomB.setTopWall(gameFactory.createDoorWall(roomB));
+                roomB.setDoorColumns();
             }
             if (levelPosA.z > levelPosB.z) {
                 roomA.setTopWall(gameFactory.createDoorWall(roomA));
                 roomB.setBottomWall(gameFactory.createDoorWall(roomB));
+                roomB.setDoorColumns();
             }
         }
     }

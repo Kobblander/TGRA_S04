@@ -21,7 +21,7 @@ public class BasicWall extends AbstractWall {
     protected void build() {
         box = new Box("wall.jpg", position, thickness, height, length);
         box.build(World.getInstance().getModelBuilder());
-        box.setRotation(rotation);
+        box.setRotation(rotation, Vector3.Y);
     }
 
     @Override

@@ -21,4 +21,6 @@ public interface Object {
 
     public Vector3 getPosition();
 
+    public void setPosition(Vector3 position);
+
 }
