@@ -2,6 +2,7 @@ package com.tgra.client.game.rooms;
 
 import com.badlogic.gdx.math.Vector3;
 import com.tgra.client.game.walls.Wall;
+import javafx.geometry.Side;
 
 /**
  * <h1>Room</h1>
@@ -14,12 +15,8 @@ import com.tgra.client.game.walls.Wall;
  */
 public interface Room extends com.tgra.client.game.object.Object {
 
-    public void setBottomWall(Wall bottomWall);
-    public void setTopWall(Wall bottomWall);
-    public void setRightWall(Wall bottomWall);
-    public void setLeftWall(Wall bottomWall);
-
-    public void setDoorColumns();
+    public void setWall(Wall wall, Side side);
+    public void setDoorColumns(Side side);
 
     public void setDoor();
 

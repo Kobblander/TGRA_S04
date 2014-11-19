@@ -92,6 +92,9 @@ public class GameFactory {
         level.addRoomToLevel(createMazeRoom(), new LevelPos(1, 0, 1));
 
 
+        level.addRoomToLevel(createBasicRoom(3, 3, 3), new LevelPos(2, 0, 6));
+
+
 
         //level.addDoorway(new LevelPos(0, 0, 0), new LevelPos(0, 0, 1));
         level.addDoorway(new LevelPos(5, 0, 0), new LevelPos(6, 0, 0));
@@ -102,6 +105,7 @@ public class GameFactory {
         level.addDoorway(new LevelPos(-1, 0, 3), new LevelPos(-1, 0, 2));
         level.addDoorway(new LevelPos(-1, 0, 3), new LevelPos(-1, 0, 4));
         level.addDoorway(new LevelPos(-2, 0, 3), new LevelPos(-3, 0, 3));
+        level.addDoorway(new LevelPos(2, 0, 1), new LevelPos(2, 0, 6));
 
 
         // Return the level

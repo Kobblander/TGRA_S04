@@ -12,6 +12,7 @@ import com.tgra.client.game.object.Object;
 import com.tgra.client.game.roofs.Roof;
 import com.tgra.client.game.shapes.Cylinder;
 import com.tgra.client.game.walls.Wall;
+import javafx.geometry.Side;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -148,110 +149,98 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
     }
 
     @Override
-    public void setTopWall(Wall topWall) {
-        if (topWall == null) {
-            this.topWall = null;
+    public void setWall(Wall wall, Side side) {
+        if (wall == null) {
             return;
         }
-        columnAPos = new Vector3(this.position.x + unitSize / 2, this.position.y + unitSize / 2, this.position.z - actualZSize / 2 - thickness / 2);
-        columnBPos = new Vector3(this.position.x - unitSize / 2, this.position.y + unitSize / 2, this.position.z - actualZSize / 2 - thickness / 2);
-        columnCPos = new Vector3(this.position.x, this.position.y + unitSize, this.position.z - actualZSize / 2 - thickness / 2);
-        c1 = gameFactory.createColumn(columnAPos, thickness, unitSize, thickness);
-        c2 = gameFactory.createColumn(columnBPos, thickness, unitSize, thickness);
-        c3 = gameFactory.createColumn(columnCPos, thickness, unitSize, thickness);
-        c3.setRotation(-90f, Vector3.Z);
-        topWall.initWall(
-                new Vector3(zPos - actualZSize - thickness+0.1f, yPos, -position.x),
-                -90.0f,
-                actualXSize,
-                actualYSize,
-                thickness
-        );
-        this.topWall = topWall;
-        outerWalls.add(topWall);
-    }
-
-    @Override
-    public void setBottomWall(Wall bottomWall) {
-        if (bottomWall == null) {
-            this.bottomWall = null;
-            return;
+        switch (side) {
+            case TOP:
+                wall.initWall(
+                        new Vector3(zPos - actualZSize - thickness+0.1f, yPos, -position.x),
+                        -90.0f,
+                        actualXSize,
+                        actualYSize,
+                        thickness
+                );
+                this.topWall = wall;
+                break;
+            case BOTTOM:
+                wall.initWall(
+                        new Vector3(zPos-0.1f, yPos, -position.x),
+                        -90.0f,
+                        actualXSize,
+                        actualYSize,
+                        thickness
+                );
+                this.bottomWall = wall;
+                break;
+            case RIGHT:
+                wall.initWall(
+                        new Vector3(xPos-0.1f, yPos,  position.z),
+                        0.0f,
+                        actualZSize,
+                        actualYSize,
+                        thickness
+                );
+                this.rightWall = wall;
+                break;
+            case LEFT:
+                wall.initWall(
+                        new Vector3(xPos  - actualXSize - thickness+0.1f, yPos,  position.z),
+                        0.0f,
+                        actualZSize,
+                        actualYSize,
+                        thickness
+                );
+                this.leftWall = wall;
+                break;
         }
-        columnAPos = new Vector3(this.position.x + unitSize / 2, this.position.y + unitSize / 2, this.position.z + actualZSize / 2 + thickness / 2);
-        columnBPos = new Vector3(this.position.x - unitSize / 2, this.position.y + unitSize / 2, this.position.z + actualZSize / 2 + thickness / 2);
-        columnCPos = new Vector3(this.position.x, this.position.y + unitSize, this.position.z + actualZSize / 2 + thickness / 2);
-        c1 = gameFactory.createColumn(columnAPos, thickness, unitSize, thickness);
-        c2 = gameFactory.createColumn(columnBPos, thickness, unitSize, thickness);
-        c3 = gameFactory.createColumn(columnCPos, thickness, unitSize, thickness);
-        c3.setRotation(-90f, Vector3.Z);
-        bottomWall.initWall(
-                new Vector3(zPos-0.1f, yPos, -position.x),
-                -90.0f,
-                actualXSize,
-                actualYSize,
-                thickness
-        );
-        this.bottomWall = bottomWall;
-        outerWalls.add(bottomWall);
-    }
-    @Override
-    public void setLeftWall(Wall leftWall) {
-        if (leftWall == null) {
-            this.leftWall = null;
-            return;
-        }
-        columnAPos = new Vector3(this.position.x - actualXSize / 2 - thickness / 2, this.position.y + unitSize / 2, this.position.z + unitSize / 2);
-        columnBPos = new Vector3(this.position.x - actualXSize / 2 - thickness / 2, this.position.y + unitSize / 2, this.position.z - unitSize / 2);
-        columnCPos = new Vector3(this.position.x - actualXSize / 2 - thickness / 2, this.position.y + unitSize, this.position.z);
-        c1 = gameFactory.createColumn(columnAPos, thickness, unitSize, thickness);
-        c2 = gameFactory.createColumn(columnBPos, thickness, unitSize, thickness);
-        c3 = gameFactory.createColumn(columnCPos, thickness, unitSize, thickness);
-        c3.setRotation(-90f, Vector3.X);
-        leftWall.initWall(
-                new Vector3(xPos  - actualXSize - thickness+0.1f, yPos,  position.z),
-                0.0f,
-                actualZSize,
-                actualYSize,
-                thickness
-        );
-        this.leftWall = leftWall;
-        outerWalls.add(leftWall);
-    }
-
-    @Override
-    public void setRightWall(Wall rightWall) {
-        if (rightWall == null) {
-            this.rightWall = null;
-            return;
-        }
-        columnAPos = new Vector3(this.position.x + actualXSize / 2 + thickness / 2, this.position.y + unitSize / 2, this.position.z + unitSize / 2);
-        columnBPos = new Vector3(this.position.x + actualXSize / 2 + thickness / 2, this.position.y + unitSize / 2, this.position.z - unitSize / 2);
-        columnCPos = new Vector3(this.position.x + actualXSize / 2 + thickness / 2, this.position.y + unitSize, this.position.z);
-        c1 = gameFactory.createColumn(columnAPos, thickness, unitSize, thickness);
-        c2 = gameFactory.createColumn(columnBPos, thickness, unitSize, thickness);
-        c3 = gameFactory.createColumn(columnCPos, thickness, unitSize, thickness);
-        c3.setRotation(-90f, Vector3.X);
-        rightWall.initWall(
-                new Vector3(xPos-0.1f, yPos,  position.z),
-                0.0f,
-                actualZSize,
-                actualYSize,
-                thickness
-        );
-        this.rightWall = rightWall;
-        outerWalls.add(rightWall);
+        outerWalls.add(wall);
     }
 
     @Override
     public abstract void render(ModelBatch modelBatch, Environment environment);
 
     @Override
-    public void setDoorColumns() {
-        /*
-        c1.build(World.getInstance().getModelBuilder());
-        c2.build(World.getInstance().getModelBuilder());
-        c3.build(World.getInstance().getModelBuilder());
-        */
+    public void setDoorColumns(Side side) {
+        switch (side) {
+            case TOP:
+                columnAPos = new Vector3(this.position.x + unitSize / 2, this.position.y + unitSize / 2, this.position.z - actualZSize / 2 - thickness / 2);
+                columnBPos = new Vector3(this.position.x - unitSize / 2, this.position.y + unitSize / 2, this.position.z - actualZSize / 2 - thickness / 2);
+                columnCPos = new Vector3(this.position.x, this.position.y + unitSize, this.position.z - actualZSize / 2 - thickness / 2);
+                c1 = gameFactory.createColumn(columnAPos, thickness, unitSize, thickness);
+                c2 = gameFactory.createColumn(columnBPos, thickness, unitSize, thickness);
+                c3 = gameFactory.createColumn(columnCPos, thickness, unitSize, thickness);
+                c3.setRotation(-90f, Vector3.Z);
+                break;
+            case BOTTOM:
+                columnAPos = new Vector3(this.position.x + unitSize / 2, this.position.y + unitSize / 2, this.position.z + actualZSize / 2 + thickness / 2);
+                columnBPos = new Vector3(this.position.x - unitSize / 2, this.position.y + unitSize / 2, this.position.z + actualZSize / 2 + thickness / 2);
+                columnCPos = new Vector3(this.position.x, this.position.y + unitSize, this.position.z + actualZSize / 2 + thickness / 2);
+                c1 = gameFactory.createColumn(columnAPos, thickness, unitSize, thickness);
+                c2 = gameFactory.createColumn(columnBPos, thickness, unitSize, thickness);
+                c3 = gameFactory.createColumn(columnCPos, thickness, unitSize, thickness);
+                c3.setRotation(-90f, Vector3.Z);
+                break;
+            case RIGHT:
+                columnAPos = new Vector3(this.position.x + actualXSize / 2 + thickness / 2, this.position.y + unitSize / 2, this.position.z + unitSize / 2);
+                columnBPos = new Vector3(this.position.x + actualXSize / 2 + thickness / 2, this.position.y + unitSize / 2, this.position.z - unitSize / 2);
+                columnCPos = new Vector3(this.position.x + actualXSize / 2 + thickness / 2, this.position.y + unitSize, this.position.z);
+                c1 = gameFactory.createColumn(columnAPos, thickness, unitSize, thickness);
+                c2 = gameFactory.createColumn(columnBPos, thickness, unitSize, thickness);
+                c3 = gameFactory.createColumn(columnCPos, thickness, unitSize, thickness);
+                c3.setRotation(-90f, Vector3.X);
+                break;
+            case LEFT:
+                columnAPos = new Vector3(this.position.x - actualXSize / 2 - thickness / 2, this.position.y + unitSize / 2, this.position.z + unitSize / 2);
+                columnBPos = new Vector3(this.position.x - actualXSize / 2 - thickness / 2, this.position.y + unitSize / 2, this.position.z - unitSize / 2);
+                columnCPos = new Vector3(this.position.x - actualXSize / 2 - thickness / 2, this.position.y + unitSize, this.position.z);
+                c1 = gameFactory.createColumn(columnAPos, thickness, unitSize, thickness);
+                c2 = gameFactory.createColumn(columnBPos, thickness, unitSize, thickness);
+                c3 = gameFactory.createColumn(columnCPos, thickness, unitSize, thickness);
+                c3.setRotation(-90f, Vector3.X);
+                break;
+        }
         doodads.add(c1);
         doodads.add(c2);
         doodads.add(c3);
