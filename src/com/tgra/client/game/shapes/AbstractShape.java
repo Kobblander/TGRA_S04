@@ -45,13 +45,11 @@ public abstract class AbstractShape implements Shape {
 
     @Override
     public boolean isHit(BoundingBox player) {
-        /*
         System.out.println("------------------");
         System.out.println("Player : " + player);
-        System.out.println("Shapes Center : " + box.getCenter());
-        System.out.println("Shape Height : " + box.getHeight());
+        System.out.println("BoundingBox Center : " + boundingBox.getCenter());
+        System.out.println("BoundingBox Height : " + boundingBox.getHeight());
         System.out.println("------------------");
-        */
 
 
         return boundingBox.contains(player);
