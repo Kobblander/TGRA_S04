@@ -46,6 +46,8 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
     // A doorway would take up a single unit.
     protected final float unitSize = 3f;
 
+    protected final float wallSepFactor = 0.1f;
+
     // Number of units per roomSize
     // This needs to be an odd number.
     // A room of size 5 would have 5x5 units
@@ -305,22 +307,10 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
     public void setPosition(Vector3 position) {
         this.position = position;
 
-        // Set relative wall positions.
-        xPos = this.position.x + this.actualXSize / 2 + thickness / 2;
-        yPos = this.position.y + this.actualYSize / 2;
-        zPos = this.position.z + this.actualZSize / 2 + thickness / 2;
-
-        topWallPos = new Vector3(    this.position.x,                                   this.position.y + actualYSize / 2, this.position.z - actualZSize / 2 - thickness / 2);
-        bottomWallPos =  new Vector3(this.position.x,                                   this.position.y + actualYSize / 2, this.position.z + actualZSize / 2 + thickness / 2);
-        rightWallPos =  new Vector3( this.position.x + actualXSize / 2 + thickness / 2, this.position.y + actualYSize / 2, this.position.z);
-        leftWallPos =  new Vector3(  this.position.x - actualXSize / 2 - thickness / 2, this.position.y + actualYSize / 2, this.position.z);
-
-        /*
-        Wall wallTop = GameFactory.createBasicWall(new Vector3(position.x, yPos, zPos), 0.0f, actualZSize, actualYSize, 1.0f);
-        Wall wallLeft = GameFactory.createBasicWall(new Vector3(xPos, yPos, position.z), 90.0f, actualXSize, actualYSize, 1.0f);
-        Wall wallBottom = GameFactory.createBasicWall(new Vector3(position.x, yPos, -zPos), 0.0f, actualZSize, actualYSize, 1.0f);
-        Wall wallRight = GameFactory.createBasicWall(new Vector3(-xPos, yPos, position.z), 90.0f, actualXSize, actualYSize, 1.0f);
-        */
+        topWallPos = new Vector3(    this.position.x,                                                   this.position.y + actualYSize / 2, this.position.z - actualZSize / 2 - thickness / 2 + wallSepFactor);
+        bottomWallPos =  new Vector3(this.position.x,                                                   this.position.y + actualYSize / 2, this.position.z + actualZSize / 2 + thickness / 2 - wallSepFactor);
+        rightWallPos =  new Vector3( this.position.x + actualXSize / 2 + thickness / 2 - wallSepFactor, this.position.y + actualYSize / 2, this.position.z);
+        leftWallPos =  new Vector3(  this.position.x - actualXSize / 2 - thickness / 2 + wallSepFactor, this.position.y + actualYSize / 2, this.position.z);
 
         calculateEdgePoints();
         initDoodads();

@@ -62,7 +62,7 @@ public class DoorWall extends AbstractWall {
     private Vector3 calculateBoxBPos() {
         Vector3 newBPos = new Vector3(this.position);
         if (rotation == 90f || rotation == -90f) {
-            newBPos.z += ((roomData.getActualXSize()/2) / 2) + (roomData.getUnitSize()/2)/2;
+            newBPos.x += ((roomData.getActualXSize()/2) / 2) + (roomData.getUnitSize()/2)/2;
         } else {
             newBPos.z += ((roomData.getActualZSize()/2) / 2) + (roomData.getUnitSize()/2)/2;
         }
@@ -73,7 +73,7 @@ public class DoorWall extends AbstractWall {
     private Vector3 calculateBoxAPos() {
         Vector3 newAPos = new Vector3(this.position);
         if (rotation == 90f || rotation == -90f) {
-            newAPos.z -= ((roomData.getActualXSize()/2) / 2) + (roomData.getUnitSize()/2)/2;
+            newAPos.x -= ((roomData.getActualXSize()/2) / 2) + (roomData.getUnitSize()/2)/2;
         } else {
             newAPos.z -= ((roomData.getActualZSize()/2) / 2) + (roomData.getUnitSize()/2)/2;
         }
