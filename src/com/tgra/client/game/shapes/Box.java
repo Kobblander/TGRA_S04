@@ -35,7 +35,6 @@ public class Box extends AbstractShape {
         this.width = width;
         this.height = height;
         this.depth = depth;
-        this.box = new BoundingBox();
 
         this.texture = new Texture(Gdx.files.internal("data/box/" + texture));
     }
@@ -62,7 +61,7 @@ public class Box extends AbstractShape {
         shapeInstance.transform.setTranslation(center);
         shapeInstance.calculateTransforms();
 
-        box = shapeInstance.calculateBoundingBox(box);
+        boundingBox = shapeInstance.calculateBoundingBox(new BoundingBox());
     }
 
     @Override

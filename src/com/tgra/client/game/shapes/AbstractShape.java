@@ -17,6 +17,7 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 public abstract class AbstractShape implements Shape {
     protected BoundingBox box;
     protected ModelInstance shapeInstance;
+    protected BoundingBox boundingBox;
     protected Vector3 center;
     protected Texture texture;
 
