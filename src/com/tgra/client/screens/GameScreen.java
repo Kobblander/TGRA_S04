@@ -84,9 +84,6 @@ public class GameScreen implements Screen {
         room3 = GameFactory.createBasicRoom(new Vector3(16, -1.9f, 2), 2);
         room4 = GameFactory.createBasicRoom(new Vector3(-16, -1.9f, 2), 2);
 
-        column = new Cylinder("glyphs.jpg", new Vector3(8f, 0f, 8f), 1f, 8f, 1f);
-        column.build(modelBuilder);
-
         controller = new InputManager(camera, player);
         Gdx.input.setInputProcessor(controller);
 
@@ -116,9 +113,6 @@ public class GameScreen implements Screen {
             room2.render(modelBatch, environment);
             room3.render(modelBatch, environment);
             room4.render(modelBatch, environment);
-
-            column.render(modelBatch, environment);
-
         modelBatch.end();
 
 

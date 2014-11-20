@@ -1,6 +1,5 @@
 package com.tgra.client.utility;
 
-import com.badlogic.gdx.assets.loaders.ModelLoader;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
@@ -17,7 +16,7 @@ public class ObjectLoader {
     public ModelInstance instance;
 
     public ObjectLoader(FileHandle file) {
-        ModelLoader loader = new ObjLoader();
+        ObjLoader loader = new ObjLoader();
 
         model = loader.loadModel(file);
         instance = new ModelInstance(model);

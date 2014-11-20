@@ -86,23 +86,23 @@ public class Player  {
         switch(key) {
             case 'A' :
                 nextMove.set(camera.position.x + delta * MathUtils.sinDeg(angleX),
-                             camera.position.y,
-                             camera.position.z - delta * MathUtils.cosDeg(angleX));
+                        camera.position.y,
+                        camera.position.z - delta * MathUtils.cosDeg(angleX));
                 break;
             case 'D' :
                 nextMove.set(camera.position.x - delta * MathUtils.sinDeg(angleX),
-                             camera.position.y,
-                             camera.position.z + delta * MathUtils.cosDeg(angleX));
+                        camera.position.y,
+                        camera.position.z + delta * MathUtils.cosDeg(angleX));
                 break;
             case 'W' :
                 nextMove.set(camera.position.x + delta * camera.direction.x,
-                             camera.position.y,
-                             camera.position.z + delta * camera.direction.z);
+                        camera.position.y,
+                        camera.position.z + delta * camera.direction.z);
                 break;
             case 'S' :
                 nextMove.set(camera.position.x - delta * camera.direction.x,
-                             camera.position.y,
-                             camera.position.z - delta * camera.direction.z);
+                        camera.position.y,
+                        camera.position.z - delta * camera.direction.z);
                 break;
             default:
                 System.out.println("Invalid input key.");
@@ -122,8 +122,8 @@ public class Player  {
         Vector3 nextMove = new Vector3();
 
         nextMove.set(camera.position.x + (delta * camera.direction.x) * scale,
-                     camera.position.y,
-                     camera.position.z + (delta * camera.direction.z) * scale);
+                camera.position.y,
+                camera.position.z + (delta * camera.direction.z) * scale);
 
         return nextMove;
     }
@@ -151,7 +151,7 @@ public class Player  {
     private void updateCamera(PerspectiveCamera camera, Vector3 nextMove) {
         BoundingBox player = buildPlayer(nextMove);
 
-         setCameraPosition(camera, nextMove);
+        setCameraPosition(camera, nextMove);
     }
 
     /**

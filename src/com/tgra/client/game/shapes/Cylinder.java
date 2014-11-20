@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.BoundingBox;
+import com.tgra.client.utility.ObjectLoader;
 import com.tgra.client.utility.Texture;
 
 /**
@@ -36,6 +38,14 @@ public class Cylinder implements Shape {
         this.depth = depth;
 
         this.cylinderTexture = new Texture(Gdx.files.internal("data/cylinder/" + texture));
+        ObjectLoader loader = new ObjectLoader(Gdx.files.internal("data/player/Snowman_Top.OBJ"));
+        this.cylinderInstance = loader.instance;
+
+        cylinderInstance.transform.setToTranslation(-0.5f, -1.4f, -0.5f);
+        cylinderInstance.transform.scale(100, 100, 100);
+
+        BoundingBox box1 = cylinderInstance.calculateBoundingBox(new BoundingBox());
+        System.out.println(box1.getWidth());
     }
 
     @Override
