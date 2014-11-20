@@ -49,7 +49,7 @@ public abstract class AbstractShape implements Shape {
         System.out.println("------------------");
         System.out.println("Player : " + player);
         System.out.println("Shapes Center : " + box.getCenter());
-        System.out.println("Shape Heihgt : " + box.getHeight());
+        System.out.println("Shape Height : " + box.getHeight());
         System.out.println("------------------");
 
 
