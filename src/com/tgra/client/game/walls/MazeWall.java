@@ -3,11 +3,10 @@ package com.tgra.client.game.walls;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.math.Vector3;
-import com.tgra.client.game.GameFactory;
+import com.badlogic.gdx.math.collision.BoundingBox;
 import com.tgra.client.game.World;
 import com.tgra.client.game.maze.Coord;
 import com.tgra.client.game.maze.Maze;
-import com.tgra.client.game.object.AbstractObject;
 import com.tgra.client.game.shapes.Box;
 
 /**
@@ -27,6 +26,7 @@ public class MazeWall extends AbstractWall {
     private Vector3 endPoint;
     private Box box;
     private Maze maze;
+    private final float thickness = 0.5f;
 
 
     public MazeWall(Coord sCoord, Coord eCoord, Maze maze) {
@@ -57,12 +57,12 @@ public class MazeWall extends AbstractWall {
         if (sCoord.x == eCoord.x) {
             newPos = new Vector3(startPoint.x, startPoint.y, startPoint.z + length / 2);
             rotation = -0f;
-            box = new Box("wall.jpg", newPos, 0.5f, 4, length);
+            box = new Box("wall.jpg", newPos, thickness, 4, length);
         }
         if (sCoord.y == eCoord.y) {
             newPos = new Vector3(startPoint.x + length / 2, startPoint.y, startPoint.z);
             rotation = 0f;
-            box = new Box("wall.jpg", newPos, length, 4, 0.5f);
+            box = new Box("wall.jpg", newPos, length, 4, thickness);
         }
         box.build(World.getInstance().getModelBuilder());
         box.setRotation(rotation, Vector3.Y);
@@ -77,6 +77,11 @@ public class MazeWall extends AbstractWall {
     @Override
     public Vector3 getPosition() {
         return position;
+    }
+
+    @Override
+    public boolean isHit(BoundingBox player) {
+        return box.isHit(player);
     }
 
     /*

@@ -4,7 +4,6 @@ import com.badlogic.gdx.math.Vector3;
 import com.tgra.client.game.GameFactory;
 import com.tgra.client.game.object.AbstractObject;
 import com.tgra.client.game.rooms.RoomData;
-import com.tgra.client.game.shapes.Box;
 
 /**
  * <h1>AbstractWallt</h1>

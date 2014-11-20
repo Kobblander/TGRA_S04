@@ -39,6 +39,7 @@ public class GameScreen implements Screen {
 
     private World world = World.getInstance();
 
+
     private GameFactory gameFactory = GameFactory.getInstance();
     private ModelBatch modelBatch;
 
@@ -55,7 +56,7 @@ public class GameScreen implements Screen {
 
         // Setup camera
         camera = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        camera.position.set(0f, 0f, 0f);
+        camera.position.set(2f, 0f, 2f);
         camera.near = 0.2f;
         camera.far = 350f;
 
@@ -95,17 +96,11 @@ public class GameScreen implements Screen {
 
         // -- Render begin -- //
         modelBatch.begin(camera);
+            lights.render(delta);
 
-        lights.render(delta);
+            player.draw(modelBatch, environment);
 
-        player.draw(modelBatch, environment);
-
-        //room.render(modelBatch, environment);
-
-        //room2.render(modelBatch, environment);
-
-        level.render(modelBatch, environment);
-
+            level.render(modelBatch, environment);
 
         modelBatch.end();
         // -- Render end -- //

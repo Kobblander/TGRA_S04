@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.tgra.client.game.World;
-import com.tgra.client.game.object.AbstractObject;
 import com.tgra.client.game.shapes.Box;
 
 /**

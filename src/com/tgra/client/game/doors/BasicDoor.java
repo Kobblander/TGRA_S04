@@ -2,11 +2,9 @@ package com.tgra.client.game.doors;
 
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
-import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.BoundingBox;
 import com.tgra.client.game.World;
-import com.tgra.client.game.keys.Key;
 import com.tgra.client.game.shapes.Box;
-import javafx.geometry.Side;
 
 /**
  * <h1>BasicDoor</h1>
@@ -25,6 +23,11 @@ public class BasicDoor extends AbstractDoor {
     @Override
     public void render(ModelBatch modelBatch, Environment environment) {
         box.render(modelBatch, environment);
+    }
+
+    @Override
+    public boolean isHit(BoundingBox player) {
+        return false;
     }
 
     @Override

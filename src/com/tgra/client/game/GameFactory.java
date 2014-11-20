@@ -15,19 +15,19 @@ import com.tgra.client.game.maze.Coord;
 import com.tgra.client.game.maze.Maze;
 import com.tgra.client.game.maze.MazeType;
 import com.tgra.client.game.mechanisms.BasicLockMechanism;
-import com.tgra.client.game.rooms.KeyRoom;
-import com.tgra.client.game.rooms.MazeRoom;
-import com.tgra.client.game.walls.MazeWall;
 import com.tgra.client.game.object.Object;
 import com.tgra.client.game.roofs.BasicRoof;
 import com.tgra.client.game.roofs.Roof;
 import com.tgra.client.game.rooms.BasicRoom;
+import com.tgra.client.game.rooms.KeyRoom;
+import com.tgra.client.game.rooms.MazeRoom;
 import com.tgra.client.game.rooms.Room;
 import com.tgra.client.game.shapes.Box;
 import com.tgra.client.game.shapes.Cylinder;
 import com.tgra.client.game.shapes.Shape;
 import com.tgra.client.game.walls.BasicWall;
 import com.tgra.client.game.walls.DoorWall;
+import com.tgra.client.game.walls.MazeWall;
 import com.tgra.client.game.walls.Wall;
 
 /**

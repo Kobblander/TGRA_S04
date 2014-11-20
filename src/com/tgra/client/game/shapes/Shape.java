@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.BoundingBox;
 import com.tgra.client.game.object.Object;
 
 /**
@@ -28,6 +29,8 @@ public interface Shape {
      * @param builder the model builder ( tool )
      */
     public void build(ModelBuilder builder);
+
+    public boolean isHit(BoundingBox box);
 
     public void setRotation(float degrees, Vector3 axis);
 

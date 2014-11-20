@@ -3,6 +3,7 @@ package com.tgra.client.game.maze;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.BoundingBox;
 import com.tgra.client.game.GameFactory;
 import com.tgra.client.game.object.AbstractObject;
 import com.tgra.client.game.walls.MazeWall;
@@ -159,6 +160,11 @@ public class Maze extends AbstractObject {
         for (MazeWall w : mazeWalls) {
             w.render(modelBatch, environment);
         }
+    }
+
+    @Override
+    public boolean isHit(BoundingBox player) {
+        return false;
     }
 
     public Vector3 getBottomLeftCorner() {

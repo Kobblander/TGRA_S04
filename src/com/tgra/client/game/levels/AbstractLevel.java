@@ -3,13 +3,11 @@ package com.tgra.client.game.levels;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.BoundingBox;
 import com.tgra.client.game.GameFactory;
-import com.tgra.client.game.LevelAssembler;
-import com.tgra.client.game.doors.Door;
 import com.tgra.client.game.mechanisms.DoorLockMechanism;
 import com.tgra.client.game.object.AbstractObject;
 import com.tgra.client.game.rooms.Room;
-import com.tgra.client.game.rooms.RoomData;
 import javafx.geometry.Side;
 
 import java.util.ArrayList;
@@ -132,4 +130,6 @@ public abstract class AbstractLevel extends AbstractObject implements Level {
         room.setWall(gameFactory.createBasicWall(), Side.RIGHT);
     }
 
+    @Override
+    public boolean isHit(BoundingBox player) { return false; }
 }

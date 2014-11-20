@@ -1,9 +1,7 @@
 package com.tgra.client.game.levels;
 
-import com.tgra.client.game.mechanisms.DoorLockMechanism;
-import com.tgra.client.game.rooms.Room;
 import com.tgra.client.game.object.Object;
-import javafx.geometry.Side;
+import com.tgra.client.game.rooms.Room;
 
 /**
  * <h1>Level</h1>

@@ -2,8 +2,8 @@ package com.tgra.client.game.shapes;
 
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Vector3;
-import com.tgra.client.game.object.AbstractObject;
 import com.tgra.client.utility.Texture;
+import com.badlogic.gdx.math.collision.BoundingBox;
 
 /**
  * <h1>AbstractShape</h1>
@@ -41,5 +41,11 @@ public abstract class AbstractShape implements Shape {
     public void translate(float x, float y, float z) {
         shapeInstance.transform.translate(x, y ,z);
         shapeInstance.calculateTransforms();
+    }
+
+    public boolean isHit(BoundingBox box) {
+        BoundingBox shape = shapeInstance.calculateBoundingBox(new BoundingBox());
+
+        return shape.contains(box);
     }
 }

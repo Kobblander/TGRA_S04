@@ -67,7 +67,6 @@ public class Box extends AbstractShape {
         modelBatch.render(shapeInstance, environment);
     }
 
-
     public float getRotation() {
         Quaternion q = new Quaternion();
 

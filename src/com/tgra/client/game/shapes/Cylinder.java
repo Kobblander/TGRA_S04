@@ -30,6 +30,7 @@ public class Cylinder extends AbstractShape {
         this.depth = depth;
 
         this.texture = new Texture(Gdx.files.internal("data/cylinder/" + texture));
+
         build(World.getInstance().getModelBuilder());
     }
 
@@ -59,5 +60,4 @@ public class Cylinder extends AbstractShape {
     public void render(ModelBatch modelBatch, Environment environment) {
         modelBatch.render(shapeInstance, environment);
     }
-
 }

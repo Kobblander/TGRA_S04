@@ -1,7 +1,6 @@
 package com.tgra.client.game.doors;
 
 import com.badlogic.gdx.math.Vector3;
-import com.tgra.client.game.keys.Key;
 import com.tgra.client.game.object.Object;
 import javafx.geometry.Side;
 

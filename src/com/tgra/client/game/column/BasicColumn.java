@@ -3,6 +3,7 @@ package com.tgra.client.game.column;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.BoundingBox;
 import com.tgra.client.game.World;
 import com.tgra.client.game.object.AbstractObject;
 import com.tgra.client.game.shapes.Cylinder;
@@ -41,6 +42,11 @@ public class BasicColumn extends AbstractObject implements Column {
     @Override
     public void render(ModelBatch modelBatch, Environment environment) {
         cylinder.render(modelBatch, environment);
+    }
+
+    @Override
+    public boolean isHit(BoundingBox player) {
+        return false;
     }
 
     @Override

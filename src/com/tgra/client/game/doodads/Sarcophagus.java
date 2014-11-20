@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.loader.ObjLoader;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.BoundingBox;
 
 /**
  * <h1>Sarcophagus</h1>
@@ -35,5 +36,10 @@ public class Sarcophagus extends AbstractDoodad {
     public void render(ModelBatch modelBatch, Environment environment)
     {
 
+    }
+
+    @Override
+    public boolean isHit(BoundingBox player) {
+        return false;
     }
 }

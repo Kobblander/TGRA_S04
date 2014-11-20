@@ -1,5 +1,6 @@
 package com.tgra.client.game.roofs;
 
+import com.badlogic.gdx.math.collision.BoundingBox;
 import com.tgra.client.game.object.AbstractObject;
 
 /**
@@ -16,7 +17,10 @@ public abstract class AbstractRoof extends AbstractObject implements Roof {
     protected abstract void build();
 
     @Override
-    public void update(float deltaTime) {
+    public void update(float deltaTime) {}
 
+    @Override
+    public boolean isHit(BoundingBox player) {
+        return false;
     }
 }
