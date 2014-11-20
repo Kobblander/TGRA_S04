@@ -31,7 +31,7 @@ public class BasicLevel extends AbstractLevel {
 
     @Override
     public void assemble() {
-        LevelAssembler.assembleKobbaLevel(this);
-        //LevelAssembler.assembleTestLevel(this);
+        //LevelAssembler.assembleKobbaLevel(this);
+        LevelAssembler.assembleTestLevel(this);
     }
 }
