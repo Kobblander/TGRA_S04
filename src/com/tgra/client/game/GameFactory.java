@@ -1,14 +1,20 @@
 package com.tgra.client.game;
 
 import com.badlogic.gdx.math.Vector3;
+import com.tgra.client.game.doors.BasicDoor;
+import com.tgra.client.game.doors.Door;
 import com.tgra.client.game.floors.BasicFloor;
 import com.tgra.client.game.floors.Floor;
+import com.tgra.client.game.keys.BasicKey;
+import com.tgra.client.game.keys.Key;
 import com.tgra.client.game.levels.BasicLevel;
 import com.tgra.client.game.levels.Level;
 import com.tgra.client.game.levels.LevelPos;
 import com.tgra.client.game.maze.Coord;
 import com.tgra.client.game.maze.Maze;
 import com.tgra.client.game.maze.MazeType;
+import com.tgra.client.game.mechanisms.BasicLockMechanism;
+import com.tgra.client.game.rooms.KeyRoom;
 import com.tgra.client.game.rooms.MazeRoom;
 import com.tgra.client.game.walls.MazeWall;
 import com.tgra.client.game.object.Object;
@@ -70,43 +76,18 @@ public class GameFactory {
         return doorWall;
     }
 
+    public Door createBasicDoor() {
+        BasicDoor basicDoor = new BasicDoor();
+        world.addObject(basicDoor);
+
+        return basicDoor;
+    }
+
     public Level createBasicLevel(int levelXSize, int levelYSize) {
         // Create the basic level
         Level level = new BasicLevel(new Vector3(0f, -1.9f, 0f), levelXSize, levelYSize);
+        level.assemble();
         world.addObject(level);
-
-
-        level.addRoomToLevel(createBasicRoom(3, 1, 1), new LevelPos(2, 0, -1));
-
-        level.addRoomToLevel(createBasicRoom(1, 5, 1), new LevelPos(6, 0, 0));
-
-        level.addRoomToLevel(createBasicRoom(1, 2, 1), new LevelPos(0, 0, 0));
-        level.addRoomToLevel(createBasicRoom(5, 1, 1), new LevelPos(1, 0, 0));
-
-
-        level.addRoomToLevel(createBasicRoom(3, 2, 1), new LevelPos(-2, 0, 3));
-        level.addRoomToLevel(createBasicRoom(1, 1, 1), new LevelPos(-1, 0, 2));
-        level.addRoomToLevel(createBasicRoom(1, 1, 1), new LevelPos(-1, 0, 4));
-        level.addRoomToLevel(createBasicRoom(1, 1, 1), new LevelPos(-3, 0, 3));
-
-        level.addRoomToLevel(createMazeRoom(), new LevelPos(1, 0, 1));
-
-
-        level.addRoomToLevel(createBasicRoom(3, 3, 3), new LevelPos(2, 0, 6));
-
-
-
-        //level.addDoorway(new LevelPos(0, 0, 0), new LevelPos(0, 0, 1));
-        level.addDoorway(new LevelPos(5, 0, 0), new LevelPos(6, 0, 0));
-        level.addDoorway(new LevelPos(3, 0, 0), new LevelPos(3, 0, -1));
-        level.addDoorway(new LevelPos(2, 0, 0), new LevelPos(2, 0, 1));
-        level.addDoorway(new LevelPos(1, 0, 3), new LevelPos(0, 0, 3));
-        level.addDoorway(new LevelPos(0, 0, 0), new LevelPos(1, 0, 0));
-        level.addDoorway(new LevelPos(-1, 0, 3), new LevelPos(-1, 0, 2));
-        level.addDoorway(new LevelPos(-1, 0, 3), new LevelPos(-1, 0, 4));
-        level.addDoorway(new LevelPos(-2, 0, 3), new LevelPos(-3, 0, 3));
-        level.addDoorway(new LevelPos(2, 0, 1), new LevelPos(2, 0, 6));
-
 
         // Return the level
         return level;
@@ -158,5 +139,18 @@ public class GameFactory {
 
     public Box createWallBox(Vector3 newPos, float v, float tallness, float thickness) {
         return null;
+    }
+
+    public Key createKey(BasicLockMechanism basicLockMechanism) {
+        BasicKey basicKey = new BasicKey();
+        basicKey.setDoorLockMechanism(basicLockMechanism);
+        world.addObject(basicKey);
+        return basicKey;
+    }
+
+    public KeyRoom createKeyRoom(int roomYSize) {
+        KeyRoom keyRoom = new KeyRoom(roomYSize);
+        world.addObject(keyRoom);
+        return keyRoom;
     }
 }

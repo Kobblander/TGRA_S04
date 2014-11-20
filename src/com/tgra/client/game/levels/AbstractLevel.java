@@ -4,10 +4,16 @@ import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.tgra.client.game.GameFactory;
+import com.tgra.client.game.LevelAssembler;
+import com.tgra.client.game.doors.Door;
+import com.tgra.client.game.mechanisms.DoorLockMechanism;
 import com.tgra.client.game.object.AbstractObject;
 import com.tgra.client.game.rooms.Room;
 import com.tgra.client.game.rooms.RoomData;
 import javafx.geometry.Side;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <h1>AbstractLevel</h1>
@@ -24,13 +30,15 @@ public abstract class AbstractLevel extends AbstractObject implements Level {
 
     protected GameFactory gameFactory = GameFactory.getInstance();
 
+    protected List<DoorLockMechanism> doorLockMechanisms = new ArrayList<DoorLockMechanism>();
+
     @Override
     public void update(float deltaTime) {
 
     }
 
     @Override
-    public LevelPos addRoomToLevel(Room room, LevelPos levelPos) {
+    public Room addRoomToLevel(Room room, LevelPos levelPos) {
         int roomXSize = room.getRoomData().getxSize();
         int roomYSize = room.getRoomData().getySize();
         int roomZSize = room.getRoomData().getzSize();
@@ -48,7 +56,7 @@ public abstract class AbstractLevel extends AbstractObject implements Level {
                 }
             }
         }
-        return levelPos;
+        return room;
     }
 
     /**
@@ -65,8 +73,6 @@ public abstract class AbstractLevel extends AbstractObject implements Level {
         }
         Room roomA = levelGrid.getRoomAtPos(levelPosA);
         Room roomB = levelGrid.getRoomAtPos(levelPosB);
-        RoomData roomDataA = roomA.getRoomData();
-        RoomData roomDataB = roomB.getRoomData();
 
         // LevelPoses must be next to eachother.
         if (levelPosA.y == levelPosB.y) {
@@ -125,4 +131,5 @@ public abstract class AbstractLevel extends AbstractObject implements Level {
         room.setWall(gameFactory.createBasicWall(), Side.TOP);
         room.setWall(gameFactory.createBasicWall(), Side.RIGHT);
     }
+
 }

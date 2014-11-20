@@ -1,6 +1,7 @@
 package com.tgra.client.game.rooms;
 
 import com.badlogic.gdx.math.Vector3;
+import com.tgra.client.game.doors.Door;
 import com.tgra.client.game.walls.Wall;
 import javafx.geometry.Side;
 
@@ -18,7 +19,12 @@ public interface Room extends com.tgra.client.game.object.Object {
     public void setWall(Wall wall, Side side);
     public void setDoorColumns(Side side);
 
-    public void setDoor();
+    /**
+     * Condition: The room must have a doorway on the side specified.
+     * @param side The side on which the door should be.
+     */
+    public void setDoor(Door door, Side side);
+
 
     public void setPosition(Vector3 position);
     public RoomData getRoomData();

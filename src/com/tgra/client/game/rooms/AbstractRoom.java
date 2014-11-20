@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
 import com.tgra.client.game.GameFactory;
 import com.tgra.client.game.World;
+import com.tgra.client.game.doors.Door;
 import com.tgra.client.game.floors.Floor;
 import com.tgra.client.game.object.AbstractObject;
 import com.tgra.client.game.object.Object;
@@ -91,6 +92,12 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
 
     protected ArrayList<Object> doodads = new ArrayList<Object>();
 
+    protected Door door;
+    protected Vector3 topWallPos;
+    protected Vector3 leftWallPos;
+    protected Vector3 rightWallPos;
+    protected Vector3 bottomWallPos;
+
     protected Vector3 columnAPos = new Vector3();
     protected Vector3 columnBPos = new Vector3();
     protected Vector3 columnCPos = new Vector3();
@@ -108,17 +115,6 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
         this.xUnits = roomXSize * unitCount;
         this.yUnits = roomYSize * unitCount;
         this.zUnits = roomZSize * unitCount;
-        /*
-        if (this.xUnits % 2 == 0) {
-            this.xUnits--;
-        }
-        if (this.yUnits % 2 == 0) {
-            this.yUnits--;
-        }
-        if (this.zUnits % 2 == 0) {
-            this.zUnits--;
-        }
-        */
 
         // Calculate the actual size of the room in float
         if (roomXSize > 1) {
@@ -146,6 +142,7 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
         roomData.setWallThickness(thickness);
         roomData.setUnitCount(unitCount);
         roomData.setUnitSize(unitSize);
+
     }
 
     @Override
@@ -156,7 +153,7 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
         switch (side) {
             case TOP:
                 wall.initWall(
-                        new Vector3(zPos - actualZSize - thickness+0.1f, yPos, -position.x),
+                        topWallPos,
                         -90.0f,
                         actualXSize,
                         actualYSize,
@@ -166,7 +163,7 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
                 break;
             case BOTTOM:
                 wall.initWall(
-                        new Vector3(zPos-0.1f, yPos, -position.x),
+                        bottomWallPos,
                         -90.0f,
                         actualXSize,
                         actualYSize,
@@ -176,7 +173,7 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
                 break;
             case RIGHT:
                 wall.initWall(
-                        new Vector3(xPos-0.1f, yPos,  position.z),
+                        rightWallPos,
                         0.0f,
                         actualZSize,
                         actualYSize,
@@ -186,7 +183,7 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
                 break;
             case LEFT:
                 wall.initWall(
-                        new Vector3(xPos  - actualXSize - thickness+0.1f, yPos,  position.z),
+                        leftWallPos,
                         0.0f,
                         actualZSize,
                         actualYSize,
@@ -247,8 +244,48 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
     }
 
     @Override
-    public void setDoor() {
+    public void setDoor(Door door, Side side) {
+        if (door == null) {
+            System.out.println("Room; setDoor; door is null.");
+            return;
+        }
 
+        switch (side) {
+            case TOP:
+                door.initDoor(
+                        new Vector3(this.position.x, this.position.y + unitSize / 2, this.position.z - actualZSize / 2 - thickness / 2),
+                        Side.TOP,
+                        unitSize,
+                        unitSize,
+                        0.1f);
+                break;
+            case BOTTOM:
+                door.initDoor(
+                        new Vector3(this.position.x, this.position.y + unitSize / 2, this.position.z + actualZSize / 2 + thickness / 2),
+                        Side.BOTTOM,
+                        unitSize,
+                        unitSize,
+                        0.1f);
+                break;
+            case LEFT:
+                door.initDoor(
+                        new Vector3(this.position.x - actualXSize / 2 - thickness / 2, this.position.y + unitSize / 2, this.position.z),
+                        Side.LEFT,
+                        unitSize,
+                        unitSize,
+                        0.1f);
+                break;
+            case RIGHT:
+                door.initDoor(
+                        new Vector3(this.position.x + actualXSize / 2 + thickness / 2, this.position.y + unitSize / 2, this.position.z),
+                        Side.RIGHT,
+                        unitSize,
+                        unitSize,
+                        0.1f);
+                break;
+        }
+
+        this.door = door;
     }
 
     /**
@@ -269,6 +306,11 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
         xPos = this.position.x + this.actualXSize / 2 + thickness / 2;
         yPos = this.position.y + this.actualYSize / 2;
         zPos = this.position.z + this.actualZSize / 2 + thickness / 2;
+
+        topWallPos = new Vector3(zPos - actualZSize - thickness+0.1f, yPos, -position.x);
+        bottomWallPos = new Vector3(zPos-0.1f, yPos, -position.x);
+        rightWallPos = new Vector3(xPos-0.1f, yPos,  position.z);
+        leftWallPos = new Vector3(xPos  - actualXSize - thickness+0.1f, yPos,  position.z);
 
         calculateEdgePoints();
         initDoodads();

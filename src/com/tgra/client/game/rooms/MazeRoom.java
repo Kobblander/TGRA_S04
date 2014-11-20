@@ -20,7 +20,7 @@ import com.tgra.client.game.object.Object;
 public class MazeRoom extends AbstractRoom {
 
     private Maze maze;
-    private int roomSize = 5;
+    private final int roomSize = 5;
 
     public MazeRoom() {
         initializeRoom(roomSize, 1, roomSize);

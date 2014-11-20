@@ -4,6 +4,9 @@ import com.tgra.client.game.doors.Door;
 import com.tgra.client.game.keys.Key;
 import com.tgra.client.game.rooms.Room;
 
+import java.util.Collection;
+import java.util.List;
+
 /**
  * <h1>DoorLockMechanism</h1>
  * <h2>com.tgra.client.game.mechanisms</h2>
@@ -15,7 +18,10 @@ import com.tgra.client.game.rooms.Room;
  */
 public interface DoorLockMechanism {
 
-    public void addKeyToDoor(Key key, Door door);
-    public void collectKey(Key key);
+    public void addKeyToDoor(Door door, Key key);
+    public void collectKey(Door door, Key key);
+
+    public List getDoors();
+    public List getKeys();
 
 }

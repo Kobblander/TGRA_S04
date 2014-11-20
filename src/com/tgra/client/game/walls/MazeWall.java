@@ -53,7 +53,7 @@ public class MazeWall extends AbstractWall {
         this.startPoint = new Vector3(blc.x + cellsize * sCoord.x, 0f, blc.z + cellsize * sCoord.y);
         this.endPoint = new Vector3(blc.x + cellsize * eCoord.x, 0f, blc.z + cellsize * eCoord.y);
         this.length = startPoint.dst(endPoint);
-        Vector3 newPos = new Vector3();
+        Vector3 newPos;
         if (sCoord.x == eCoord.x) {
             newPos = new Vector3(startPoint.x, startPoint.y, startPoint.z + length / 2);
             rotation = -0f;

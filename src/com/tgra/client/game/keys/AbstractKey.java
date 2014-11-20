@@ -2,6 +2,8 @@ package com.tgra.client.game.keys;
 
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
+import com.badlogic.gdx.math.Vector3;
+import com.tgra.client.game.doors.Door;
 import com.tgra.client.game.mechanisms.DoorLockMechanism;
 import com.tgra.client.game.object.AbstractObject;
 import com.tgra.client.game.shapes.Box;
@@ -18,8 +20,14 @@ import com.tgra.client.game.shapes.Box;
 public abstract class AbstractKey extends AbstractObject implements Key {
 
     protected Box tempBox;
+    protected Door door;
     protected boolean collected;
     protected DoorLockMechanism doorLockMechanism;
+
+    @Override
+    public boolean isCollected() {
+        return collected;
+    }
 
     @Override
     public void update(float deltaTime) {
@@ -27,16 +35,22 @@ public abstract class AbstractKey extends AbstractObject implements Key {
     }
 
     @Override
-    public void render(ModelBatch modelBatch, Environment environment) {
-        if (!collected) {
-            tempBox.render(modelBatch, environment);
-        }
+    public void setPosition(Vector3 position) {
+        this.position = position;
+        build();
     }
+
+    @Override
+    public void setDoor(Door door) {
+        this.door = door;
+    }
+
+    protected abstract void build();
 
     @Override
     public void pickup() {
         collected = true;
-        doorLockMechanism.collectKey(this);
+        doorLockMechanism.collectKey(door, this);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.tgra.client.game.keys;
 
+import com.tgra.client.game.doors.Door;
 import com.tgra.client.game.mechanisms.DoorLockMechanism;
 import com.tgra.client.game.object.Object;
 /**
@@ -14,6 +15,11 @@ import com.tgra.client.game.object.Object;
 public interface Key extends Object {
 
     public void pickup();
+
     public void setDoorLockMechanism(DoorLockMechanism doorLockMechanism);
+
+    public void setDoor(Door door);
+
+    public boolean isCollected();
 
 }

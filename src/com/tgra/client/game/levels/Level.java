@@ -1,7 +1,9 @@
 package com.tgra.client.game.levels;
 
+import com.tgra.client.game.mechanisms.DoorLockMechanism;
 import com.tgra.client.game.rooms.Room;
 import com.tgra.client.game.object.Object;
+import javafx.geometry.Side;
 
 /**
  * <h1>Level</h1>
@@ -17,11 +19,14 @@ public interface Level extends Object {
     /**
      * Adds a room
      */
-    public LevelPos addRoomToLevel(Room room, LevelPos levelPos);
+    public Room addRoomToLevel(Room room, LevelPos levelPos);
 
     /**
      * Initially adds the door in the middle.
      */
     public void addDoorway(LevelPos levelPosA, LevelPos levelPosB);
 
+    //public void addLockedDoorToRoom(LevelPos levelPos);
+
+    public void assemble();
 }

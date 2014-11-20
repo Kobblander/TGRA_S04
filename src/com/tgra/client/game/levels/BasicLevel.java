@@ -3,6 +3,7 @@ package com.tgra.client.game.levels;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.tgra.client.game.LevelAssembler;
 import com.tgra.client.game.rooms.Room;
 
 /**
@@ -26,5 +27,11 @@ public class BasicLevel extends AbstractLevel {
         for (Room r : this.levelGrid.getAllRooms()) {
             r.render(modelBatch, environment);
         }
+    }
+
+    @Override
+    public void assemble() {
+        LevelAssembler.assembleKobbaLevel(this);
+
     }
 }

@@ -21,9 +21,9 @@ public class BasicRoom extends AbstractRoom {
         if (roomXSize % 2 == 0) {
             System.out.println("Room sizes must be odd numbers.");
             roomXSize++;
-        } else if (roomYSize % 2 == 0) {
+        } else if (roomZSize % 2 == 0) {
             System.out.println("Room sizes must be odd numbers.");
-            roomYSize++;
+            roomZSize++;
         }
         initializeRoom(roomXSize, roomYSize, roomZSize);
     }
@@ -54,6 +54,10 @@ public class BasicRoom extends AbstractRoom {
 
     @Override
     public void render(ModelBatch modelBatch, Environment environment) {
+
+        if (door != null) {
+            door.render(modelBatch, environment);
+        }
 
         for (Object o : doodads) {
             o.render(modelBatch, environment);

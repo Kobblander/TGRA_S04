@@ -51,17 +51,17 @@ public class Box extends AbstractShape {
 
         builder.begin();
 
-            MeshPartBuilder partBuilder = builder.part("box", GL20.GL_TRIANGLES, attributes, boxTexture.material);
-            boxTexture.setUVRange(partBuilder, width, height);
+        MeshPartBuilder partBuilder = builder.part("box", GL20.GL_TRIANGLES, attributes, boxTexture.material);
+        boxTexture.setUVRange(partBuilder, width, height);
 
-            partBuilder.box(
-                center.x,
-                center.y,
-                center.z,
-                width,
-                height,
-                depth
-            );
+        partBuilder.box(
+            center.x,
+            center.y,
+            center.z,
+            width,
+            height,
+            depth
+        );
 
         shapeInstance = new ModelInstance(builder.end());
         shapeInstance.calculateTransforms();
