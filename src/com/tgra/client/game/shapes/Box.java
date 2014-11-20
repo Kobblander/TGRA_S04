@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.BoundingBox;
 import com.tgra.client.utility.Texture;
 
 /**
@@ -59,6 +60,7 @@ public class Box extends AbstractShape {
 
         shapeInstance.transform.setTranslation(center);
         shapeInstance.calculateTransforms();
+        boundingBox = shapeInstance.calculateBoundingBox(new BoundingBox());
     }
 
     @Override
