@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.tgra.client.game.GameFactory;
 import com.tgra.client.game.World;
+import com.tgra.client.game.column.Column;
 import com.tgra.client.game.doors.Door;
 import com.tgra.client.game.floors.Floor;
 import com.tgra.client.game.object.AbstractObject;
@@ -102,9 +103,9 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
     protected Vector3 columnAPos = new Vector3();
     protected Vector3 columnBPos = new Vector3();
     protected Vector3 columnCPos = new Vector3();
-    protected Cylinder c1;
-    protected Cylinder c2;
-    protected Cylinder c3;
+    protected Column c1;
+    protected Column c2;
+    protected Column c3;
 
     protected abstract void initDoodads();
 
@@ -309,10 +310,17 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
         yPos = this.position.y + this.actualYSize / 2;
         zPos = this.position.z + this.actualZSize / 2 + thickness / 2;
 
-        topWallPos = new Vector3(zPos - actualZSize - thickness+0.1f, yPos, -position.x);
-        bottomWallPos = new Vector3(zPos-0.1f, yPos, -position.x);
-        rightWallPos = new Vector3(xPos-0.1f, yPos,  position.z);
-        leftWallPos = new Vector3(xPos  - actualXSize - thickness+0.1f, yPos,  position.z);
+        topWallPos = new Vector3(    this.position.x,                                   this.position.y + actualYSize / 2, this.position.z - actualZSize / 2 - thickness / 2);
+        bottomWallPos =  new Vector3(this.position.x,                                   this.position.y + actualYSize / 2, this.position.z + actualZSize / 2 + thickness / 2);
+        rightWallPos =  new Vector3( this.position.x + actualXSize / 2 + thickness / 2, this.position.y + actualYSize / 2, this.position.z);
+        leftWallPos =  new Vector3(  this.position.x - actualXSize / 2 - thickness / 2, this.position.y + actualYSize / 2, this.position.z);
+
+        /*
+        Wall wallTop = GameFactory.createBasicWall(new Vector3(position.x, yPos, zPos), 0.0f, actualZSize, actualYSize, 1.0f);
+        Wall wallLeft = GameFactory.createBasicWall(new Vector3(xPos, yPos, position.z), 90.0f, actualXSize, actualYSize, 1.0f);
+        Wall wallBottom = GameFactory.createBasicWall(new Vector3(position.x, yPos, -zPos), 0.0f, actualZSize, actualYSize, 1.0f);
+        Wall wallRight = GameFactory.createBasicWall(new Vector3(-xPos, yPos, position.z), 90.0f, actualXSize, actualYSize, 1.0f);
+        */
 
         calculateEdgePoints();
         initDoodads();

@@ -26,6 +26,7 @@ public class MazeWall extends AbstractWall {
     private Vector3 endPoint;
     private Box box;
     private Maze maze;
+    private final float thickness = 0.5f;
 
 
     public MazeWall(Coord sCoord, Coord eCoord, Maze maze) {
@@ -56,12 +57,12 @@ public class MazeWall extends AbstractWall {
         if (sCoord.x == eCoord.x) {
             newPos = new Vector3(startPoint.x, startPoint.y, startPoint.z + length / 2);
             rotation = -0f;
-            box = new Box("wall.jpg", newPos, 0.5f, 4, length);
+            box = new Box("wall.jpg", newPos, thickness, 4, length);
         }
         if (sCoord.y == eCoord.y) {
             newPos = new Vector3(startPoint.x + length / 2, startPoint.y, startPoint.z);
             rotation = 0f;
-            box = new Box("wall.jpg", newPos, length, 4, 0.5f);
+            box = new Box("wall.jpg", newPos, length, 4, thickness);
         }
         box.build(World.getInstance().getModelBuilder());
         box.setRotation(rotation, Vector3.Y);

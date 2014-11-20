@@ -27,11 +27,12 @@ public class LevelAssembler {
 
     private static List<BasicLockMechanism> basicLockMechanismList = new ArrayList<BasicLockMechanism>();
 
+    private static BasicLockMechanism blm = new BasicLockMechanism();
+
     private LevelAssembler() {
     }
 
     public static void assembleKobbaLevel(Level level) {
-        BasicLockMechanism blm = new BasicLockMechanism();
         Key key1 = gameFactory.createKey(blm);
         Key key2 = gameFactory.createKey(blm);
         Key key3 = gameFactory.createKey(blm);
@@ -55,7 +56,7 @@ public class LevelAssembler {
         level.addRoomToLevel(gameFactory.createBasicRoom(1, 2, 1), new LevelPos(0, 0, 0));
 
         // Add door to this room
-        Room room1 = level.addRoomToLevel(gameFactory.createBasicRoom(5, 1, 1), new LevelPos(1, 0, 0));
+        Room room1 = level.addRoomToLevel(gameFactory.createBasicRoom(5, 2, 1), new LevelPos(1, 0, 0));
         room1.setDoor(door1, Side.BOTTOM);
 
 
@@ -64,7 +65,7 @@ public class LevelAssembler {
         level.addRoomToLevel(gameFactory.createBasicRoom(1, 1, 1), new LevelPos(-1, 0, 4));
         level.addRoomToLevel(gameFactory.createBasicRoom(1, 1, 1), new LevelPos(-3, 0, 3));
 
-        level.addRoomToLevel(gameFactory.createMazeRoom(), new LevelPos(1, 0, 1));
+        //level.addRoomToLevel(gameFactory.createMazeRoom(), new LevelPos(1, 0, 1));
 
 
         level.addRoomToLevel(gameFactory.createBasicRoom(3, 3, 3), new LevelPos(2, 0, 6));

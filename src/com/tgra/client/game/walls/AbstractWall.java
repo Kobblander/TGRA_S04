@@ -21,6 +21,9 @@ public abstract class AbstractWall extends AbstractObject implements Wall {
     protected float ySize;
     protected float zSize;
 
+    protected Vector3 startPoint;
+    protected Vector3 endPoint;
+
     protected RoomData roomData;
 
     // Default thickness of all walls.
@@ -50,6 +53,18 @@ public abstract class AbstractWall extends AbstractObject implements Wall {
         this.height = height;
         this.length = length;
         this.rotation = rotation;
+
+        build();
+    }
+
+    @Override
+    public void initWall(Vector3 startPoint, Vector3 endPoint, float rotation, float length, float height, float thickness) {
+        this.startPoint = startPoint;
+        this.endPoint = endPoint;
+        this.rotation = rotation;
+        this.thickness = thickness;
+        this.height = height;
+        this.length = length;
 
         build();
     }

@@ -16,7 +16,7 @@ import com.tgra.client.game.object.Object;
  * @author jakob
  * @version 1.1
  */
-public interface Shape extends Object{
+public interface Shape {
     /**
      * Render the object in its model batch
      * @param modelBatch batch to render the model in
@@ -33,4 +33,10 @@ public interface Shape extends Object{
     public boolean isHit(BoundingBox box);
 
     public void setRotation(float degrees, Vector3 axis);
+
+    public void translate(Vector3 motion);
+
+    public void translate(float x, float y, float z);
+
+    public Vector3 getPosition();
 }

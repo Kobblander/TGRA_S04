@@ -3,6 +3,7 @@ package com.tgra.client.game.rooms;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.tgra.client.game.column.Column;
 import com.tgra.client.game.object.Object;
 import com.tgra.client.game.shapes.Cylinder;
 
@@ -33,14 +34,10 @@ public class BasicRoom extends AbstractRoom {
     protected void initDoodads() {
 
         // Create all the rooms objects.
-        Cylinder c1 = gameFactory.createColumn(TL, 1f, actualYSize, 1f);
-        c1.build(modelBuilder);
-        Cylinder c2 = gameFactory.createColumn(TR, 1f, actualYSize, 1f);
-        c2.build(modelBuilder);
-        Cylinder c3 = gameFactory.createColumn(BL, 1f, actualYSize, 1f);
-        c3.build(modelBuilder);
-        Cylinder c4 = gameFactory.createColumn(BR, 1f, actualYSize, 1f);
-        c4.build(modelBuilder);
+        Column c1 = gameFactory.createColumn(TL, 1f, actualYSize, 1f);
+        Column c2 = gameFactory.createColumn(TR, 1f, actualYSize, 1f);
+        Column c3 = gameFactory.createColumn(BL, 1f, actualYSize, 1f);
+        Column c4 = gameFactory.createColumn(BR, 1f, actualYSize, 1f);
         doodads.add(c1);
         doodads.add(c2);
         doodads.add(c3);
