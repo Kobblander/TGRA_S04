@@ -53,6 +53,6 @@ public abstract class AbstractShape implements Shape {
         System.out.println("------------------");
 
 
-        return box.intersects(player);
+        return box.contains(player);
     }
 }
