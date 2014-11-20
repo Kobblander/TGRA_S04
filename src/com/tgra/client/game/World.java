@@ -52,7 +52,7 @@ public class World {
         return roomList;
     }
 
-    public static List<Object> getObjectList() {
+    public List<Object> getObjectList() {
         return objectList;
     }
 
