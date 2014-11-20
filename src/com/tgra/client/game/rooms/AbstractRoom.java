@@ -341,6 +341,8 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
 
     @Override
     public boolean isHit(BoundingBox player) {
+        BoundingBox box = new BoundingBox();
+
         return topWall.isHit(player) || bottomWall.isHit(player) ||
                leftWall.isHit(player) || rightWall.isHit(player);
     }
