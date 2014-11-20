@@ -1,5 +1,7 @@
 package com.tgra.client.game;
 
+import com.badlogic.gdx.graphics.g3d.ModelBatch;
+import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.tgra.client.game.object.Object;
 import com.tgra.client.game.rooms.Room;
 import com.tgra.client.game.shapes.Shape;
@@ -28,10 +30,25 @@ public class World {
 
     private static List<Shape> shapeList = new ArrayList<Shape>();
 
+    private static ModelBuilder modelBuilder = new ModelBuilder();
+
+    private static ModelBatch modelBatch = new ModelBatch();
+
     private World() {
     }
 
-    public static List<Room> getRoomList() {
+    // -- Functions -- //
+
+
+    public ModelBatch getModelBatch() {
+        return modelBatch;
+    }
+
+    public ModelBuilder getModelBuilder() {
+        return modelBuilder;
+    }
+
+    public List<Room> getRoomList() {
         return roomList;
     }
 
@@ -39,15 +56,15 @@ public class World {
         return objectList;
     }
 
-    public static void addObject(Object object) {
+    public void addObject(Object object) {
         objectList.add(object);
     }
 
-    public static void addShape(Shape shape) {
+    public void addShape(Shape shape) {
         shapeList.add(shape);
     }
 
-    public static List<Shape> getShapeList() {
+    public List<Shape> getShapeList() {
         return shapeList;
     }
 

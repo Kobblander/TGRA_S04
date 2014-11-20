@@ -21,12 +21,11 @@ import com.tgra.client.utility.Texture;
  * @author jakob
  * @version 1.1
  */
-public class Box implements Shape {
+public class Box extends AbstractShape {
     // Box texture
     private Texture boxTexture;
 
     // Box instance
-    private ModelInstance boxInstance;
 
     // Box 3d representation
     private Vector3 center;
@@ -52,36 +51,31 @@ public class Box implements Shape {
 
         builder.begin();
 
-            MeshPartBuilder partBuilder = builder.part("box", GL20.GL_TRIANGLES, attributes, boxTexture.material);
-            boxTexture.setUVRange(partBuilder, width, height);
+        MeshPartBuilder partBuilder = builder.part("box", GL20.GL_TRIANGLES, attributes, boxTexture.material);
+        boxTexture.setUVRange(partBuilder, width, height);
 
-            partBuilder.box(
-                center.x,
-                center.y,
-                center.z,
-                width,
-                height,
-                depth
-            );
+        partBuilder.box(
+            center.x,
+            center.y,
+            center.z,
+            width,
+            height,
+            depth
+        );
 
-        boxInstance = new ModelInstance(builder.end());
-        boxInstance.calculateTransforms();
+        shapeInstance = new ModelInstance(builder.end());
+        shapeInstance.calculateTransforms();
     }
 
     @Override
     public void render(ModelBatch modelBatch, Environment environment) {
-        modelBatch.render(boxInstance, environment);
-    }
-
-    public void setRotation(float degrees) {
-        boxInstance.transform.rotate(Vector3.Y, degrees);
-        boxInstance.calculateTransforms();
+        modelBatch.render(shapeInstance, environment);
     }
 
     public float getRotation() {
         Quaternion q = new Quaternion();
 
-        boxInstance.transform.getRotation(q);
+        shapeInstance.transform.getRotation(q);
 
         return q.getAngle();
     }

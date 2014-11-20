@@ -17,12 +17,9 @@ import com.tgra.client.utility.Texture;
  * Date : 11/9/2014
  * Time : 01:04
  */
-public class Sphere implements Shape {
+public class Sphere extends AbstractShape {
     // Side textures
     private static Texture sphereTexture;
-
-    // Box instance
-    private static ModelInstance sphereInstance;
 
     // Box 3d representation
     private Vector3 center;
@@ -38,7 +35,7 @@ public class Sphere implements Shape {
 
     @Override
     public void render(ModelBatch modelBatch, Environment environment) {
-        modelBatch.render(sphereInstance, environment);
+        modelBatch.render(shapeInstance, environment);
     }
 
     @Override
@@ -57,9 +54,9 @@ public class Sphere implements Shape {
                 10
             );
 
-        sphereInstance = new ModelInstance(builder.end());
+        shapeInstance = new ModelInstance(builder.end());
 
-        sphereInstance.transform.setTranslation(center);
-        sphereInstance.calculateTransforms();
+        shapeInstance.transform.setTranslation(center);
+        shapeInstance.calculateTransforms();
     }
 }

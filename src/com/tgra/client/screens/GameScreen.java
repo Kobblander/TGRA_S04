@@ -12,7 +12,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.tgra.client.MyGame;
 import com.tgra.client.events.InputManager;
 import com.tgra.client.game.GameFactory;
+import com.tgra.client.game.World;
+import com.tgra.client.game.levels.Level;
 import com.tgra.client.game.rooms.Room;
+import com.tgra.client.game.shapes.Box;
 import com.tgra.client.game.shapes.Cylinder;
 import com.tgra.client.graphics.Player;
 import com.tgra.client.utility.Lights;
@@ -33,17 +36,17 @@ public class GameScreen implements Screen {
     public static PerspectiveCamera camera;
     private static InputManager controller;
 
-    // ModelBatch
-    private ModelBatch modelBatch;
-
     // Player and light
     private static Player player;
     private static Lights lights;
 
-    private static Room room;
-    private static Room room2, room3, room4;
-    private static Cylinder column;
+    private World world = World.getInstance();
 
+
+    private GameFactory gameFactory = GameFactory.getInstance();
+    private ModelBatch modelBatch;
+
+    private Level level;
 
     public GameScreen(MyGame game) {
         this.game = game;
@@ -56,33 +59,18 @@ public class GameScreen implements Screen {
 
         // Setup camera
         camera = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        camera.position.set(0f, 0f, 0f);
+        camera.position.set(2f, 0f, 2f);
         camera.near = 0.2f;
         camera.far = 350f;
 
         // Setup batch
-        ModelBuilder modelBuilder = new ModelBuilder();
-        modelBatch = new ModelBatch();
+        ModelBuilder modelBuilder = World.getInstance().getModelBuilder();
 
         // Setup Player and light
         player = new Player(modelBuilder);
         lights = new Lights(player);
 
-        // Setup road
-        /*
-        sphere = new Sphere("earth.jpg", new Vector3(0, 0, 0), 1.5f);
-        sphere.build(modelBuilder);
-        */
-
-        /*
-        box = new Box("wood.jpg", new Vector3(0, 0, 0), 5f, 5f, 5f);
-        box.build(modelBuilder);
-        */
-
-        room = GameFactory.createBasicRoom(new Vector3(2, -1.9f, 2), 2);
-        room2 = GameFactory.createBasicRoom(new Vector3(2, -1.9f, 16), 2);
-        room3 = GameFactory.createBasicRoom(new Vector3(16, -1.9f, 2), 2);
-        room4 = GameFactory.createBasicRoom(new Vector3(-16, -1.9f, 2), 2);
+        level = gameFactory.createBasicLevel(10, 10);
 
         controller = new InputManager(camera, player);
         Gdx.input.setInputProcessor(controller);
@@ -95,25 +83,23 @@ public class GameScreen implements Screen {
         Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 
+        modelBatch = world.getModelBatch();
+
         // Update controller
         controller.update(delta);
 
         Environment environment = Lights.getEnvironment();
 
-        // Render graphics instances
+        // -- Render begin -- //
         modelBatch.begin(camera);
             lights.render(delta);
 
-            //box.render(modelBatch, environment);
-
-
             player.draw(modelBatch, environment);
 
-            room.render(modelBatch, environment);
-            room2.render(modelBatch, environment);
-            room3.render(modelBatch, environment);
-            room4.render(modelBatch, environment);
+            level.render(modelBatch, environment);
+
         modelBatch.end();
+        // -- Render end -- //
 
 
         // Render stats

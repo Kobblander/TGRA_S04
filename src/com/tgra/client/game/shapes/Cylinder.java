@@ -9,8 +9,7 @@ import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.collision.BoundingBox;
-import com.tgra.client.utility.ObjectLoader;
+import com.tgra.client.game.World;
 import com.tgra.client.utility.Texture;
 
 /**
@@ -19,12 +18,9 @@ import com.tgra.client.utility.Texture;
  * Date : 11/10/2014
  * Time : 04:36
  */
-public class Cylinder implements Shape {
+public class Cylinder extends AbstractShape {
     // Cylinder texture
     private Texture cylinderTexture;
-
-    // Cylinder instance
-    private ModelInstance cylinderInstance;
 
     // Cylinder 3d representation
     private Vector3 center;
@@ -38,14 +34,8 @@ public class Cylinder implements Shape {
         this.depth = depth;
 
         this.cylinderTexture = new Texture(Gdx.files.internal("data/cylinder/" + texture));
-        ObjectLoader loader = new ObjectLoader(Gdx.files.internal("data/player/Snowman_Top.OBJ"));
-        this.cylinderInstance = loader.instance;
 
-        cylinderInstance.transform.setToTranslation(-0.5f, -1.4f, -0.5f);
-        cylinderInstance.transform.scale(100, 100, 100);
-
-        BoundingBox box1 = cylinderInstance.calculateBoundingBox(new BoundingBox());
-        System.out.println(box1.getWidth());
+        build(World.getInstance().getModelBuilder());
     }
 
     @Override
@@ -54,24 +44,24 @@ public class Cylinder implements Shape {
 
         builder.begin();
 
-            MeshPartBuilder partBuilder = builder.part("cylinder", GL20.GL_TRIANGLES, attributes, cylinderTexture.material);
+        MeshPartBuilder partBuilder = builder.part("cylinder", GL20.GL_TRIANGLES, attributes, cylinderTexture.material);
         cylinderTexture.setUVRange(partBuilder, width, height);
 
-            partBuilder.cylinder(
-                    width,
-                    height,
-                    depth,
-                    10
-            );
+        partBuilder.cylinder(
+                width,
+                height,
+                depth,
+                10
+        );
 
-        cylinderInstance = new ModelInstance(builder.end());
+        shapeInstance = new ModelInstance(builder.end());
 
-        cylinderInstance.transform.setTranslation(center);
-        cylinderInstance.calculateTransforms();
+        shapeInstance.transform.setTranslation(center);
+        shapeInstance.calculateTransforms();
     }
 
     @Override
     public void render(ModelBatch modelBatch, Environment environment) {
-        modelBatch.render(cylinderInstance, environment);
+        modelBatch.render(shapeInstance, environment);
     }
 }

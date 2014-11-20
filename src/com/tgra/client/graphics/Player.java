@@ -11,8 +11,12 @@ import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
+import com.tgra.client.game.World;
+import com.tgra.client.game.object.Object;
 import com.tgra.client.screens.GameScreen;
 import com.tgra.client.utility.Texture;
+
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA
@@ -21,8 +25,8 @@ import com.tgra.client.utility.Texture;
  * Time : 00:38
  */
 public class Player  {
-    private static float HEIGHT = 1.9f;
-    public static float WIDTH = 0.5f;
+    private static float HEIGHT = 1f;
+    public static float WIDTH = 0.2f;
     private static float groundY = -0.4f;
     private static float angleX = -90, angleY = 0;
 
@@ -70,7 +74,10 @@ public class Player  {
         Vector3 nextMove = getNextMove(camera, delta, key);
         BoundingBox player = buildPlayer(nextMove);
 
-        setCameraPosition(camera, nextMove);
+        if(isHit(player))
+            slideAlong(camera, nextMove);
+        else
+            setCameraPosition(camera, nextMove);
     }
 
     /**
@@ -151,7 +158,8 @@ public class Player  {
     private void updateCamera(PerspectiveCamera camera, Vector3 nextMove) {
         BoundingBox player = buildPlayer(nextMove);
 
-        setCameraPosition(camera, nextMove);
+        if(!isHit(player))
+            setCameraPosition(camera, nextMove);
     }
 
     /**
@@ -194,6 +202,16 @@ public class Player  {
     public void setAngles(float angleX, float angleY) {
         this.angleX = angleX;
         this.angleY = angleY;
+    }
+
+    private boolean isHit(BoundingBox player) {
+        List<Object> objs = World.getObjectList();
+
+        for(Object obj: objs)
+            if(obj.isHit(player))
+                return true;
+
+        return false;
     }
 
     public void flashLight(PointLight flashLight) {

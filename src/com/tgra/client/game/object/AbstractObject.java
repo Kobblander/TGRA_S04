@@ -1,10 +1,6 @@
 package com.tgra.client.game.object;
 
-import com.badlogic.gdx.graphics.g3d.ModelBatch;
-import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
-
-import java.lang.*;
 
 /**
  * <h1>AbstractObject</h1>
@@ -17,12 +13,18 @@ import java.lang.*;
  */
 public abstract class AbstractObject implements Object {
 
-    protected static ModelBuilder builder = new ModelBuilder();
-
-    protected static ModelBatch modelBatch = new ModelBatch();
-
     protected Vector3 position;
 
     @Override
     public abstract void update(float deltaTime);
+
+    @Override
+    public Vector3 getPosition() {
+        return this.position;
+    }
+
+    @Override
+    public void setPosition(Vector3 position) {
+        this.position = position;
+    }
 }

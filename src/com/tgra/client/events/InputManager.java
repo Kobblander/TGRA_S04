@@ -16,7 +16,7 @@ import com.tgra.client.utility.Lights;
 public class InputManager implements InputProcessor {
     static final float MOUSE_SENSITIVITY = 0.25f;
     static float MOVE_SPEED = 10;
-    static final float NORMAL_SPEED = 10;
+    static final float NORMAL_SPEED = 5;
     static final float RUN_SPEED = 15;
     static final float NINETY_DEGREE = 89.99f;
     private final Player player;

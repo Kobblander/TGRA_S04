@@ -3,7 +3,8 @@ package com.tgra.client.game.walls;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.math.Vector3;
-import com.tgra.client.game.object.AbstractObject;
+import com.badlogic.gdx.math.collision.BoundingBox;
+import com.tgra.client.game.World;
 import com.tgra.client.game.shapes.Box;
 
 /**
@@ -11,27 +12,25 @@ import com.tgra.client.game.shapes.Box;
  */
 public class BasicWall extends AbstractWall {
 
+    protected Box box;
 
-    public BasicWall(Vector3 position, float rotation, float length, float height, float thickness) {
-        this.position = position;
-        this.thickness = thickness;
-        this.height = height;
-        this.length = length;
-        this.rotation = rotation;
-
-        build();
+    public BasicWall() {
     }
-
 
     @Override
     protected void build() {
         box = new Box("wall.jpg", position, thickness, height, length);
-        box.build(AbstractObject.builder);
-        box.setRotation(rotation);
+        box.build(World.getInstance().getModelBuilder());
+        box.setRotation(rotation, Vector3.Y);
     }
 
     @Override
     public void render(ModelBatch modelBatch, Environment environment) {
         box.render(modelBatch, environment);
+    }
+
+    @Override
+    public boolean isHit(BoundingBox player) {
+        return box.isHit(player);
     }
 }

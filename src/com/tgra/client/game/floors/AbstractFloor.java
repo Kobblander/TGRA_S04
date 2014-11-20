@@ -1,5 +1,6 @@
 package com.tgra.client.game.floors;
 
+import com.badlogic.gdx.math.collision.BoundingBox;
 import com.tgra.client.game.object.AbstractObject;
 
 /**
@@ -22,5 +23,10 @@ public abstract class AbstractFloor extends AbstractObject implements Floor {
     @Override
     public void update(float deltaTime) {
 
+    }
+
+    @Override
+    public boolean isHit(BoundingBox player) {
+        return false;
     }
 }
