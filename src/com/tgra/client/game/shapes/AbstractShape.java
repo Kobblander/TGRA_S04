@@ -54,6 +54,6 @@ public abstract class AbstractShape implements Shape {
         */
 
 
-        return shapeInstance.calculateBoundingBox(boundingBox).mul(shapeInstance.transform).intersects(player);
+        return boundingBox.contains(player);
     }
 }

@@ -31,6 +31,7 @@ public class Cylinder extends AbstractShape {
         this.depth = depth;
 
         this.texture = new Texture(Gdx.files.internal("data/cylinder/" + texture));
+        this.boundingBox = new BoundingBox();
 
         build(World.getInstance().getModelBuilder());
     }
@@ -56,7 +57,7 @@ public class Cylinder extends AbstractShape {
         shapeInstance.transform.setTranslation(center);
         shapeInstance.calculateTransforms();
 
-        //bounding = shapeInstance.calculateBoundingBox(new BoundingBox());
+        boundingBox = shapeInstance.calculateBoundingBox(boundingBox);
     }
 
     @Override
