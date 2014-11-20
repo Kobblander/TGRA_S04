@@ -65,7 +65,7 @@ public class LevelAssembler {
         level.addRoomToLevel(gameFactory.createBasicRoom(1, 1, 1), new LevelPos(-1, 0, 4));
         level.addRoomToLevel(gameFactory.createBasicRoom(1, 1, 1), new LevelPos(-3, 0, 3));
 
-        level.addRoomToLevel(gameFactory.createMazeRoom(), new LevelPos(1, 0, 1));
+        //level.addRoomToLevel(gameFactory.createMazeRoom(), new LevelPos(1, 0, 1));
 
 
         level.addRoomToLevel(gameFactory.createBasicRoom(3, 3, 3), new LevelPos(2, 0, 6));
@@ -87,9 +87,9 @@ public class LevelAssembler {
         level.addDoorway(new LevelPos(-1, 0, 3), new LevelPos(-1, 0, 4));
         level.addDoorway(new LevelPos(-2, 0, 3), new LevelPos(-3, 0, 3));
         level.addDoorway(new LevelPos(2, 0, 1), new LevelPos(2, 0, 6));
+    }
 
-
-
-
+    public static void assembleTestLevel(Level level) {
+        level.addRoomToLevel(gameFactory.createBasicRoom(1, 2, 1), new LevelPos(0, 0, 0));
     }
 }

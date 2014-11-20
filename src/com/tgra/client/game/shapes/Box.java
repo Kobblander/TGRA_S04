@@ -50,15 +50,14 @@ public class Box extends AbstractShape {
         texture.setUVRange(partBuilder, width, height);
 
         partBuilder.box(
-            center.x,
-            center.y,
-            center.z,
             width,
             height,
             depth
         );
 
         shapeInstance = new ModelInstance(builder.end());
+
+        shapeInstance.transform.setTranslation(center);
         shapeInstance.calculateTransforms();
     }
 

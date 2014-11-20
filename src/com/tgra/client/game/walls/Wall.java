@@ -16,6 +16,7 @@ import com.tgra.client.game.rooms.RoomData;
 public interface Wall extends Object{
 
     public void initWall(Vector3 pos, float rotation, float length, float height, float thickness);
+    public void initWall(Vector3 pos1, Vector3 pos2, float rotation, float length, float height, float thickness);
     public void setRoomData(RoomData roomData);
 
 }
