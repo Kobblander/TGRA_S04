@@ -64,6 +64,8 @@ public class Box extends AbstractShape {
         shapeInstance.calculateTransforms();
 
         boundingBox = shapeInstance.calculateBoundingBox(box);
+        boundingBox.mul(shapeInstance.transform);
+        System.out.println("Center: " + boundingBox.getCenter());
     }
 
     @Override
