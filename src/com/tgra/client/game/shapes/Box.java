@@ -64,6 +64,8 @@ public class Box extends AbstractShape {
         );
 
         shapeInstance = new ModelInstance(builder.end());
+
+        // shapeInstance.transform.setTranslation(center);
         shapeInstance.calculateTransforms();
     }
 

@@ -46,5 +46,4 @@ public abstract class AbstractShape implements Shape {
         shapeInstance.transform.translate(position);
         shapeInstance.calculateTransforms();
     }
-
 }

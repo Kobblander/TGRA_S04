@@ -7,16 +7,12 @@ import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.tgra.client.MyGame;
 import com.tgra.client.events.InputManager;
 import com.tgra.client.game.GameFactory;
 import com.tgra.client.game.World;
 import com.tgra.client.game.levels.Level;
-import com.tgra.client.game.rooms.Room;
-import com.tgra.client.game.shapes.Box;
-import com.tgra.client.game.shapes.Cylinder;
 import com.tgra.client.graphics.Player;
 import com.tgra.client.utility.Lights;
 
