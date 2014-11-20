@@ -15,7 +15,6 @@ import com.badlogic.gdx.math.collision.BoundingBox;
  * @version 1.1
  */
 public abstract class AbstractShape implements Shape {
-    protected BoundingBox box;
     protected ModelInstance shapeInstance;
     protected BoundingBox boundingBox;
     protected Vector3 center;
@@ -48,11 +47,10 @@ public abstract class AbstractShape implements Shape {
     public boolean isHit(BoundingBox player) {
         System.out.println("------------------------------------------------------");
         System.out.println("Player : " + player);
-        System.out.println("Shapes Center : " + box.getCenter());
-        System.out.println("Shape Height : " + box.getHeight());
+        System.out.println("Shapes Center : " + boundingBox.getCenter());
+        System.out.println("Shape Height : " + boundingBox.getHeight());
         System.out.println("------------------------------------------------------");
 
-
-        return box.contains(player);
+        return boundingBox.contains(player);
     }
 }

@@ -36,7 +36,7 @@ public class Box extends AbstractShape {
         this.height = height;
         this.depth = depth;
 
-        this.box = new BoundingBox();
+        this.boundingBox = new BoundingBox();
 
         this.texture = new Texture(Gdx.files.internal("data/box/" + texture));
     }
@@ -63,7 +63,7 @@ public class Box extends AbstractShape {
         shapeInstance.transform.setTranslation(center);
         shapeInstance.calculateTransforms();
 
-        boundingBox = shapeInstance.calculateBoundingBox(box);
+        boundingBox = shapeInstance.calculateBoundingBox(boundingBox);
         boundingBox.mul(shapeInstance.transform);
         System.out.println("Center: " + boundingBox.getCenter());
     }
