@@ -1,6 +1,8 @@
 package com.tgra.client.game;
 
 import com.badlogic.gdx.math.Vector3;
+import com.tgra.client.game.column.BasicColumn;
+import com.tgra.client.game.column.Column;
 import com.tgra.client.game.doors.BasicDoor;
 import com.tgra.client.game.doors.Door;
 import com.tgra.client.game.floors.BasicFloor;
@@ -9,7 +11,6 @@ import com.tgra.client.game.keys.BasicKey;
 import com.tgra.client.game.keys.Key;
 import com.tgra.client.game.levels.BasicLevel;
 import com.tgra.client.game.levels.Level;
-import com.tgra.client.game.levels.LevelPos;
 import com.tgra.client.game.maze.Coord;
 import com.tgra.client.game.maze.Maze;
 import com.tgra.client.game.maze.MazeType;
@@ -99,9 +100,9 @@ public class GameFactory {
         return maze;
     }
 
-    public Cylinder createColumn(Vector3 position, float width, float height, float depth) {
-        Shape cylinder = new Cylinder("glyphs.jpg", position, width, height, depth);
-        return (Cylinder) cylinder;
+    public Column createColumn(Vector3 position, float width, float height, float depth) {
+        Column column = new BasicColumn("glyphs.jpg", position, width, height, depth);
+        return  column;
     }
 
     public Room createBasicRoom(int roomXSize, int roomYSize, int roomZSize) {

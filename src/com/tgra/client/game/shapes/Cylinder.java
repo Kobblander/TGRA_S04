@@ -19,11 +19,7 @@ import com.tgra.client.utility.Texture;
  * Time : 04:36
  */
 public class Cylinder extends AbstractShape {
-    // Cylinder texture
-    private Texture cylinderTexture;
 
-    // Cylinder 3d representation
-    private Vector3 center;
     private float width, height, depth;
 
     public Cylinder(String texture, Vector3 center, float width, float height, float depth) {
@@ -33,7 +29,7 @@ public class Cylinder extends AbstractShape {
         this.height = height;
         this.depth = depth;
 
-        this.cylinderTexture = new Texture(Gdx.files.internal("data/cylinder/" + texture));
+        this.texture = new Texture(Gdx.files.internal("data/cylinder/" + texture));
         build(World.getInstance().getModelBuilder());
     }
 
@@ -43,8 +39,8 @@ public class Cylinder extends AbstractShape {
 
         builder.begin();
 
-        MeshPartBuilder partBuilder = builder.part("cylinder", GL20.GL_TRIANGLES, attributes, cylinderTexture.material);
-        cylinderTexture.setUVRange(partBuilder, width, height);
+        MeshPartBuilder partBuilder = builder.part("cylinder", GL20.GL_TRIANGLES, attributes, texture.material);
+        texture.setUVRange(partBuilder, width, height);
 
         partBuilder.cylinder(
                 width,

@@ -3,6 +3,7 @@ package com.tgra.client.game.shapes;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.math.Vector3;
 import com.tgra.client.game.object.AbstractObject;
+import com.tgra.client.utility.Texture;
 
 /**
  * <h1>AbstractShape</h1>
@@ -13,19 +14,32 @@ import com.tgra.client.game.object.AbstractObject;
  * @author jakob
  * @version 1.1
  */
-public abstract class AbstractShape extends AbstractObject implements Shape {
+public abstract class AbstractShape implements Shape {
 
     protected ModelInstance shapeInstance;
-
+    protected Vector3 center;
+    protected Texture texture;
 
     @Override
-    public void update(float deltaTime) {
-
+    public Vector3 getPosition() {
+        return center;
     }
 
     @Override
     public void setRotation(float degrees, Vector3 axis) {
         shapeInstance.transform.rotate(axis, degrees);
+        shapeInstance.calculateTransforms();
+    }
+
+    @Override
+    public void translate(Vector3 motion) {
+        shapeInstance.transform.translate(motion);
+        shapeInstance.calculateTransforms();
+    }
+
+    @Override
+    public void translate(float x, float y, float z) {
+        shapeInstance.transform.translate(x, y ,z);
         shapeInstance.calculateTransforms();
     }
 }

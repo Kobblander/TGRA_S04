@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
 import com.tgra.client.game.GameFactory;
 import com.tgra.client.game.World;
+import com.tgra.client.game.column.Column;
 import com.tgra.client.game.doors.Door;
 import com.tgra.client.game.floors.Floor;
 import com.tgra.client.game.object.AbstractObject;
@@ -101,9 +102,9 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
     protected Vector3 columnAPos = new Vector3();
     protected Vector3 columnBPos = new Vector3();
     protected Vector3 columnCPos = new Vector3();
-    protected Cylinder c1;
-    protected Cylinder c2;
-    protected Cylinder c3;
+    protected Column c1;
+    protected Column c2;
+    protected Column c3;
 
     protected abstract void initDoodads();
 

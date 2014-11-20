@@ -19,10 +19,8 @@ import com.tgra.client.utility.Texture;
  */
 public class Sphere extends AbstractShape {
     // Side textures
-    private static Texture sphereTexture;
 
     // Box 3d representation
-    private Vector3 center;
     private float radius, width, height, depth;
 
     public Sphere(String texture, Vector3 center, float radius) {
@@ -30,7 +28,7 @@ public class Sphere extends AbstractShape {
 
         this.radius = radius;
 
-        this.sphereTexture = new Texture(Gdx.files.internal("data/box/" + texture));
+        this.texture = new Texture(Gdx.files.internal("data/box/" + texture));
     }
 
     @Override
@@ -44,7 +42,7 @@ public class Sphere extends AbstractShape {
 
         builder.begin();
 
-            MeshPartBuilder partBuilder = builder.part("sphere", GL20.GL_TRIANGLES, attributes, sphereTexture.material);
+            MeshPartBuilder partBuilder = builder.part("sphere", GL20.GL_TRIANGLES, attributes, texture.material);
 
             partBuilder.sphere(
                 radius,

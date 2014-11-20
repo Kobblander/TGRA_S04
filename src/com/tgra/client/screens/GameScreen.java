@@ -7,16 +7,13 @@ import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.tgra.client.MyGame;
 import com.tgra.client.events.InputManager;
 import com.tgra.client.game.GameFactory;
 import com.tgra.client.game.World;
 import com.tgra.client.game.levels.Level;
-import com.tgra.client.game.rooms.Room;
-import com.tgra.client.game.shapes.Box;
-import com.tgra.client.game.shapes.Cylinder;
+import com.tgra.client.game.object.Object;
 import com.tgra.client.graphics.Player;
 import com.tgra.client.utility.Lights;
 
@@ -77,6 +74,13 @@ public class GameScreen implements Screen {
         game.setupBasicScreen(stage);
     }
 
+    private void update(float delta) {
+        controller.update(delta);
+        for (Object o : World.getInstance().getObjectList()) {
+            o.update(delta);
+        }
+    }
+
     @Override
     public void render (float delta) {
         Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -85,7 +89,7 @@ public class GameScreen implements Screen {
         modelBatch = world.getModelBatch();
 
         // Update controller
-        controller.update(delta);
+        update(delta);
 
         Environment environment = Lights.getEnvironment();
 
@@ -110,6 +114,7 @@ public class GameScreen implements Screen {
         // Render stats
         game.renderBasicScreen(stage);
     }
+
 
     @Override
     public void resize(int width, int height) {

@@ -22,13 +22,8 @@ import com.tgra.client.utility.Texture;
  * @version 1.1
  */
 public class Box extends AbstractShape {
-    // Box texture
-    private Texture boxTexture;
-
-    // Box instance
 
     // Box 3d representation
-    private Vector3 center;
     private float width, height, depth;
 
     //region Constructors
@@ -40,7 +35,7 @@ public class Box extends AbstractShape {
         this.height = height;
         this.depth = depth;
 
-        this.boxTexture = new Texture(Gdx.files.internal("data/box/" + texture));
+        this.texture = new Texture(Gdx.files.internal("data/box/" + texture));
     }
 
     //endregion
@@ -51,8 +46,8 @@ public class Box extends AbstractShape {
 
         builder.begin();
 
-        MeshPartBuilder partBuilder = builder.part("box", GL20.GL_TRIANGLES, attributes, boxTexture.material);
-        boxTexture.setUVRange(partBuilder, width, height);
+        MeshPartBuilder partBuilder = builder.part("box", GL20.GL_TRIANGLES, attributes, texture.material);
+        texture.setUVRange(partBuilder, width, height);
 
         partBuilder.box(
             center.x,
