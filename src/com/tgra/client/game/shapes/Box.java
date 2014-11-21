@@ -102,7 +102,5 @@ public class Box extends AbstractShape {
     public void setRotation(float degrees) {
         shapeInstance.transform.rotate(Vector3.Y, degrees);
         shapeInstance.calculateTransforms();
-
-        //setBoundingBox();
     }
 }
