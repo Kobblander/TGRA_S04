@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.tgra.client.game.column.Column;
 import com.tgra.client.game.object.Object;
-import com.tgra.client.game.shapes.Cylinder;
 
 /**
  * <h1>BasicRoom</h1>

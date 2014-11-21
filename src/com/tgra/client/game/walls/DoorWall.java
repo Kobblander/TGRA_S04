@@ -44,19 +44,15 @@ public class DoorWall extends AbstractWall {
         }
 
         boxA = new Box("wall.jpg", boxAPos, thickness, height, boxALength);
-        boxA.build(World.getInstance().getModelBuilder());
-        boxA.setRotation(rotation, Vector3.Y);
+        boxA.build(World.getInstance().getModelBuilder(), rotation);
 
         boxB = new Box("wall.jpg", boxBPos, thickness, height, boxBLength);
-        boxB.build(World.getInstance().getModelBuilder());
-        boxB.setRotation(rotation, Vector3.Y);
+        boxB.build(World.getInstance().getModelBuilder(), rotation);
 
         Vector3 doorPos = new Vector3(this.position);
         doorPos.y += roomData.getUnitSize()-0.085f;
         doorwayBox = new Box("wall.jpg", doorPos, thickness, height, roomData.getUnitSize());
-        doorwayBox.build(World.getInstance().getModelBuilder());
-        doorwayBox.setRotation(rotation, Vector3.Y);
-
+        doorwayBox.build(World.getInstance().getModelBuilder(), rotation);
     }
 
     private Vector3 calculateBoxBPos() {

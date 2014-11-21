@@ -27,9 +27,11 @@ public interface Shape {
      * Builds the object with the model builder
      * @param builder the model builder ( tool )
      */
-    public void build(ModelBuilder builder);
+    public void build(ModelBuilder builder, float degrees);
 
     public boolean isHit(BoundingBox box);
+
+    public void setRotation(float degrees);
 
     public void setRotation(float degrees, Vector3 axis);
 

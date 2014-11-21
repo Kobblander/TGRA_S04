@@ -24,7 +24,7 @@ public class BasicFloor extends AbstractFloor {
     @Override
     protected void build() {
         floor = new Box("floor.jpg", position, xSize, ySize, zSize);
-        floor.build(World.getInstance().getModelBuilder());
+        floor.build(World.getInstance().getModelBuilder(), 0);
     }
 
     @Override

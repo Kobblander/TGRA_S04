@@ -20,7 +20,6 @@ import com.tgra.client.utility.Texture;
  * Time : 04:36
  */
 public class Cylinder extends AbstractShape {
-
     private float width, height, depth;
 
     public Cylinder(String texture, Vector3 center, float width, float height, float depth) {
@@ -33,11 +32,11 @@ public class Cylinder extends AbstractShape {
         this.texture = new Texture(Gdx.files.internal("data/cylinder/" + texture));
         this.boundingBox = new BoundingBox();
 
-        build(World.getInstance().getModelBuilder());
+        build(World.getInstance().getModelBuilder(), 0);
     }
 
     @Override
-    public void build(ModelBuilder builder) {
+    public void build(ModelBuilder builder, float degrees) {
         long attributes = VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal | VertexAttributes.Usage.TextureCoordinates;
 
         builder.begin();
@@ -57,11 +56,17 @@ public class Cylinder extends AbstractShape {
         shapeInstance.transform.setTranslation(center);
         shapeInstance.calculateTransforms();
         boundingBox = shapeInstance.calculateBoundingBox(boundingBox);
-
+        boundingBox.mul(shapeInstance.transform);
     }
 
     @Override
     public void render(ModelBatch modelBatch, Environment environment) {
         modelBatch.render(shapeInstance, environment);
+    }
+
+    @Override
+    public void setRotation(float degrees) {
+        shapeInstance.transform.rotate(Vector3.Y, degrees);
+        shapeInstance.calculateTransforms();
     }
 }

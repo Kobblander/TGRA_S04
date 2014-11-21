@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
@@ -26,6 +27,7 @@ public class Box extends AbstractShape {
 
     // Box 3d representation
     private float width, height, depth;
+    private Vector3 min, max;
 
     //region Constructors
 
@@ -44,7 +46,7 @@ public class Box extends AbstractShape {
     //endregion
 
     @Override
-    public void build(ModelBuilder builder) {
+    public void build(ModelBuilder builder, float degrees) {
         long attributes = VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal | VertexAttributes.Usage.TextureCoordinates;
 
         builder.begin();
@@ -60,11 +62,15 @@ public class Box extends AbstractShape {
 
         shapeInstance = new ModelInstance(builder.end());
 
-        shapeInstance.transform.setTranslation(center);
+        shapeInstance.transform.translate(center);
+        //shapeInstance.calculateTransforms();
+
+        shapeInstance.transform.rotate(Vector3.Y, degrees);
         shapeInstance.calculateTransforms();
+        this.boundingBox = new BoundingBox();
         shapeInstance.calculateBoundingBox(boundingBox);
-        boundingBox.mul(shapeInstance.transform);
-        System.out.println("Center: " + boundingBox.getCenter());
+
+        //setBoundingBox(degrees);
     }
 
     @Override
@@ -78,5 +84,31 @@ public class Box extends AbstractShape {
         shapeInstance.transform.getRotation(q);
 
         return q.getAngle();
+    }
+
+    private void setBoundingBox() {
+        Vector3 min = new Vector3(center.x - depth / 2, center.y - height / 2, center.z - width / 2);
+        Vector3 max = new Vector3(center.x + depth / 2, center.y + height / 2, center.z + width / 2);
+
+        boundingBox = new BoundingBox(min, max);
+    }
+
+    private void setBoundingBox(float degrees) {
+
+
+        Vector3 min = new Vector3(center.x - width / 2, center.y - height / 2, center.z - depth / 2);
+        Vector3 max = new Vector3(center.x + width / 2, center.y + height / 2, center.z + depth / 2);
+
+        boundingBox = new BoundingBox(max, min);
+        //boundingBox.mul(new Matrix4(new Quaternion(Vector3.Y, degrees)));
+        //boundingBox = shapeInstance.calculateBoundingBox(boundingBox);
+    }
+
+    @Override
+    public void setRotation(float degrees) {
+        shapeInstance.transform.rotate(Vector3.Y, degrees);
+        shapeInstance.calculateTransforms();
+
+        //setBoundingBox();
     }
 }
