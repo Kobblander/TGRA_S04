@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
 import com.badlogic.gdx.graphics.g3d.utils.MeshPartBuilder;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
@@ -60,11 +61,13 @@ public class Box extends AbstractShape {
 
         shapeInstance = new ModelInstance(builder.end());
 
-        shapeInstance.transform.setTranslation(center);
-        shapeInstance.calculateTransforms();
+        shapeInstance.transform.translate(center);
+        //shapeInstance.calculateTransforms();
 
         shapeInstance.transform.rotate(Vector3.Y, degrees);
         shapeInstance.calculateTransforms();
+        this.boundingBox = new BoundingBox();
+        shapeInstance.calculateBoundingBox(boundingBox);
 
         angle = degrees;
 
@@ -95,7 +98,7 @@ public class Box extends AbstractShape {
             max = new Vector3(center.x + width / 2, center.y + height / 2, center.z + depth / 2);
         }
 
-        boundingBox = new BoundingBox(min, max);
+        boundingBox = new BoundingBox(max, min);
     }
 
     @Override

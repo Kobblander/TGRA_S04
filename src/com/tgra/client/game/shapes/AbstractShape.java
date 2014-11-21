@@ -18,7 +18,7 @@ import com.tgra.client.utility.Texture;
  */
 public abstract class AbstractShape implements Shape {
     protected ModelInstance shapeInstance;
-    protected BoundingBox boundingBox;
+    protected BoundingBox boundingBox = new BoundingBox();
     protected Vector3 center;
     protected Texture texture;
 

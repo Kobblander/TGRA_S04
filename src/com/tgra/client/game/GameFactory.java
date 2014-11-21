@@ -105,7 +105,7 @@ public class GameFactory {
 
     public Room createBasicRoom(int roomXSize, int roomYSize, int roomZSize) {
         Room room = new BasicRoom(roomXSize, roomYSize, roomZSize);
-        world.addObject(room);
+        //world.addObject(room);
         return room;
     }
 
@@ -117,14 +117,14 @@ public class GameFactory {
 
     public Floor createBasicFloor(Vector3 position, float actualXSize, float actualYSize, float actualZSize) {
         Object basicFloor = new BasicFloor(position, actualXSize, actualYSize, actualZSize);
-        world.addObject(basicFloor);
+        //world.addObject(basicFloor);
 
         return (Floor) basicFloor;
     }
 
     public Roof createBasicRoof(Vector3 position, float actualXSize, float actualYSize, float actualZSize) {
         Object basicRoof = new BasicRoof(position, actualXSize, actualYSize, actualZSize);
-        world.addObject(basicRoof);
+        //world.addObject(basicRoof);
 
         return (Roof) basicRoof;
     }

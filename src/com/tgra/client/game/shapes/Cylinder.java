@@ -55,7 +55,6 @@ public class Cylinder extends AbstractShape {
 
         shapeInstance.transform.setTranslation(center);
         shapeInstance.calculateTransforms();
-
         boundingBox = shapeInstance.calculateBoundingBox(boundingBox);
         boundingBox.mul(shapeInstance.transform);
     }

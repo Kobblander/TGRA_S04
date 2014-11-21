@@ -28,11 +28,15 @@ public class World {
 
     private static List<Object> objectList = new ArrayList<Object>();
 
+    private static List<Object> collidableObjects = new ArrayList<Object>();
+
     private static List<Shape> shapeList = new ArrayList<Shape>();
 
     private static ModelBuilder modelBuilder = new ModelBuilder();
 
     private static ModelBatch modelBatch = new ModelBatch();
+
+
 
     private World() {
     }
@@ -54,6 +58,10 @@ public class World {
 
     public List<Object> getObjectList() {
         return objectList;
+    }
+
+    public void removeObjectFromList(Object object) {
+        objectList.remove(object);
     }
 
     public void addObject(Object object) {
