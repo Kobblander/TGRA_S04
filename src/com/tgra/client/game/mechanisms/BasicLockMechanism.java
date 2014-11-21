@@ -36,11 +36,12 @@ public class BasicLockMechanism implements DoorLockMechanism {
     public void collectKey(Door door, Key key) {
         // If the door does not contain said key. Simply return.
         List<Key> doorKeys = keyDoorMap.get(door);
-        boolean isUnlocked = true;
 
         if (!doorKeys.contains(key)) {
             return;
         }
+
+        boolean isUnlocked = true;
 
         for (Key k : doorKeys) {
             if (!k.isCollected()) {

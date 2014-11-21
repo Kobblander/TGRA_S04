@@ -61,4 +61,9 @@ public class Sphere extends AbstractShape {
         shapeInstance.transform.rotate(Vector3.Y, degrees);
         shapeInstance.calculateTransforms();
     }
+
+    @Override
+    protected void setBoundingBox() {
+
+    }
 }

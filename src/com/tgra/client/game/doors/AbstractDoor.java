@@ -27,7 +27,7 @@ public abstract class AbstractDoor extends AbstractObject implements Door {
     protected Side side;
     protected boolean open;
 
-    protected float thickness;
+    protected final float thickness = 0.5f;
     protected float height;
     protected float length;
 
@@ -54,7 +54,7 @@ public abstract class AbstractDoor extends AbstractObject implements Door {
     @Override
     public void initDoor(Vector3 pos, Side side, float length, float height, float thickness) {
         this.position = pos;
-        this.thickness = thickness;
+        //this.thickness = thickness;
         this.height = height;
         this.length = length;
         this.side = side;

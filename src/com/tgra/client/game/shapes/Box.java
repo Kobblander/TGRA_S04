@@ -66,8 +66,6 @@ public class Box extends AbstractShape {
 
         shapeInstance.transform.rotate(Vector3.Y, degrees);
         shapeInstance.calculateTransforms();
-        this.boundingBox = new BoundingBox();
-        shapeInstance.calculateBoundingBox(boundingBox);
 
         angle = degrees;
 
@@ -87,7 +85,8 @@ public class Box extends AbstractShape {
         return q.getAngle();
     }
 
-    private void setBoundingBox() {
+    @Override
+    protected void setBoundingBox() {
         Vector3 min, max;
 
         if (angle == -90) {

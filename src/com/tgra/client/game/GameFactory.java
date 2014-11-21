@@ -140,15 +140,18 @@ public class GameFactory {
         return null;
     }
 
-    public Key createKey(BasicLockMechanism basicLockMechanism) {
+    public Key createKey(BasicLockMechanism basicLockMechanism, Door door) {
         BasicKey basicKey = new BasicKey();
         basicKey.setDoorLockMechanism(basicLockMechanism);
+        basicKey.setDoor(door);
+        basicLockMechanism.addKeyToDoor(door, basicKey);
         world.addObject(basicKey);
         return basicKey;
     }
 
     public KeyRoom createKeyRoom(int roomYSize) {
         KeyRoom keyRoom = new KeyRoom(roomYSize);
+
         world.addObject(keyRoom);
         return keyRoom;
     }

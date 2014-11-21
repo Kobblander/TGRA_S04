@@ -33,29 +33,24 @@ public class LevelAssembler {
     }
 
     public static void assembleKobbaLevel(Level level) {
-        Key key1 = gameFactory.createKey(blm);
-        Key key2 = gameFactory.createKey(blm);
-        Key key3 = gameFactory.createKey(blm);
+
+        // First key rooms and its door
         Door door1 = gameFactory.createBasicDoor();
-        blm.addKeyToDoor(door1, key1);
-        blm.addKeyToDoor(door1, key2);
-        blm.addKeyToDoor(door1, key3);
-        basicLockMechanismList.add(blm);
+        Key key1 = gameFactory.createKey(blm, door1);
+        Key key2 = gameFactory.createKey(blm, door1);
+        Key key3 = gameFactory.createKey(blm, door1);
 
-        KeyRoom kr1 = (KeyRoom) level.addRoomToLevel(gameFactory.createKeyRoom(2), new LevelPos(1, 0, -1));
-        KeyRoom kr2 = (KeyRoom) level.addRoomToLevel(gameFactory.createKeyRoom(1), new LevelPos(5, 0, -1));
-        KeyRoom kr3 = (KeyRoom) level.addRoomToLevel(gameFactory.createKeyRoom(5), new LevelPos(6, 0, 0));
-        kr1.setKey(key1);
-        kr2.setKey(key2);
-        kr3.setKey(key3);
+        ((KeyRoom) level.addRoomToLevel(gameFactory.createKeyRoom(2), new LevelPos(1, 0, -1))).setKey(key1);
+        ((KeyRoom) level.addRoomToLevel(gameFactory.createKeyRoom(1), new LevelPos(5, 0, -1))).setKey(key2);
+        ((KeyRoom) level.addRoomToLevel(gameFactory.createKeyRoom(5), new LevelPos(6, 0, 0))).setKey(key3);
 
-
+        // Hallway to key rooms
         level.addRoomToLevel(gameFactory.createBasicRoom(3, 1, 1), new LevelPos(2, 0, -1));
 
-
+        // Start room
         level.addRoomToLevel(gameFactory.createBasicRoom(1, 2, 1), new LevelPos(0, 0, 0));
 
-        // Add door to this room
+        // Add door to first hallway
         Room room1 = level.addRoomToLevel(gameFactory.createBasicRoom(5, 2, 1), new LevelPos(1, 0, 0));
         room1.setDoor(door1, Side.BOTTOM);
 

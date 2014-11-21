@@ -36,8 +36,8 @@ public class BasicKey extends AbstractKey {
     @Override
     public boolean isHit(BoundingBox player) {
 
-        if(tempBox.isHit(player))
-            System.out.println("Key Collected");
+        if(tempBox.isHit(player) && !collected)
+            pickup();
 
         return false;
     }

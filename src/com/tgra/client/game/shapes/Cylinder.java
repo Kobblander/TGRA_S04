@@ -69,4 +69,9 @@ public class Cylinder extends AbstractShape {
         shapeInstance.transform.rotate(Vector3.Y, degrees);
         shapeInstance.calculateTransforms();
     }
+
+    @Override
+    protected void setBoundingBox() {
+
+    }
 }
