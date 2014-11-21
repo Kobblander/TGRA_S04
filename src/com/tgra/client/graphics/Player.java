@@ -25,7 +25,7 @@ import java.util.List;
  * Time : 00:38
  */
 public class Player  {
-    private static float HEIGHT = 1f;
+    private static float HEIGHT = 2f;
     public static float WIDTH = 1f;
     private static float groundY = -0.4f;
     private static float angleX = -90, angleY = 0;

@@ -1,6 +1,8 @@
 package com.tgra.client.game.shapes;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.tgra.client.utility.Texture;
@@ -45,6 +47,11 @@ public abstract class AbstractShape implements Shape {
 
     @Override
     public boolean isHit(BoundingBox player) {
-        return boundingBox.intersects(player);
+        boolean hit = boundingBox.intersects(player);
+
+        if(hit)
+            shapeInstance.materials.get(0).set(ColorAttribute.createDiffuse(Color.RED));
+
+        return hit;
     }
 }
