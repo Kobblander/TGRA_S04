@@ -27,7 +27,7 @@ public class BasicDoor extends AbstractDoor {
 
     @Override
     public boolean isHit(BoundingBox player) {
-        return false;
+        return box.isHit(player);
     }
 
     @Override
