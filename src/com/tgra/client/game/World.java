@@ -60,6 +60,10 @@ public class World {
         return objectList;
     }
 
+    public void removeObjectFromList(Object object) {
+        objectList.remove(object);
+    }
+
     public void addObject(Object object) {
         objectList.add(object);
     }

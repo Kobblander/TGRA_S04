@@ -26,12 +26,7 @@ import com.tgra.client.utility.Texture;
 public class Box extends AbstractShape {
 
     // Box 3d representation
-<<<<<<< HEAD
-    private float width, height, depth;
-    private Vector3 min, max;
-=======
     private float width, height, depth, angle;
->>>>>>> 7ae4e7c22883beb52f12f4b81174d971d4124296
 
     //region Constructors
 
@@ -74,13 +69,9 @@ public class Box extends AbstractShape {
         this.boundingBox = new BoundingBox();
         shapeInstance.calculateBoundingBox(boundingBox);
 
-<<<<<<< HEAD
-        //setBoundingBox(degrees);
-=======
         angle = degrees;
 
         setBoundingBox();
->>>>>>> 7ae4e7c22883beb52f12f4b81174d971d4124296
     }
 
     @Override
@@ -97,19 +88,6 @@ public class Box extends AbstractShape {
     }
 
     private void setBoundingBox() {
-<<<<<<< HEAD
-        Vector3 min = new Vector3(center.x - depth / 2, center.y - height / 2, center.z - width / 2);
-        Vector3 max = new Vector3(center.x + depth / 2, center.y + height / 2, center.z + width / 2);
-
-        boundingBox = new BoundingBox(min, max);
-    }
-
-    private void setBoundingBox(float degrees) {
-
-
-        Vector3 min = new Vector3(center.x - width / 2, center.y - height / 2, center.z - depth / 2);
-        Vector3 max = new Vector3(center.x + width / 2, center.y + height / 2, center.z + depth / 2);
-=======
         Vector3 min, max;
 
         if (angle == -90) {
@@ -119,11 +97,8 @@ public class Box extends AbstractShape {
             min = new Vector3(center.x - width / 2, center.y - height / 2, center.z - depth / 2);
             max = new Vector3(center.x + width / 2, center.y + height / 2, center.z + depth / 2);
         }
->>>>>>> 7ae4e7c22883beb52f12f4b81174d971d4124296
 
         boundingBox = new BoundingBox(max, min);
-        //boundingBox.mul(new Matrix4(new Quaternion(Vector3.Y, degrees)));
-        //boundingBox = shapeInstance.calculateBoundingBox(boundingBox);
     }
 
     @Override
