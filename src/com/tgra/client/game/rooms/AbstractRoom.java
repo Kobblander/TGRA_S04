@@ -44,7 +44,7 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
 
     // Unit size of a room.
     // A doorway would take up a single unit.
-    protected final float unitSize = 3f;
+    protected final float unitSize = 5f;
 
     protected final float wallSepFactor = 0.1f;
 
