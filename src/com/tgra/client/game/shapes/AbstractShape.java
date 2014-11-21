@@ -39,18 +39,20 @@ public abstract class AbstractShape implements Shape {
 
     @Override
     public void translate(float x, float y, float z) {
-        shapeInstance.transform.translate(x, y ,z);
+        shapeInstance.transform.translate(x, y, z);
         shapeInstance.calculateTransforms();
     }
 
     @Override
     public boolean isHit(BoundingBox player) {
-        System.out.println("------------------");
-        System.out.println("Player : " + player);
-        System.out.println("BoundingBox Center : " + boundingBox.getCenter());
-        System.out.println("BoundingBox Height : " + boundingBox.getHeight());
-        System.out.println("------------------");
 
+        System.out.println("------------------------------------------------------");
+        System.out.println("Player : " + player.hashCode());
+        System.out.println("Shape ID : " + boundingBox.hashCode());
+        System.out.println("Shape Center : " + boundingBox.getCenter());
+        System.out.println("Shape Height : " + boundingBox.getHeight());
+        System.out.println("This Height : " + center);
+        System.out.println("------------------------------------------------------");
 
         return boundingBox.contains(player);
     }

@@ -343,7 +343,10 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
     public boolean isHit(BoundingBox player) {
         BoundingBox box = new BoundingBox();
 
+        return false;
+        /*
         return topWall.isHit(player) || bottomWall.isHit(player) ||
                leftWall.isHit(player) || rightWall.isHit(player);
+               */
     }
 }
