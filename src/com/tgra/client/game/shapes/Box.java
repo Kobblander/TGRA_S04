@@ -25,7 +25,7 @@ import com.tgra.client.utility.Texture;
 public class Box extends AbstractShape {
 
     // Box 3d representation
-    private float width, height, depth;
+    private float width, height, depth, angle;
 
     //region Constructors
 
@@ -66,6 +66,8 @@ public class Box extends AbstractShape {
         shapeInstance.transform.rotate(Vector3.Y, degrees);
         shapeInstance.calculateTransforms();
 
+        angle = degrees;
+
         setBoundingBox();
     }
 
@@ -83,18 +85,15 @@ public class Box extends AbstractShape {
     }
 
     private void setBoundingBox() {
-        Vector3 min = new Vector3(center.x - depth / 2, center.y - height / 2, center.z - width / 2);
-        Vector3 max = new Vector3(center.x + depth / 2, center.y + height / 2, center.z + width / 2);
+        Vector3 min, max;
 
-        boundingBox = new BoundingBox(min, max);
-    }
-
-    private void setBoundingBox(float degrees) {
-        Vector3 min = new Vector3(center.x - width / 2, center.y - height / 2, center.z - depth / 2);
-        min.rotate(Vector3.Y, -degrees);
-
-        Vector3 max = new Vector3(center.x + width / 2, center.y + height / 2, center.z + depth / 2);
-        max.rotate(Vector3.Y, -degrees);
+        if (angle == -90) {
+            min = new Vector3(center.x - depth / 2, center.y - height / 2, center.z - width / 2);
+            max = new Vector3(center.x + depth / 2, center.y + height / 2, center.z + width / 2);
+        } else {
+            min = new Vector3(center.x - width / 2, center.y - height / 2, center.z - depth / 2);
+            max = new Vector3(center.x + width / 2, center.y + height / 2, center.z + depth / 2);
+        }
 
         boundingBox = new BoundingBox(min, max);
     }
