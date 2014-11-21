@@ -44,7 +44,7 @@ public class Box extends AbstractShape {
     //endregion
 
     @Override
-    public void build(ModelBuilder builder) {
+    public void build(ModelBuilder builder, float degrees) {
         long attributes = VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal | VertexAttributes.Usage.TextureCoordinates;
 
         builder.begin();
@@ -63,9 +63,10 @@ public class Box extends AbstractShape {
         shapeInstance.transform.setTranslation(center);
         shapeInstance.calculateTransforms();
 
-        boundingBox = shapeInstance.calculateBoundingBox(boundingBox);
-        boundingBox.mul(shapeInstance.transform);
-        System.out.println("Center: " + boundingBox.getCenter());
+        shapeInstance.transform.rotate(Vector3.Y, degrees);
+        shapeInstance.calculateTransforms();
+
+        setBoundingBox();
     }
 
     @Override
@@ -79,5 +80,30 @@ public class Box extends AbstractShape {
         shapeInstance.transform.getRotation(q);
 
         return q.getAngle();
+    }
+
+    private void setBoundingBox() {
+        Vector3 min = new Vector3(center.x - depth / 2, center.y - height / 2, center.z - width / 2);
+        Vector3 max = new Vector3(center.x + depth / 2, center.y + height / 2, center.z + width / 2);
+
+        boundingBox = new BoundingBox(min, max);
+    }
+
+    private void setBoundingBox(float degrees) {
+        Vector3 min = new Vector3(center.x - width / 2, center.y - height / 2, center.z - depth / 2);
+        min.rotate(Vector3.Y, -degrees);
+
+        Vector3 max = new Vector3(center.x + width / 2, center.y + height / 2, center.z + depth / 2);
+        max.rotate(Vector3.Y, -degrees);
+
+        boundingBox = new BoundingBox(min, max);
+    }
+
+    @Override
+    public void setRotation(float degrees) {
+        shapeInstance.transform.rotate(Vector3.Y, degrees);
+        shapeInstance.calculateTransforms();
+
+        //setBoundingBox();
     }
 }

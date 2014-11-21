@@ -37,7 +37,7 @@ public class BasicDoor extends AbstractDoor {
         } else {
             box = new Box("wood.jpg", position, thickness, height, length);
         }
-        box.build(World.getInstance().getModelBuilder());
+        box.build(World.getInstance().getModelBuilder(), 0);
 
     }
 }

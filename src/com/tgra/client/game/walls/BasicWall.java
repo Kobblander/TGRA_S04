@@ -2,7 +2,6 @@ package com.tgra.client.game.walls;
 
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.tgra.client.game.World;
 import com.tgra.client.game.shapes.Box;
@@ -14,14 +13,12 @@ public class BasicWall extends AbstractWall {
 
     protected Box box;
 
-    public BasicWall() {
-    }
+    public BasicWall() {}
 
     @Override
     protected void build() {
         box = new Box("wall.jpg", position, thickness, height, length);
-        box.build(World.getInstance().getModelBuilder());
-        box.setRotation(rotation, Vector3.Y);
+        box.build(World.getInstance().getModelBuilder(), rotation);
     }
 
     @Override

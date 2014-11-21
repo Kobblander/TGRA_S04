@@ -69,11 +69,6 @@ public class LevelAssembler {
 
 
         level.addRoomToLevel(gameFactory.createBasicRoom(3, 3, 3), new LevelPos(2, 0, 6));
-
-
-
-
-
         level.addDoorway(new LevelPos(1, 0, -1), new LevelPos(2, 0, -1));
         level.addDoorway(new LevelPos(5, 0, -1), new LevelPos(2, 0, -1));
 

@@ -23,8 +23,6 @@ import com.tgra.client.game.rooms.KeyRoom;
 import com.tgra.client.game.rooms.MazeRoom;
 import com.tgra.client.game.rooms.Room;
 import com.tgra.client.game.shapes.Box;
-import com.tgra.client.game.shapes.Cylinder;
-import com.tgra.client.game.shapes.Shape;
 import com.tgra.client.game.walls.BasicWall;
 import com.tgra.client.game.walls.DoorWall;
 import com.tgra.client.game.walls.MazeWall;

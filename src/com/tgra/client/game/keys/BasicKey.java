@@ -23,7 +23,7 @@ public class BasicKey extends AbstractKey {
     @Override
     protected void build() {
         tempBox = new Box("wood.jpg", position, 0.5f, 0.5f, 0.5f);
-        tempBox.build(World.getInstance().getModelBuilder());
+        tempBox.build(World.getInstance().getModelBuilder(), 0);
     }
 
     @Override

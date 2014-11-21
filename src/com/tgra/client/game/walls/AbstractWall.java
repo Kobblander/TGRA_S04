@@ -32,7 +32,7 @@ public abstract class AbstractWall extends AbstractObject implements Wall {
     // Length, height and rotation of the wall.
     protected float height;
     protected float length;
-    protected float rotation;
+    protected float rotation = 0f;
 
     protected GameFactory gameFactory = GameFactory.getInstance();
 

@@ -7,7 +7,6 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import com.tgra.client.game.World;
 import com.tgra.client.game.object.AbstractObject;
 import com.tgra.client.game.shapes.Cylinder;
-import com.tgra.client.utility.Texture;
 
 /**
  * <h1>BasicColumn</h1>
@@ -31,7 +30,7 @@ public class BasicColumn extends AbstractObject implements Column {
         this.height = height;
         this.depth = depth;
         cylinder = new Cylinder(texture, position, width, height, depth);
-        cylinder.build(World.getInstance().getModelBuilder());
+        cylinder.build(World.getInstance().getModelBuilder(), 0);
     }
 
     @Override

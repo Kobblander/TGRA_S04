@@ -18,8 +18,6 @@ import com.tgra.client.utility.Texture;
  * Time : 01:04
  */
 public class Sphere extends AbstractShape {
-    // Side textures
-
     // Box 3d representation
     private float radius, width, height, depth;
 
@@ -37,7 +35,7 @@ public class Sphere extends AbstractShape {
     }
 
     @Override
-    public void build(ModelBuilder builder) {
+    public void build(ModelBuilder builder, float degrees) {
         long attributes = VertexAttributes.Usage.Position | VertexAttributes.Usage.Normal | VertexAttributes.Usage.TextureCoordinates;
 
         builder.begin();
@@ -55,6 +53,12 @@ public class Sphere extends AbstractShape {
         shapeInstance = new ModelInstance(builder.end());
 
         shapeInstance.transform.setTranslation(center);
+        shapeInstance.calculateTransforms();
+    }
+
+    @Override
+    public void setRotation(float degrees) {
+        shapeInstance.transform.rotate(Vector3.Y, degrees);
         shapeInstance.calculateTransforms();
     }
 }

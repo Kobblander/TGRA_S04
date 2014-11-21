@@ -1,9 +1,11 @@
 package com.tgra.client.game.shapes;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.graphics.g3d.attributes.ColorAttribute;
 import com.badlogic.gdx.math.Vector3;
-import com.tgra.client.utility.Texture;
 import com.badlogic.gdx.math.collision.BoundingBox;
+import com.tgra.client.utility.Texture;
 
 /**
  * <h1>AbstractShape</h1>
@@ -27,31 +29,47 @@ public abstract class AbstractShape implements Shape {
 
     @Override
     public void setRotation(float degrees, Vector3 axis) {
-        shapeInstance.transform.rotate(axis, degrees);
-        shapeInstance.calculateTransforms();
+        //shapeInstance.transform.rotate(axis, degrees);
+        //shapeInstance.calculateTransforms();
     }
 
     @Override
     public void translate(Vector3 motion) {
-        shapeInstance.transform.translate(motion);
-        shapeInstance.calculateTransforms();
+        //shapeInstance.transform.translate(motion);
+        //shapeInstance.calculateTransforms();
     }
 
     @Override
     public void translate(float x, float y, float z) {
-        shapeInstance.transform.translate(x, y, z);
-        shapeInstance.calculateTransforms();
+        //shapeInstance.transform.translate(x, y, z);
+        //shapeInstance.calculateTransforms();
     }
 
     @Override
     public boolean isHit(BoundingBox player) {
-        System.out.println("------------------------------------------------------");
-        System.out.println("Player : " + player);
-        System.out.println("Shape ID : " + boundingBox.hashCode());
-        System.out.println("Shape Center : " + boundingBox.getCenter());
-        System.out.println("Shape Height : " + boundingBox.getHeight());
-        System.out.println("------------------------------------------------------");
+        boolean hit =  boundingBox.intersects(player);
 
-        return boundingBox.contains(player);
+        BoundingBox b = new BoundingBox().mul(shapeInstance.transform);
+        boolean bHit = b.intersects(player);
+
+        if(!hit) {
+            System.out.println("------------------------------------------------------");
+            System.out.println("Shape ID : " + boundingBox.hashCode());
+            System.out.println("Shape Center : " + boundingBox.getCenter());
+            System.out.println("Shape Size : " + boundingBox.getWidth() + ", " + boundingBox.getHeight() + ", " + boundingBox.getDepth());
+            System.out.println("SC : " + b.getCenter());
+            System.out.println("SS : " + b.getWidth() + ", " + b.getHeight() + ", " + b.getDepth());
+            System.out.println("------------------------------------------------------");
+        }
+
+        if(hit) {
+            shapeInstance.materials.get(0).set(ColorAttribute.createDiffuse(Color.RED));
+        }
+
+        //if(bHit)
+           // shapeInstance.materials.get(0).set(ColorAttribute.createDiffuse(Color.GREEN));
+
+
+        return hit;
     }
 }
