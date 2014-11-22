@@ -49,11 +49,7 @@ public class GameScreen implements Screen {
         this.game = game;
     }
 
-    @Override
-    public void show () {
-        // Setup screen
-        stage = new Stage();
-
+    public void build() {
         // Setup camera
         camera = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.position.set(2f, 0f, 2f);
@@ -70,8 +66,14 @@ public class GameScreen implements Screen {
         level = gameFactory.createBasicLevel(10, 10);
 
         controller = new InputManager(camera, player);
-        Gdx.input.setInputProcessor(controller);
+    }
 
+    @Override
+    public void show () {
+        // Setup screen
+        stage = new Stage();
+
+        Gdx.input.setInputProcessor(controller);
         controller.setCameraDirection();
 
         game.setupBasicScreen(stage);
