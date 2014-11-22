@@ -9,4 +9,7 @@
    <file name="flashlightOn">
       <path>flashlight_on.wav</path>
    </file>
+   <file name="key">
+      <path>key.wav</path>
+   </file>
 </audio>
