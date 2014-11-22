@@ -1,16 +1,11 @@
 package com.tgra.client.game.doors;
 
-import com.badlogic.gdx.graphics.g3d.Environment;
-import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.tgra.client.game.GameFactory;
-import com.tgra.client.game.keys.Key;
 import com.tgra.client.game.object.AbstractObject;
 import com.tgra.client.game.shapes.Box;
+import com.tgra.client.managers.AudioManager;
 import javafx.geometry.Side;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * <h1>AbstractDoor</h1>
@@ -25,9 +20,9 @@ public abstract class AbstractDoor extends AbstractObject implements Door {
 
     protected Box box;
     protected Side side;
-    protected boolean open;
+    protected boolean opening, open;
 
-    protected float thickness;
+    protected final float thickness = 0.5f;
     protected float height;
     protected float length;
 
@@ -37,7 +32,9 @@ public abstract class AbstractDoor extends AbstractObject implements Door {
 
     @Override
     public void open() {
+        AudioManager.play("door_unlock");
         this.open = true;
+        this.opening = true;
     }
 
     @Override
@@ -45,8 +42,11 @@ public abstract class AbstractDoor extends AbstractObject implements Door {
         // TODO: If open start animation or simply remove box
         if (open) {
             //if (position.y < 3.0f)
-            if (box != null && box.getPosition() != null) {
+            if (box != null && box.getPosition() != null && position.y < 2.0f) {
                 box.translate(0, openSpeed * deltaTime, 0);
+            } else if(opening) {
+                opening = false;
+                AudioManager.stop("door_unlock");
             }
         }
     }
@@ -54,7 +54,7 @@ public abstract class AbstractDoor extends AbstractObject implements Door {
     @Override
     public void initDoor(Vector3 pos, Side side, float length, float height, float thickness) {
         this.position = pos;
-        this.thickness = thickness;
+        //this.thickness = thickness;
         this.height = height;
         this.length = length;
         this.side = side;

@@ -12,4 +12,8 @@
    <file name="key">
       <path>key.wav</path>
    </file>
+   <file name="door_unlock">
+      <path>door_unlock.wav</path>
+      <loop>True</loop>
+   </file>
 </audio>

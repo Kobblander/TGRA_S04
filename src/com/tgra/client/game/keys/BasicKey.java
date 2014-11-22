@@ -63,7 +63,7 @@ public class BasicKey extends AbstractKey {
         boolean hit = box.intersects(player);
 
         if(hit && !collected) {
-            collected = true;
+            pickup();
             AudioManager.play("key");
         }
 

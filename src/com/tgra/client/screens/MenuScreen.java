@@ -32,7 +32,7 @@ public class MenuScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         batch.begin();
-            stage.draw();
+        stage.draw();
         batch.end();
     }
 

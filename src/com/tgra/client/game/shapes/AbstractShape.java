@@ -28,19 +28,21 @@ public abstract class AbstractShape implements Shape {
     @Override
     public void setRotation(float degrees, Vector3 axis) {
         shapeInstance.transform.rotate(axis, degrees);
-        shapeInstance.calculateTransforms();
+        setBoundingBox();
     }
 
     @Override
     public void translate(Vector3 motion) {
         shapeInstance.transform.translate(motion);
-        shapeInstance.calculateTransforms();
+        center.add(motion);
+        setBoundingBox();
     }
 
     @Override
     public void translate(float x, float y, float z) {
         shapeInstance.transform.translate(x, y, z);
-        shapeInstance.calculateTransforms();
+        center.add(x, y, z);
+        setBoundingBox();
     }
 
     @Override
@@ -53,4 +55,6 @@ public abstract class AbstractShape implements Shape {
 
         return hit;
     }
+
+    protected abstract void setBoundingBox();
 }

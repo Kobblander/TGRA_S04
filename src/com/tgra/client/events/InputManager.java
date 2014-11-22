@@ -1,11 +1,13 @@
 package com.tgra.client.events;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.math.MathUtils;
-import com.tgra.client.graphics.*;
+import com.tgra.client.graphics.Player;
 import com.tgra.client.utility.Lights;
+import org.lwjgl.input.Mouse;
 
 /**
  * Created with IntelliJ IDEA
@@ -23,7 +25,7 @@ public class InputManager implements InputProcessor {
 
     private PerspectiveCamera camera;
     private int lastX, lastY;
-    private float angleX = -90, angleY = 0;
+    private float angleX = 90, angleY = 0;
     private float originView;
 
     private boolean W, A, S, D, SHIFT;
@@ -69,10 +71,7 @@ public class InputManager implements InputProcessor {
 
     @Override
     public boolean touchDown(int x, int y, int pointer, int button) {
-        lastX = x;
-        lastY = y;
-
-        return true;
+        return false;
     }
 
     @Override
@@ -82,38 +81,24 @@ public class InputManager implements InputProcessor {
 
     @Override
     public boolean touchDragged(int x, int y, int pointer) {
-        angleX += (lastX - x) * MOUSE_SENSITIVITY;
-        lastX = x;
-        angleY += (lastY - y) * -MOUSE_SENSITIVITY;
-        lastY = y;
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        angleX -= (lastX - screenX) * MOUSE_SENSITIVITY;
+        lastX = screenX;
+        angleY -= (lastY - screenY) * -MOUSE_SENSITIVITY;
+        lastY = screenY;
 
         if (angleY > NINETY_DEGREE)
             angleY = NINETY_DEGREE;
         else if (angleY < -NINETY_DEGREE)
             angleY = -NINETY_DEGREE;
 
-        final float cos = MathUtils.cosDeg(angleY);
-
-        // Don't fuck with me
-        // I ain't nothin' to fuck with
-        if(cos == 0f)
-            return true;
-
-        player.setAngles(angleX, angleY);
-        camera.direction.x = MathUtils.cosDeg(angleX) * cos;
-        camera.direction.y = MathUtils.sinDeg(angleY) * 1f;
-        camera.direction.z = MathUtils.sinDeg(angleX) * cos;
-
-        // Rotate player
-        Player.rotate(camera);
-        camera.update();
+        setCameraDirection();
 
         return true;
-    }
-
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        return false;
     }
 
     @Override
@@ -130,6 +115,7 @@ public class InputManager implements InputProcessor {
     }
 
     public void update(float delta) {
+        Mouse.setGrabbed(true);
         // No key is down
         if (!(A | D | W | S))
             return;
@@ -163,9 +149,30 @@ public class InputManager implements InputProcessor {
         camera.update();
     }
 
+    public void setCameraDirection() {
+        final float cos = MathUtils.cosDeg(angleY);
+
+        // Don't fuck with me
+        // I ain't nothin' to fuck with
+        if(cos == 0f)
+            return;
+
+        player.setAngles(angleX, angleY);
+        camera.direction.x = MathUtils.cosDeg(angleX) * cos;
+        camera.direction.y = MathUtils.sinDeg(angleY) * 1f;
+        camera.direction.z = MathUtils.sinDeg(angleX) * cos;
+
+        // Rotate player
+        Player.rotate(camera);
+        camera.update();
+    }
+
     public InputManager(final PerspectiveCamera camera, Player player) {
         this.camera = camera;
         this.player = player;
+
+        this.lastX = Gdx.input.getX();
+        this.lastY = Gdx.input.getY();
 
         originView = camera.fieldOfView;
         player.setCameraPosition(camera, camera.position);

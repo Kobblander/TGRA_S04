@@ -2,9 +2,11 @@ package com.tgra.client.game.mechanisms;
 
 import com.tgra.client.game.doors.Door;
 import com.tgra.client.game.keys.Key;
-import com.tgra.client.utility.MapUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <h1>BasicLockMechanism</h1>
@@ -36,11 +38,12 @@ public class BasicLockMechanism implements DoorLockMechanism {
     public void collectKey(Door door, Key key) {
         // If the door does not contain said key. Simply return.
         List<Key> doorKeys = keyDoorMap.get(door);
-        boolean isUnlocked = true;
 
         if (!doorKeys.contains(key)) {
             return;
         }
+
+        boolean isUnlocked = true;
 
         for (Key k : doorKeys) {
             if (!k.isCollected()) {
