@@ -32,6 +32,8 @@ public abstract class AbstractDoor extends AbstractObject implements Door {
     protected float length;
 
     protected final float openSpeed = 0.2f;
+    protected float doorPos = 0f;
+    protected float doorTopStop = 2.4f;
 
     protected GameFactory gameFactory = GameFactory.getInstance();
 
@@ -45,9 +47,12 @@ public abstract class AbstractDoor extends AbstractObject implements Door {
         // TODO: If open start animation or simply remove box
         if (open) {
             //if (position.y < 3.0f)
-            if (box != null && box.getPosition() != null) {
+
+            if (box != null && box.getPosition() != null && doorPos < doorTopStop) {
                 box.translate(0, openSpeed * deltaTime, 0);
+                doorPos += openSpeed * deltaTime;
             }
+
         }
     }
 

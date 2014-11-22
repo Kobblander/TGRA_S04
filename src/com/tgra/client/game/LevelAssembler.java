@@ -51,19 +51,30 @@ public class LevelAssembler {
         level.addRoomToLevel(gameFactory.createBasicRoom(1, 2, 1), new LevelPos(0, 0, 0));
 
         // Add door to first hallway
-        Room room1 = level.addRoomToLevel(gameFactory.createBasicRoom(5, 2, 1), new LevelPos(1, 0, 0));
-        room1.setDoor(door1, Side.BOTTOM);
+        level.addRoomToLevel(gameFactory.createBasicRoom(5, 2, 1), new LevelPos(1, 0, 0)).setDoor(door1, Side.BOTTOM);
 
+        Door door2 = gameFactory.createBasicDoor();
+        Key key4 = gameFactory.createKey(blm, door2);
+        Key key5 = gameFactory.createKey(blm, door2);
 
-        level.addRoomToLevel(gameFactory.createBasicRoom(3, 2, 1), new LevelPos(-2, 0, 3));
-        level.addRoomToLevel(gameFactory.createBasicRoom(1, 1, 1), new LevelPos(-1, 0, 2));
-        level.addRoomToLevel(gameFactory.createBasicRoom(1, 1, 1), new LevelPos(-1, 0, 4));
+        // Hallway from maze to keyrooms
+        level.addRoomToLevel(gameFactory.createBasicRoom(3, 2, 1), new LevelPos(-2, 0, 3)).setDoor(door2, Side.LEFT);
+
+        // Keyrooms to open main keyroom
+        ((KeyRoom) level.addRoomToLevel(gameFactory.createKeyRoom(1), new LevelPos(-1, 0, 2))).setKey(key4);
+        ((KeyRoom) level.addRoomToLevel(gameFactory.createKeyRoom(1), new LevelPos(-1, 0, 4))).setKey(key5);
+
+        // Main keyroom
         level.addRoomToLevel(gameFactory.createBasicRoom(1, 1, 1), new LevelPos(-3, 0, 3));
 
         level.addRoomToLevel(gameFactory.createMazeRoom(), new LevelPos(1, 0, 1));
 
 
         level.addRoomToLevel(gameFactory.createBasicRoom(3, 3, 3), new LevelPos(2, 0, 6));
+
+
+
+
         level.addDoorway(new LevelPos(1, 0, -1), new LevelPos(2, 0, -1));
         level.addDoorway(new LevelPos(5, 0, -1), new LevelPos(2, 0, -1));
 
