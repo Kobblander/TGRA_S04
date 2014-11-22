@@ -47,7 +47,13 @@ public abstract class AbstractShape implements Shape {
 
     @Override
     public boolean isHit(BoundingBox player) {
-        return boundingBox.intersects(player);
+        boolean hit = boundingBox.intersects(player);
+
+        // For debugging collision
+        //if(hit)
+        //    shapeIntance.materials.get(0).set(ColorAttribute.createDiffuse(Color.RED));
+
+        return hit;
     }
 
     protected abstract void setBoundingBox();

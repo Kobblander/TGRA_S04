@@ -72,6 +72,8 @@ public class GameScreen implements Screen {
         controller = new InputManager(camera, player);
         Gdx.input.setInputProcessor(controller);
 
+        controller.setCameraDirection();
+
         game.setupBasicScreen(stage);
     }
 

@@ -2,9 +2,11 @@ package com.tgra.client.game.mechanisms;
 
 import com.tgra.client.game.doors.Door;
 import com.tgra.client.game.keys.Key;
-import com.tgra.client.utility.MapUtils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <h1>BasicLockMechanism</h1>
