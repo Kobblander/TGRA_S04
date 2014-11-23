@@ -7,7 +7,7 @@ import org.lwjgl.LWJGLException;
 
 public class DesktopLauncher {
     public static void main (String[] arg) throws LWJGLException {
-        LwjglApplicationConfiguration config = configuration("Cools Running", 800, 600);
+        LwjglApplicationConfiguration config = configuration("Cools Running");
         new LwjglApplication(new MyGame(), config);
     }
 

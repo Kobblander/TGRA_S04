@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import com.tgra.client.*;
+import com.tgra.client.game.GameFactory;
 import com.tgra.client.ui.*;
 
 public class MenuScreen implements Screen {
@@ -20,6 +21,8 @@ public class MenuScreen implements Screen {
     // Button Statics
     private static final float BUTTON_HEIGHT = 60f;
     private static final float BUTTON_SPACING = 25f;
+
+    private GameFactory gameFactory = GameFactory.getInstance();
 
     // Constructor
     public MenuScreen(MyGame game){
@@ -49,6 +52,8 @@ public class MenuScreen implements Screen {
         stage = new Stage();
 
         drawMenu(centerX, centerY);
+
+        game.main.build();
     }
 
     @Override
