@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.math.collision.BoundingBox;
 import com.tgra.client.game.GameFactory;
 import com.tgra.client.game.World;
 import com.tgra.client.game.column.Column;
@@ -353,10 +352,5 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
     @Override
     public RoomData getRoomData() {
         return roomData;
-    }
-
-    @Override
-    public boolean isHit(BoundingBox player) {
-        return false;
     }
 }

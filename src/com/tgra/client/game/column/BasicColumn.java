@@ -31,6 +31,7 @@ public class BasicColumn extends AbstractObject implements Column {
         this.depth = depth;
         cylinder = new Cylinder(texture, position, width, height, depth);
         cylinder.build(World.getInstance().getModelBuilder(), 0);
+
     }
 
     @Override
@@ -45,7 +46,7 @@ public class BasicColumn extends AbstractObject implements Column {
 
     @Override
     public boolean isHit(BoundingBox player) {
-        return false;
+        return cylinder.isHit(player);
     }
 
     @Override

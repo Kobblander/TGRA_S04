@@ -6,14 +6,12 @@ import com.badlogic.gdx.graphics.VertexAttributes;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
-import com.badlogic.gdx.graphics.g3d.environment.PointLight;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
 import com.tgra.client.game.World;
 import com.tgra.client.game.object.Object;
-import com.tgra.client.screens.GameScreen;
 import com.tgra.client.utility.Texture;
 
 import java.util.List;
@@ -207,19 +205,11 @@ public class Player  {
     private boolean isHit(BoundingBox player) {
         List<Object> objs = World.getInstance().getObjectList();
 
-        /*
         for(Object obj: objs)
             if(obj.isHit(player))
                 return true;
-                */
 
         return false;
     }
 
-    public void flashLight(PointLight flashLight) {
-        float delta = Gdx.graphics.getDeltaTime();
-
-        Vector3 light = getFrontMove(GameScreen.camera, delta, 150f);
-        flashLight.position.set(light);
-    }
 }

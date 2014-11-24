@@ -55,8 +55,8 @@ public class Cylinder extends AbstractShape {
 
         shapeInstance.transform.setTranslation(center);
         shapeInstance.calculateTransforms();
-        boundingBox = shapeInstance.calculateBoundingBox(boundingBox);
-        boundingBox.mul(shapeInstance.transform);
+
+        setBoundingBox();
     }
 
     @Override
@@ -72,6 +72,11 @@ public class Cylinder extends AbstractShape {
 
     @Override
     protected void setBoundingBox() {
+        Vector3 min, max;
 
+        min = new Vector3(center.x - width / 2, center.y - height / 2, center.z - depth / 2 );
+        max = new Vector3(center.x + width / 2, center.y + height / 2, center.z + depth / 2);
+
+        boundingBox = new BoundingBox(max, min);
     }
 }

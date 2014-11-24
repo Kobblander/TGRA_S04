@@ -37,6 +37,7 @@ public class Box extends AbstractShape {
         this.boundingBox = new BoundingBox();
 
         this.texture = new Texture(Gdx.files.internal("data/box/" + texture));
+        setBoundingBox();
     }
 
     //endregion

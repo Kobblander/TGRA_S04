@@ -6,7 +6,6 @@ import com.tgra.client.game.levels.Level;
 import com.tgra.client.game.levels.LevelPos;
 import com.tgra.client.game.mechanisms.BasicLockMechanism;
 import com.tgra.client.game.rooms.KeyRoom;
-import com.tgra.client.game.rooms.Room;
 import javafx.geometry.Side;
 
 import java.util.ArrayList;
@@ -161,6 +160,6 @@ public class LevelAssembler {
     }
 
     public static void assembleTestLevel(Level level) {
-        level.addRoomToLevel(gameFactory.createBasicRoom(1, 2, 1), new LevelPos(0, 0, 0));
+        level.addRoomToLevel(gameFactory.createBigRoom(5, 5, 7), new LevelPos(0, 0, 0));
     }
 }

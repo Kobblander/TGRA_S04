@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.Model;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
+import com.badlogic.gdx.graphics.g3d.environment.PointLight;
 import com.badlogic.gdx.graphics.g3d.loader.ObjLoader;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.math.collision.BoundingBox;
@@ -27,6 +28,7 @@ public class BasicKey extends AbstractKey {
     private BoundingBox box;
     private Vector3 size = new Vector3(3f, 3f, 3f);
     private boolean up = true;
+    private PointLight light;
 
     public BasicKey() {
     }
@@ -43,7 +45,7 @@ public class BasicKey extends AbstractKey {
         instance.transform.scale(0.2f, 0.2f, 0.2f);
         instance.calculateTransforms();
 
-        //Lights.addLight(position);
+        light = Lights.addLight(position);
         buildBox();
     }
 
@@ -65,6 +67,7 @@ public class BasicKey extends AbstractKey {
         if(hit && !collected) {
             pickup();
             AudioManager.play("key");
+            Lights.removeLight(light);
         }
 
         return false;
@@ -75,7 +78,6 @@ public class BasicKey extends AbstractKey {
         Vector3 max = new Vector3(position.x + size.x / 2, position.y + size.y / 2, position.z + size.z / 2);
 
         box = new BoundingBox(max, min);
-        System.out.println(box);
     }
 
     private void bounceKey() {

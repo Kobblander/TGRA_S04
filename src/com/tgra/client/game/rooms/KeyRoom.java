@@ -3,10 +3,10 @@ package com.tgra.client.game.rooms;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.BoundingBox;
 import com.tgra.client.game.column.Column;
 import com.tgra.client.game.keys.Key;
 import com.tgra.client.game.object.Object;
-import com.tgra.client.game.shapes.Cylinder;
 
 /**
  * <h1>KeyRoom</h1>
@@ -76,5 +76,10 @@ public class KeyRoom extends AbstractRoom {
         Object r = (Object) roof;
         r.render(modelBatch, environment);
 
+    }
+
+    @Override
+    public boolean isHit(BoundingBox player) {
+        return false;
     }
 }

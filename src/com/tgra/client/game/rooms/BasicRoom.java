@@ -3,6 +3,7 @@ package com.tgra.client.game.rooms;
 import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.collision.BoundingBox;
 import com.tgra.client.game.column.Column;
 import com.tgra.client.game.object.Object;
 
@@ -70,6 +71,11 @@ public class BasicRoom extends AbstractRoom {
         Object r = (Object) roof;
         r.render(modelBatch, environment);
 
+    }
+
+    @Override
+    public boolean isHit(BoundingBox player) {
+        return false;
     }
 
 
