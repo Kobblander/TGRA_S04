@@ -226,7 +226,7 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
                 columnCPos = new Vector3(this.position.x, this.position.y + unitSize, this.position.z - actualZSize / 2 - thickness / 2);
                 c1 = gameFactory.createColumn(columnAPos, thickness, unitSize, thickness);
                 c2 = gameFactory.createColumn(columnBPos, thickness, unitSize, thickness);
-                c3 = gameFactory.createColumn(columnCPos, thickness, unitSize, thickness);
+                c3 = gameFactory.createHorizColumn(columnCPos, thickness, unitSize, thickness);
                 c3.setRotation(-90f, Vector3.Z);
                 break;
             case BOTTOM:
@@ -235,7 +235,7 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
                 columnCPos = new Vector3(this.position.x, this.position.y + unitSize, this.position.z + actualZSize / 2 + thickness / 2);
                 c1 = gameFactory.createColumn(columnAPos, thickness, unitSize, thickness);
                 c2 = gameFactory.createColumn(columnBPos, thickness, unitSize, thickness);
-                c3 = gameFactory.createColumn(columnCPos, thickness, unitSize, thickness);
+                c3 = gameFactory.createHorizColumn(columnCPos, thickness, unitSize, thickness);
                 c3.setRotation(-90f, Vector3.Z);
                 break;
             case RIGHT:
@@ -244,7 +244,7 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
                 columnCPos = new Vector3(this.position.x + actualXSize / 2 + thickness / 2, this.position.y + unitSize, this.position.z);
                 c1 = gameFactory.createColumn(columnAPos, thickness, unitSize, thickness);
                 c2 = gameFactory.createColumn(columnBPos, thickness, unitSize, thickness);
-                c3 = gameFactory.createColumn(columnCPos, thickness, unitSize, thickness);
+                c3 = gameFactory.createHorizColumn(columnCPos, thickness, unitSize, thickness);
                 c3.setRotation(-90f, Vector3.X);
                 break;
             case LEFT:
@@ -253,7 +253,7 @@ public abstract class AbstractRoom extends AbstractObject implements Room {
                 columnCPos = new Vector3(this.position.x - actualXSize / 2 - thickness / 2, this.position.y + unitSize, this.position.z);
                 c1 = gameFactory.createColumn(columnAPos, thickness, unitSize, thickness);
                 c2 = gameFactory.createColumn(columnBPos, thickness, unitSize, thickness);
-                c3 = gameFactory.createColumn(columnCPos, thickness, unitSize, thickness);
+                c3 = gameFactory.createHorizColumn(columnCPos, thickness, unitSize, thickness);
                 c3.setRotation(-90f, Vector3.X);
                 break;
         }

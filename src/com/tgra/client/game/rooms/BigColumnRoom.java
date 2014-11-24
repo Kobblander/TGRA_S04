@@ -7,6 +7,9 @@ import com.badlogic.gdx.math.collision.BoundingBox;
 import com.tgra.client.game.column.Column;
 import com.tgra.client.game.object.Object;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * <h1>BigColumnRoom</h1>
  * <h2>com.tgra.client.game.rooms</h2>
@@ -17,6 +20,8 @@ import com.tgra.client.game.object.Object;
  * @version 1.1
  */
 public class BigColumnRoom extends AbstractRoom {
+
+    List<Column> bigBolumns = new ArrayList<Column>();
 
     public BigColumnRoom(int roomXSize, int roomYSize, int roomZSize) {
         initializeRoom(roomXSize, roomYSize, roomZSize);
@@ -46,7 +51,7 @@ public class BigColumnRoom extends AbstractRoom {
                 colPos.x = TL.x + x * (unitSize * roomXSize + thickness) + thickness/2;
                 colPos.z = TL.z + z * (unitSize * roomZSize + thickness)/2 + 2f;
                 Column c5 = gameFactory.createColumn(colPos, 4f, actualYSize, 4f);
-                doodads.add(c5);
+                bigBolumns.add(c5);
             }
         }
 
@@ -60,6 +65,10 @@ public class BigColumnRoom extends AbstractRoom {
         }
 
         for (Object o : doodads) {
+            o.render(modelBatch, environment);
+        }
+
+        for (Object o : bigBolumns) {
             o.render(modelBatch, environment);
         }
 
@@ -78,11 +87,16 @@ public class BigColumnRoom extends AbstractRoom {
     @Override
     public boolean isHit(BoundingBox player) {
 
-        /*for (Object o : doodads) {
-            if(o.isHit(player))
+        for (Object o : bigBolumns) {
+            if (o.isHit(player)) {
                 return true;
-        }*/
+            }
+        }
 
-        return false;
+        if (c1 == null || c2 == null || c3 == null) {
+            return false;
+        }
+
+        return c1.isHit(player) || c2.isHit(player);
     }
 }

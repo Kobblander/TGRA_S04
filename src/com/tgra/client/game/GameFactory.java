@@ -91,12 +91,18 @@ public class GameFactory {
 
     public Maze createMaze(int size, float cellsize, MazeType mazeType, Vector3 position) {
         Maze maze = new Maze(size, cellsize, mazeType, position);
-        world.addObject(maze);
+        //world.addObject(maze);
         return maze;
+    }
+
+    public Column createHorizColumn(Vector3 position, float width, float height, float depth) {
+        Column column = new BasicColumn("glyphs.jpg", position, width, height, depth);
+        return  column;
     }
 
     public Column createColumn(Vector3 position, float width, float height, float depth) {
         Column column = new BasicColumn("glyphs.jpg", position, width, height, depth);
+        world.addObject(column);
         return  column;
     }
 
@@ -108,7 +114,7 @@ public class GameFactory {
 
     public Room createMazeRoom() {
         Room room = new MazeRoom();
-        world.addObject(room);
+        //world.addObject(room);
         return room;
     }
 
@@ -149,14 +155,14 @@ public class GameFactory {
     public KeyRoom createKeyRoom(int roomYSize) {
         KeyRoom keyRoom = new KeyRoom(roomYSize);
 
-        world.addObject(keyRoom);
+        //world.addObject(keyRoom);
         return keyRoom;
     }
 
     public BigColumnRoom createBigRoom(int roomXSize, int roomYSize, int roomZSize) {
         BigColumnRoom bigColumnRoom = new BigColumnRoom(roomXSize, roomYSize, roomZSize);
 
-        world.addObject(bigColumnRoom);
+        //world.addObject(bigColumnRoom);
         return bigColumnRoom;
     }
 }

@@ -84,6 +84,10 @@ public class MazeRoom extends AbstractRoom {
 
     @Override
     public boolean isHit(BoundingBox player) {
-        return false;
+
+        if (c1 == null || c2 == null || c3 == null) {
+            return false;
+        }
+        return c1.isHit(player) || c2.isHit(player);
     }
 }
