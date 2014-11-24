@@ -128,7 +128,7 @@ public class InputManager implements InputProcessor {
 
         // Move speed full sqrt of normal
         if ((A ^ D) & (W ^ S))
-            delta *= (float) Math.sqrt(MOVE_SPEED);
+            delta *= MOVE_SPEED;
         else {
             // Move speed full
             delta *= MOVE_SPEED;

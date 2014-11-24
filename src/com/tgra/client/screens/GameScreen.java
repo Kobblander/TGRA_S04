@@ -54,7 +54,7 @@ public class GameScreen implements Screen {
         camera = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.position.set(2f, 0f, 2f);
         camera.near = 0.2f;
-        camera.far = 350f;
+        camera.far = 110f;
 
         // Setup batch
         ModelBuilder modelBuilder = World.getInstance().getModelBuilder();

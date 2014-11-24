@@ -43,7 +43,7 @@ public class BasicKey extends AbstractKey {
         instance.transform.scale(0.2f, 0.2f, 0.2f);
         instance.calculateTransforms();
 
-        Lights.addLight(position);
+        //Lights.addLight(position);
         buildBox();
     }
 

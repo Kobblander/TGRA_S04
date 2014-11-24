@@ -207,9 +207,11 @@ public class Player  {
     private boolean isHit(BoundingBox player) {
         List<Object> objs = World.getInstance().getObjectList();
 
+        /*
         for(Object obj: objs)
             if(obj.isHit(player))
                 return true;
+                */
 
         return false;
     }

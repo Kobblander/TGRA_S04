@@ -4,35 +4,26 @@ import com.badlogic.gdx.graphics.g3d.Environment;
 import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.tgra.client.game.column.Column;
-import com.tgra.client.game.maze.Maze;
-import com.tgra.client.game.maze.MazeType;
-import com.tgra.client.game.shapes.Cylinder;
 import com.tgra.client.game.object.Object;
 
 /**
- * <h1>MazeRoom</h1>
+ * <h1>BigColumnRoom</h1>
  * <h2>com.tgra.client.game.rooms</h2>
  * <p></p>
- * Created on 18.11.2014.
+ * Created on 23.11.2014.
  *
  * @author jakob
  * @version 1.1
  */
-public class MazeRoom extends AbstractRoom {
+public class BigColumnRoom extends AbstractRoom {
 
-    private Maze maze;
-    private final int roomSize = 5;
-
-    public MazeRoom() {
-        initializeRoom(roomSize, 1, roomSize);
+    public BigColumnRoom(int roomXSize, int roomYSize, int roomZSize) {
+        initializeRoom(roomXSize, roomYSize, roomZSize);
     }
 
     @Override
     protected void initDoodads() {
 
-        maze = gameFactory.createMaze(15, unitSize + 0.3f, MazeType.PRIM, this.position);
-
-        // Create all the rooms objects.
         Column c1 = gameFactory.createColumn(TL, 1f, actualYSize, 1f);
         Column c2 = gameFactory.createColumn(TR, 1f, actualYSize, 1f);
         Column c3 = gameFactory.createColumn(BL, 1f, actualYSize, 1f);
@@ -42,28 +33,30 @@ public class MazeRoom extends AbstractRoom {
         doodads.add(c3);
         doodads.add(c4);
 
-        Vector3 colPos = new Vector3();
-        colPos.y = BL.y;
-        for (int x = 1; x < 15; x++) {
-            for (int z = 1; z < 15; z++) {
-                colPos.x = TL.x + x * (unitSize + 0.3f) - 0.25f;
-                colPos.z = TL.z + z * (unitSize + 0.3f) - 0.25f;
-                Column c5 = gameFactory.createColumn(colPos, 0.5f, actualYSize, 0.5f);
-                doodads.add(c5);
-            }
-        }
-
         floor = gameFactory.createBasicFloor(position, actualXSize + thickness + 0.1f, floorThickness, actualZSize + thickness + 0.1f);
 
         Vector3 roofPos = new Vector3(position.x, actualYSize - 1.75f, position.z);
         roof = gameFactory.createBasicRoof(roofPos, actualXSize, roofThickness, actualZSize);
+
+        Vector3 colPos = new Vector3();
+        colPos.y = TL.y;
+        for (int x = 0; x < roomXSize; x++) {
+            for (int z = 0; z < roomZSize; z++) {
+                colPos.x = TL.x + x * (unitSize * roomXSize + thickness) + thickness/2;
+                colPos.z = TL.z + z * (unitSize * roomZSize + thickness)/2 + 2f;
+                Column c5 = gameFactory.createColumn(colPos, 4f, actualYSize, 4f);
+                doodads.add(c5);
+            }
+        }
 
     }
 
     @Override
     public void render(ModelBatch modelBatch, Environment environment) {
 
-        maze.render(modelBatch, environment);
+        if (door != null) {
+            door.render(modelBatch, environment);
+        }
 
         for (Object o : doodads) {
             o.render(modelBatch, environment);
@@ -79,6 +72,5 @@ public class MazeRoom extends AbstractRoom {
 
         Object r = (Object) roof;
         r.render(modelBatch, environment);
-
     }
 }

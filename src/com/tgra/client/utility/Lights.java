@@ -36,35 +36,20 @@ public class Lights {
         environment.clear();
 
         // AmbientLight
-        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.1f, 0.1f, 0.1f, 1f));
+        environment.set(new ColorAttribute(ColorAttribute.AmbientLight, 0.2f, 0.2f, 0.2f, 1f));
 
         // Light color
-        lightColor = new Color(0.2f, 0.2f, 0.2f, 0f);
+        lightColor = new Color(0.4f, 0.2f, 0.3f, 0f);
 
         // Cast lights
         //environment.add(castLight = new PointLight().set(lightColor, new Vector3(2f, 2f, -2f), 50f));
 
-        // Flash light
-        environment.add(flashLight = new PointLight());
-        flashLight.color.set(new Color(0.4f, 0.4f, 0.4f, 0f));
-        flashLight.intensity = 0f;
     }
 
     public void render(float delta) {
-        if(isFlashLight)
-            player.flashLight(flashLight);
     }
 
     public static void flashLightOn() {
-        isFlashLight = !isFlashLight;
-
-        if(isFlashLight) {
-            flashLight.intensity = 10f;
-            AudioManager.play("flashlightOn");
-        } else {
-            flashLight.intensity = 0f;
-            AudioManager.play("flashlightOff");
-        }
     }
 
     public static void addLight(Vector3 pos) {
